@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 146093084}
   - component: {fileID: 146093083}
   - component: {fileID: 146093087}
-  - component: {fileID: 146093086}
   - component: {fileID: 146093085}
+  - component: {fileID: 146093086}
   m_Layer: 0
   m_Name: Jonathan
   m_TagString: Untagged
@@ -201,7 +201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146093082}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.9, y: -3.66, z: 0}
   m_LocalScale: {x: 3.2295094, y: 3.2295094, z: 3.2295094}
   m_Children: []
@@ -223,8 +223,8 @@ MonoBehaviour:
   speed: 7500
   jumpHeight: 500
   rb: {fileID: 146093087}
---- !u!70 &146093086
-CapsuleCollider2D:
+--- !u!58 &146093086
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -237,8 +237,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.19070597, y: 0.32}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.16
 --- !u!50 &146093087
 Rigidbody2D:
   serializedVersion: 4
@@ -259,7 +259,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
