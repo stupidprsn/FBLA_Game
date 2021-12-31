@@ -6,14 +6,9 @@ public class playerMovement : MonoBehaviour {
     public float speed;
     public float jumpHeight;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Vector2 movement;
     private bool jump = false;
-
-    // Start is called before the first frame update
-    private void Start() {
-        rb = GetComponent<Rigidbody2D>();
-    }
 
     // Update is called once per frame
     private void Update() {
