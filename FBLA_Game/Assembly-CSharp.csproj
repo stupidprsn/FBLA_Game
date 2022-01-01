@@ -58,8 +58,11 @@
     <Compile Include="Assets\Scripts\toHomeScreen.cs" />
     <Compile Include="Assets\Scripts\homeScreen.cs" />
     <Compile Include="Assets\Scripts\levelSelection.cs" />
-    <Compile Include="Assets\Scripts\gameManager.cs" />
+<<<<<<< Updated upstream
+=======
     <Compile Include="Assets\Scripts\scripts.cs" />
+>>>>>>> Stashed changes
+    <Compile Include="Assets\Scripts\gameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
