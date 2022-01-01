@@ -59,7 +59,6 @@
     <Compile Include="Assets\Scripts\homeScreen.cs" />
     <Compile Include="Assets\Scripts\levelSelection.cs" />
     <Compile Include="Assets\Scripts\gameManager.cs" />
-    <Compile Include="Assets\Scripts\scripts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
