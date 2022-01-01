@@ -3,26 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour {
+    public Rigidbody2D rb;
+    public LayerMask jumpableLayer;
+
     public float speed;
     public float jumpHeight;
 
-    public Rigidbody2D rb;
-    private Vector2 movement;
     private bool jump = false;
+
+    private bool groundChecker() {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.7f, jumpableLayer);
+        
+        if(hit.collider != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // Update is called once per frame
     private void Update() {
-        movement = new Vector2(Input.GetAxis("Horizontal") * Time.deltaTime * speed, rb.velocity.y);
-        if(Input.GetKeyDown("space")) {
+        if(Input.GetKeyDown("space") && groundChecker()) {
             jump = true;
         }
     }
 
     private void FixedUpdate() {
-        rb.velocity = movement;
+        transform.Translate(
+            new Vector2(Input.GetAxis("Horizontal") * Time.fixedDeltaTime * speed, rb.velocity.y)
+        );
+
         if(jump) {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
             jump = false;
         }
     }
+
 }
