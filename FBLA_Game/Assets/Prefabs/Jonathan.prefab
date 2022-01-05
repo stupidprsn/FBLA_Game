@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &999879363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 999879364}
+  m_Layer: 0
+  m_Name: GroundCheckObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &999879364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999879363}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.159, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6844556448386597936}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6844556448386597942
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,6 +43,7 @@ GameObject:
   - component: {fileID: 6844556448386597939}
   - component: {fileID: 6844556448386597938}
   - component: {fileID: 6844556448386597937}
+  - component: {fileID: 812763256}
   m_Layer: 0
   m_Name: Jonathan
   m_TagString: Player
@@ -29,8 +60,9 @@ Transform:
   m_GameObject: {fileID: 6844556448386597942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.9, y: -3.66, z: 2}
-  m_LocalScale: {x: 3.2295094, y: 3.2295094, z: 3.2295094}
-  m_Children: []
+  m_LocalScale: {x: 3.2295094, y: 3.2295094, z: 1}
+  m_Children:
+  - {fileID: 999879364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,7 +130,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 35
-  m_LinearDrag: 0.1
+  m_LinearDrag: 0.75
   m_AngularDrag: 0.05
   m_GravityScale: 0.09
   m_Material: {fileID: 0}
@@ -135,9 +167,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6844556448386597939}
-  animator: {fileID: 0}
+  animator: {fileID: 812763256}
   jumpableLayer:
     serializedVersion: 2
     m_Bits: 256
   speed: 3
-  jumpHeight: 7.5
+  jumpHeight: 9
+  groundCheckerObj: {fileID: 999879364}
+--- !u!95 &812763256
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844556448386597942}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25053541a6d7724459679136168d812f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
