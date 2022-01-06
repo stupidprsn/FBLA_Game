@@ -54,13 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\gamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\titleScreen.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\toHomeScreen.cs" />
     <Compile Include="Assets\Scripts\homeScreen.cs" />
-    <Compile Include="Assets\Scripts\levelSelection.cs" />
     <Compile Include="Assets\Scripts\scripts.cs" />
     <Compile Include="Assets\Scripts\gameManager.cs" />
+    <Compile Include="Assets\Scripts\spaceToContinue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
