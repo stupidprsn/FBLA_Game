@@ -42,3 +42,27 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4061534519
+    locked: 0
+  - name: Torches
+    uniqueID: 340958351
+    locked: 0
+  - name: Door
+    uniqueID: 4168681029
+    locked: 0
+  - name: Jonathan
+    uniqueID: 561768347
+    locked: 0
+  - name: KeyItems
+    uniqueID: 3455643937
+    locked: 0
+  - name: Boxes
+    uniqueID: 2556144109
+    locked: 0
+  - name: Pillars
+    uniqueID: 1867404173
+    locked: 0
+  - name: Platforms
+    uniqueID: 2876933715
+    locked: 0
