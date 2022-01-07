@@ -130,3 +130,5 @@ MonoBehaviour:
   selfBox: {fileID: 521100191378693559}
   playerBox: {fileID: 0}
   player: {fileID: 0}
+  playerInventory: {fileID: 0}
+  amuletPlacer: {fileID: 0}
