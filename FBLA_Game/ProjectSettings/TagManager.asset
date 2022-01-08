@@ -54,6 +54,9 @@ TagManager:
   - name: Jonathan
     uniqueID: 561768347
     locked: 0
+  - name: Snake
+    uniqueID: 3857164609
+    locked: 0
   - name: KeyItems
     uniqueID: 3455643937
     locked: 0
