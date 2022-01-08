@@ -1,13 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class gameManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    
-
-    // Update is called once per frame
+public class gameManager : MonoBehaviour {
     void Update()
     {
         if(Input.GetKeyDown("escape"))

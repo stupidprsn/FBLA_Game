@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour {
@@ -14,29 +12,8 @@ public class playerMovement : MonoBehaviour {
     private bool jump = false;
     private float movement;
 
-    // Other Ground Checker
     public Transform groundCheckerObj;
 
-
-    // Other Ground Checker
-
-    //private bool groundChecker() {
-    //    Vector3 offSetPosition = transform.position;
-    //    if (facingRight) {
-    //        offSetPosition.x -= 0.1f;
-    //    } else {
-    //        offSetPosition.x += 0.1f;
-    //    }
-
-    //    RaycastHit2D offSetHit = Physics2D.Raycast(offSetPosition, Vector2.down, 0.7f, jumpableLayer);
-    //    RaycastHit2D centeredHit = Physics2D.Raycast(transform.position, Vector2.down, 0.7f, jumpableLayer);
-
-    //    if (offSetHit.collider != null || centeredHit.collider != null) {
-    //        return true;
-    //    } else {
-    //        return false;
-    //    }
-    //}
 
     private bool otherGroundChecker() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckerObj.position, 0.2f, jumpableLayer);
@@ -78,8 +55,7 @@ public class playerMovement : MonoBehaviour {
             animator.SetBool("isPushing", false);
         }
     }
-
-    // Update is called once per frame
+    
     private void Update() {
         calcMovement();
         flipPlayer();

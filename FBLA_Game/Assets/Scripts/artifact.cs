@@ -1,34 +1,38 @@
 using UnityEngine;
 
 public class artifact : MonoBehaviour {
-    public SpriteRenderer sr;
-    public Sprite[] sprites;
+    public SpriteRenderer artifactRenderer;
+    public Sprite[] sprites = new Sprite[3];
 
-    public BoxCollider2D selfBox;
-    public CapsuleCollider2D playerBox;
+    public BoxCollider2D artifactCollider;
 
-    public GameObject player;
-    public GameObject playerInventory;
-    public GameObject amuletPlacer;
+    private CapsuleCollider2D playerCollider;
+    private GameObject playerInventory;
 
-    private void uncollected()
-    {
-        if (selfBox.IsTouching(playerBox) && Input.GetKeyDown("w"))
-        {
+    private GameObject amuletPlacer;
+    private BoxCollider2D amuletPlacerCollider;
+
+
+    private void uncollected() {
+        if(artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w")) {
             transform.SetParent(playerInventory.transform);
         }
     }
 
-    private void collected()
-    {
-       if(playerBox.IsTouching(amuletPlacer.GetComponent<BoxCollider2D>()) && Input.GetKeyDown("w"))
-        {
+    private void collected() {
+       if(playerCollider.IsTouching(amuletPlacerCollider) && Input.GetKeyDown("w")) {
             transform.SetParent(amuletPlacer.transform);
+            transform.parent.parent.Find("Door").GetComponent<closedDoor>().checkAmulets();
         }
     }
 
     void Start() {
-        sr.sprite = sprites[Random.Range(0, sprites.Length)];
+        playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
+        playerInventory = GameObject.Find("Jonathan").transform.Find("Inventory").gameObject;
+        amuletPlacer = transform.parent.Find("Amulet Placer").gameObject;
+        amuletPlacerCollider = amuletPlacer.GetComponent<BoxCollider2D>();
+
+        artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     void Update() {
