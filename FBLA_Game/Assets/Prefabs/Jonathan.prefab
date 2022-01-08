@@ -203,7 +203,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   speed: 3
-  jumpHeight: 9
+  jumpHeight: 10
   groundCheckerObj: {fileID: 999879364}
 --- !u!95 &812763256
 Animator:

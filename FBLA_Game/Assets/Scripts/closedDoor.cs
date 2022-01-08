@@ -3,12 +3,16 @@ using UnityEngine;
 public class closedDoor : MonoBehaviour {
     public int numOfAmulets;
 
-    public GameObject amuletHolder;
+    private GameObject artifactPlacer;
     public SpriteRenderer doorPieceRenderer;
     public openedDoor openedDoorScript;
 
-    public void checkAmulets() {
-        if (amuletHolder.transform.childCount == numOfAmulets) {
+    private void Start() {
+        artifactPlacer = transform.parent.Find("Artifact Placer").gameObject;
+    }
+
+    public void checkArtifacts() {
+        if (artifactPlacer.transform.childCount == numOfAmulets) {
             doorPieceRenderer.enabled = false;
             openedDoorScript.enabled = true;
         }

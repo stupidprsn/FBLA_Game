@@ -9,8 +9,8 @@ public class artifact : MonoBehaviour {
     private CapsuleCollider2D playerCollider;
     private GameObject playerInventory;
 
-    private GameObject amuletPlacer;
-    private BoxCollider2D amuletPlacerCollider;
+    private GameObject artifactPlacer;
+    private BoxCollider2D artifactPlacerCollider;
 
 
     private void uncollected() {
@@ -20,17 +20,17 @@ public class artifact : MonoBehaviour {
     }
 
     private void collected() {
-       if(playerCollider.IsTouching(amuletPlacerCollider) && Input.GetKeyDown("w")) {
-            transform.SetParent(amuletPlacer.transform);
-            transform.parent.parent.Find("Door").GetComponent<closedDoor>().checkAmulets();
+       if(playerCollider.IsTouching(artifactPlacerCollider) && Input.GetKeyDown("w")) {
+            transform.SetParent(artifactPlacer.transform);
+            transform.parent.parent.Find("Door").GetComponent<closedDoor>().checkArtifacts();
         }
     }
 
     void Start() {
         playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
         playerInventory = GameObject.Find("Jonathan").transform.Find("Inventory").gameObject;
-        amuletPlacer = transform.parent.Find("Amulet Placer").gameObject;
-        amuletPlacerCollider = amuletPlacer.GetComponent<BoxCollider2D>();
+        artifactPlacer = transform.parent.Find("Artifact Placer").gameObject;
+        artifactPlacerCollider = artifactPlacer.GetComponent<BoxCollider2D>();
 
         artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
     }

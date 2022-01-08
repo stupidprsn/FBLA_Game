@@ -1,10 +1,14 @@
 using UnityEngine;
 
 public class openedDoor : MonoBehaviour {
-    public CapsuleCollider2D playerCollider;
+    private CapsuleCollider2D playerCollider;
     public BoxCollider2D doorCollider;
 
-    void Update() {
+    private void Start() {
+        playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
+    }
+
+    private void Update() {
         if(playerCollider.IsTouching(doorCollider) && Input.GetKeyDown("w")) {
             Debug.Log("U win!!!! <congraudatory msgs>");
         }
