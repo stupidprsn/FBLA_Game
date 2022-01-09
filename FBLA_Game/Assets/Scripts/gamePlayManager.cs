@@ -8,8 +8,19 @@ public class gamePlayManager : MonoBehaviour {
     private bool doUpdateTime = true;
     private float time;
 
+    private int health = 3;
+
     public void onWin() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void onDeath() {
+        if(health > 1) {
+            GameObject.Find("Jonathan").transform.position = new Vector3(6.3386f, -3.5686f, 1);
+            health--;
+        } else {
+            Debug.Log("u lose");
+        }
     }
 
     private void updateTime() {

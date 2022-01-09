@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1715149428717412452}
   - component: {fileID: 96510524616433655}
   - component: {fileID: 2626277758541139211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numOfAmulets: 3
-  amuletHolder: {fileID: 0}
   doorPieceRenderer: {fileID: 7119336315356798965}
   openedDoorScript: {fileID: 2626277758541139211}
 --- !u!61 &96510524616433655
@@ -140,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7febdab5e03dc27429d13213381df39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 0}
   doorCollider: {fileID: 96510524616433655}
 --- !u!1 &8585475941124551503
 GameObject:
@@ -152,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6480827452700788711}
   - component: {fileID: 7119336315356798965}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5875510719876022182}
   - component: {fileID: 5875510719876022185}
   - component: {fileID: 1550991229237051951}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Artifact Placer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

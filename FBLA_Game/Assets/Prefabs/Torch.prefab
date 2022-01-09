@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963815493393586592}
   - component: {fileID: 5001624066891938701}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6928940244312008330}
   - component: {fileID: 6928940244312008331}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
