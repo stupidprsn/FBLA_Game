@@ -7,6 +7,7 @@ public class gameManager : MonoBehaviour {
     public void toGameScene(string toScene) {
         SceneManager.LoadScene(toScene);
         gamePlayManager.enabled = true;
+        Debug.Log(toScene);
     }
 
     private void Awake() {
