@@ -38,7 +38,7 @@ public class artifact : MonoBehaviour {
     void Update() {
         if(transform.parent == playerInventory.transform) {
             collected();
-        } else {
+        } else if(transform.parent != artifactPlacer.transform){
             uncollected();
         }
     }

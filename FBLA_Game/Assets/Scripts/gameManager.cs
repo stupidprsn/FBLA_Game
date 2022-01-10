@@ -7,11 +7,16 @@ public class gameManager : MonoBehaviour {
     public void toGameScene(string toScene) {
         SceneManager.LoadScene(toScene);
         gamePlayManager.enabled = true;
+        gamePlayManager.initiateVariables();
         Debug.Log(toScene);
     }
 
     private void Awake() {
         DontDestroyOnLoad(this.gameObject);
+
+        Screen.SetResolution(1920, 1080, false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
