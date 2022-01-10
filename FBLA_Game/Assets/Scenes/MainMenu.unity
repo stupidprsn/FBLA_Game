@@ -1394,8 +1394,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -505.69, y: 203}
-  m_SizeDelta: {x: 345.52, y: 95.58}
+  m_AnchoredPosition: {x: -506.92, y: 221.11}
+  m_SizeDelta: {x: 343.06, y: 137.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &448691772
 MonoBehaviour:
@@ -1417,7 +1417,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pick Up/Place Artifact
+  m_text: 'Pick Up/Place Artifact
+
+    Enter Door'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f83b23b9dbc16e2418653afb876c497f, type: 2}
   m_sharedMaterial: {fileID: 5497717155186647651, guid: f83b23b9dbc16e2418653afb876c497f, type: 2}
@@ -1925,8 +1927,8 @@ RectTransform:
   m_Children:
   - {fileID: 1110924592}
   - {fileID: 1465056203}
-  - {fileID: 1018480387}
   - {fileID: 2055784546}
+  - {fileID: 1018480387}
   - {fileID: 2061406156}
   - {fileID: 1544795394}
   m_Father: {fileID: 2072435083}
@@ -2333,7 +2335,7 @@ RectTransform:
   m_Children:
   - {fileID: 1101730975}
   m_Father: {fileID: 800246508}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4020,7 +4022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1550697231
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5490,13 +5492,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055784545}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -40}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -39.999844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1810759314}
   m_Father: {fileID: 800246508}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -5748,7 +5750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2072435083
 RectTransform:
   m_ObjectHideFlags: 0
