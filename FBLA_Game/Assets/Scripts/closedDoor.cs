@@ -14,6 +14,7 @@ public class closedDoor : MonoBehaviour {
     public void checkArtifacts() {
         if (artifactPlacer.transform.childCount == numOfAmulets) {
             doorPieceRenderer.enabled = false;
+            FindObjectOfType<soundManager>().PlaySound("gameDoorOpen");
             openedDoorScript.enabled = true;
         }
     }

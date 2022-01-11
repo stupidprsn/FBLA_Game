@@ -8,7 +8,6 @@ public class gameManager : MonoBehaviour {
         SceneManager.LoadScene(toScene);
         gamePlayManager.enabled = true;
         gamePlayManager.initiateVariables();
-        Debug.Log(toScene);
     }
 
     private void Awake() {

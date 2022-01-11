@@ -51,6 +51,9 @@ TagManager:
   - name: Door
     uniqueID: 4168681029
     locked: 0
+  - name: PlacedAmulets
+    uniqueID: 988674361
+    locked: 0
   - name: Jonathan
     uniqueID: 561768347
     locked: 0
@@ -68,4 +71,7 @@ TagManager:
     locked: 0
   - name: Platforms
     uniqueID: 2876933715
+    locked: 0
+  - name: Foreground
+    uniqueID: 4154695959
     locked: 0

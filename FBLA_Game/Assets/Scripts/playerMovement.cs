@@ -15,7 +15,7 @@ public class playerMovement : MonoBehaviour {
     public Transform groundCheckerObj;
 
 
-    private bool otherGroundChecker() {
+    private bool GroundChecker() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckerObj.position, 0.2f, jumpableLayer);
         if(colliders.Length != 0) {
             return true;
@@ -60,8 +60,12 @@ public class playerMovement : MonoBehaviour {
         calcMovement();
         flipPlayer();
 
-        if (Input.GetKeyDown("space") && otherGroundChecker()) {
+        if (Input.GetKeyDown("space") && GroundChecker()) {
             jump = true;
+        }
+
+        if(transform.position.y < -5.5) {
+            FindObjectOfType<gamePlayManager>().onDeath();
         }
     }
 
@@ -78,13 +82,16 @@ public class playerMovement : MonoBehaviour {
 
         if(movement != 0) {
             animator.SetBool("isWalking", true);
+            FindObjectOfType<soundManager>().PlaySound("playerWalk");
         } else {
             animator.SetBool("isWalking", false);
+            FindObjectOfType<soundManager>().stopSound("playerWalk");
         }
 
         if (jump) {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
             animator.SetBool("isJumping", true);
+            FindObjectOfType<soundManager>().PlaySound("playerJump");
             jump = false;
         }
     }

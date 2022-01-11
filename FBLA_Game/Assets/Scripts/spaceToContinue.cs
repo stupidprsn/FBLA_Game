@@ -8,6 +8,8 @@ public class spaceToContinue : MonoBehaviour {
         if (Input.GetKeyDown("space")) {
             toPanel.SetActive(true);
             fromPanel.SetActive(false);
+            //FindObjectOfType<soundManager>().PlaySound("UISpacebar");
+            FindObjectOfType<soundManager>().PlaySound("playerWalk");
         }
     }
 }

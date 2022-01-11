@@ -29,27 +29,28 @@ public class homeScreen : MonoBehaviour {
         buttons[verticalIndex, horizontalIndex].Select();
         buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(0.6f, 0.6f, 0.6f, 0.4f);
 
-        if (Input.GetKeyDown("w") && verticalIndex == 1) {
+        if ((Input.GetKeyDown("w") || Input.GetKeyDown("up")) && verticalIndex == 1) {
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
             verticalIndex--;
         }
 
-        if(Input.GetKeyDown("a") && horizontalIndex != 0) {
+        if((Input.GetKeyDown("a") || Input.GetKeyDown("left")) && horizontalIndex != 0) {
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
             horizontalIndex--;
         }
 
-        if(Input.GetKeyDown("s") && verticalIndex == 0) {
+        if((Input.GetKeyDown("s") || Input.GetKeyDown("down")) && verticalIndex == 0) {
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
             verticalIndex++;
         }
 
-        if(Input.GetKeyDown("d") && horizontalIndex != 2) {
+        if((Input.GetKeyDown("d") || Input.GetKeyDown("right")) && horizontalIndex != 2) {
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
             horizontalIndex++;
         }
 
         if(Input.GetKeyDown("space")) {
+            FindObjectOfType<soundManager>().PlaySound("UISelectButton");
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(255, 255, 255, 0);
             buttons[verticalIndex, horizontalIndex].onClick.Invoke();
         }

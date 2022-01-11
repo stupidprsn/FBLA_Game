@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class artifact : MonoBehaviour {
     public SpriteRenderer artifactRenderer;
@@ -7,39 +8,52 @@ public class artifact : MonoBehaviour {
     public BoxCollider2D artifactCollider;
 
     private CapsuleCollider2D playerCollider;
-    private GameObject playerInventory;
 
     private GameObject artifactPlacer;
-    private BoxCollider2D artifactPlacerCollider;
 
+    private IEnumerator onCollect() {
+        int numOfAmulets = artifactPlacer.transform.parent.Find("Door").GetComponent<closedDoor>().numOfAmulets;
+        int currentAmulets = artifactPlacer.transform.childCount;
 
-    private void uncollected() {
-        if(artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w")) {
-            transform.SetParent(playerInventory.transform);
+        transform.SetParent(artifactPlacer.transform);
+
+        Vector3 startPos = transform.localPosition;
+        Vector3 finishPos;
+        float t = 0;
+
+        float x;
+        if (numOfAmulets % 2 == 1) {
+            x = 0f;
+        } else {
+            x = 0.08f;
         }
-    }
 
-    private void collected() {
-       if(playerCollider.IsTouching(artifactPlacerCollider) && Input.GetKeyDown("w")) {
-            transform.SetParent(artifactPlacer.transform);
-            transform.parent.parent.Find("Door").GetComponent<closedDoor>().checkArtifacts();
+        x = x - (0.16f * (Mathf.FloorToInt(numOfAmulets / 2) - currentAmulets));
+
+        finishPos = new Vector3(x, 0, 0);
+
+        artifactRenderer.sortingLayerName = "Foreground";
+
+        while(t<1) {
+            t += Time.deltaTime / 0.3f;
+            transform.localPosition = Vector3.Lerp(startPos, finishPos, t);
+            yield return null;
         }
+
+        gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "PlacedAmulets";
+        artifactPlacer.transform.parent.Find("Door").GetComponent<closedDoor>().checkArtifacts();
     }
 
     void Start() {
         playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
-        playerInventory = GameObject.Find("Jonathan").transform.Find("Inventory").gameObject;
         artifactPlacer = transform.parent.Find("Artifact Placer").gameObject;
-        artifactPlacerCollider = artifactPlacer.GetComponent<BoxCollider2D>();
 
         artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     void Update() {
-        if(transform.parent == playerInventory.transform) {
-            collected();
-        } else if(transform.parent != artifactPlacer.transform){
-            uncollected();
+        if (artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w")) {
+            StartCoroutine(onCollect());
         }
     }
 }

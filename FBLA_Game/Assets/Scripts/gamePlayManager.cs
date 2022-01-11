@@ -54,6 +54,11 @@ public class gamePlayManager : MonoBehaviour {
                 timeShown = GameObject.Find("Canvas").transform.Find("ClockText").gameObject.GetComponent<TMP_Text>();
             }
             timeShown.text = Mathf.FloorToInt(time).ToString();
+
+            if(Input.GetKeyDown("r")) {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                GameObject.Find("Canvas").transform.Find("HeartsImage").GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
+            }
         }
     }
 }
