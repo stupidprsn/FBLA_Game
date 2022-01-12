@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8585849188371898247}
   m_Layer: 8
   m_Name: CenterPlatform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9199270074678011918}
   - component: {fileID: 405605426798635741}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

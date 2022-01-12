@@ -53,20 +53,25 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\closedDoor.cs" />
-    <Compile Include="Assets\Scripts\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\homeScreen.cs" />
-    <Compile Include="Assets\Scripts\artifact.cs" />
-    <Compile Include="Assets\Scripts\openedDoor.cs" />
-    <Compile Include="Assets\Scripts\snakeAI.cs" />
-    <Compile Include="Assets\Scripts\spaceToContinue.cs" />
-    <Compile Include="Assets\Scripts\gamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\gameManager.cs" />
-    <Compile Include="Assets\Scripts\windowToggle.cs" />
-    <Compile Include="Assets\Scripts\Sound.cs" />
-    <Compile Include="Assets\Scripts\soundManager.cs" />
-    <Compile Include="Assets\Scripts\bossSnake.cs" />
-    <Compile Include="Assets\Scripts\bossDoor.cs" />
+    <Compile Include="Assets\Scripts\game\boss\bossSnake.cs" />
+    <Compile Include="Assets\Scripts\game\closedDoor.cs" />
+    <Compile Include="Assets\Scripts\game\boss\bossArtifact.cs" />
+    <Compile Include="Assets\Scripts\game\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\UI\leaderboard.cs" />
+    <Compile Include="Assets\Scripts\gameManager\soundManager.cs" />
+    <Compile Include="Assets\Scripts\game\boss\bossSnakeAI.cs" />
+    <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
+    <Compile Include="Assets\Scripts\game\artifact.cs" />
+    <Compile Include="Assets\Scripts\UI\titleScreen.cs" />
+    <Compile Include="Assets\Scripts\game\finalArtifact.cs" />
+    <Compile Include="Assets\Scripts\game\openedDoor.cs" />
+    <Compile Include="Assets\Scripts\game\snakeAI.cs" />
+    <Compile Include="Assets\Scripts\UI\spaceToContinue.cs" />
+    <Compile Include="Assets\Scripts\gameManager\gamePlayManager.cs" />
+    <Compile Include="Assets\Scripts\gameManager\gameManager.cs" />
+    <Compile Include="Assets\Scripts\gameManager\Sound.cs" />
+    <Compile Include="Assets\Scripts\gameManager\Rank.cs" />
+    <Compile Include="Assets\Scripts\UI\gameUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
