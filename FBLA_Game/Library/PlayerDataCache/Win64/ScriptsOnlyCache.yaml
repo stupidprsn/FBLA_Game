@@ -168,13 +168,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5222}
     - Class: 114
-      Script: {instanceID: 5830}
+      Script: {instanceID: 5458}
     - Class: 114
-      Script: {instanceID: 5976}
+      Script: {instanceID: 5832}
     - Class: 114
-      Script: {instanceID: 6294}
+      Script: {instanceID: 5978}
     - Class: 114
-      Script: {instanceID: 65980}
+      Script: {instanceID: 6296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -249,13 +249,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5222}
     - Class: 114
-      Script: {instanceID: 5830}
+      Script: {instanceID: 5458}
     - Class: 114
-      Script: {instanceID: 5976}
+      Script: {instanceID: 5832}
     - Class: 114
-      Script: {instanceID: 6294}
+      Script: {instanceID: 5978}
     - Class: 114
-      Script: {instanceID: 65980}
+      Script: {instanceID: 6296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -334,13 +334,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5222}
     - Class: 114
-      Script: {instanceID: 5830}
+      Script: {instanceID: 5458}
     - Class: 114
-      Script: {instanceID: 5976}
+      Script: {instanceID: 5832}
     - Class: 114
-      Script: {instanceID: 6294}
+      Script: {instanceID: 5978}
     - Class: 114
-      Script: {instanceID: 65980}
+      Script: {instanceID: 6296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -421,13 +421,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5222}
     - Class: 114
-      Script: {instanceID: 5830}
+      Script: {instanceID: 5458}
     - Class: 114
-      Script: {instanceID: 5976}
+      Script: {instanceID: 5832}
     - Class: 114
-      Script: {instanceID: 6294}
+      Script: {instanceID: 5978}
     - Class: 114
-      Script: {instanceID: 65980}
+      Script: {instanceID: 6296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -540,43 +540,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5448}
     - Class: 114
-      Script: {instanceID: 5710}
+      Script: {instanceID: 5712}
     - Class: 114
-      Script: {instanceID: 5830}
+      Script: {instanceID: 5832}
     - Class: 114
-      Script: {instanceID: 5968}
+      Script: {instanceID: 5970}
     - Class: 114
-      Script: {instanceID: 5976}
+      Script: {instanceID: 5978}
     - Class: 114
-      Script: {instanceID: 6042}
+      Script: {instanceID: 6044}
     - Class: 114
-      Script: {instanceID: 6048}
+      Script: {instanceID: 6050}
     - Class: 114
-      Script: {instanceID: 6148}
+      Script: {instanceID: 6150}
     - Class: 114
-      Script: {instanceID: 6182}
+      Script: {instanceID: 6184}
     - Class: 114
-      Script: {instanceID: 6226}
+      Script: {instanceID: 6228}
     - Class: 114
-      Script: {instanceID: 6294}
+      Script: {instanceID: 6296}
     - Class: 114
-      Script: {instanceID: 6304}
+      Script: {instanceID: 6306}
     - Class: 114
-      Script: {instanceID: 6402}
+      Script: {instanceID: 6404}
     - Class: 114
-      Script: {instanceID: 6536}
+      Script: {instanceID: 6538}
     - Class: 114
-      Script: {instanceID: 6652}
+      Script: {instanceID: 6654}
     - Class: 114
-      Script: {instanceID: 6708}
+      Script: {instanceID: 6710}
     - Class: 114
-      Script: {instanceID: 7330}
+      Script: {instanceID: 7332}
     - Class: 114
-      Script: {instanceID: 7644}
+      Script: {instanceID: 7646}
     - Class: 114
-      Script: {instanceID: 7774}
+      Script: {instanceID: 7776}
     - Class: 114
-      Script: {instanceID: 7880}
+      Script: {instanceID: 7884}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -608,16 +608,16 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: ae83e830e7a90c0aff918c4c2e520825
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: GraphicRaycaster
-  - hash:
-      serializedVersion: 2
       Hash: a6e561615949734e9f12f9b61661f43e
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: ae83e830e7a90c0aff918c4c2e520825
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: GraphicRaycaster
   - hash:
       serializedVersion: 2
       Hash: f69dfc6409fbbd89d3689368e99688a8
@@ -1244,6 +1244,12 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerPanel
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: gameUI
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1596,12 +1602,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: gameUI
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
@@ -1609,4 +1609,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/LevelTwo.unity
   - Assets/Scenes/BossLevel.unity
   - Assets/Scenes/LevelFour.unity
-  playerPath: C:/Hanlin/School/FBLA/2021-2022/FBLA_Game/Compiled Game/FBLA_Game.exe
+  playerPath: C:/Users/tsoph/OneDrive/Desktop/FBLA_Game.exe

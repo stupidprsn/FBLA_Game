@@ -68,10 +68,10 @@
     <Compile Include="Assets\Scripts\game\snakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\spaceToContinue.cs" />
     <Compile Include="Assets\Scripts\gameManager\gamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\gameManager\gameManager.cs" />
-    <Compile Include="Assets\Scripts\gameManager\Sound.cs" />
-    <Compile Include="Assets\Scripts\gameManager\Rank.cs" />
     <Compile Include="Assets\Scripts\UI\gameUI.cs" />
+    <Compile Include="Assets\Scripts\gameManager\gameManager.cs" />
+    <Compile Include="Assets\Scripts\gameManager\Rank.cs" />
+    <Compile Include="Assets\Scripts\gameManager\Sound.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

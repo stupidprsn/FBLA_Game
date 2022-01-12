@@ -48,6 +48,7 @@ public class gamePlayManager : MonoBehaviour {
     }
 
     public void winGame() {
+        FindObjectOfType<soundManager>().stopSound("playerWalk");
         win = true;
         FindObjectOfType<playerMovement>().enabled = false;
 
