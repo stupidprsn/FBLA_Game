@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,11 +47,14 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.12</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.14</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\game\boss\bossSnake.cs" />
     <Compile Include="Assets\Scripts\game\closedDoor.cs" />
@@ -62,16 +65,16 @@
     <Compile Include="Assets\Scripts\game\boss\bossSnakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
     <Compile Include="Assets\Scripts\game\artifact.cs" />
-    <Compile Include="Assets\Scripts\UI\titleScreen.cs" />
     <Compile Include="Assets\Scripts\game\finalArtifact.cs" />
     <Compile Include="Assets\Scripts\game\openedDoor.cs" />
     <Compile Include="Assets\Scripts\game\snakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\spaceToContinue.cs" />
     <Compile Include="Assets\Scripts\gameManager\gamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\UI\gameUI.cs" />
+    <Compile Include="Assets\Scripts\game\gameUI.cs" />
     <Compile Include="Assets\Scripts\gameManager\gameManager.cs" />
     <Compile Include="Assets\Scripts\gameManager\Rank.cs" />
     <Compile Include="Assets\Scripts\gameManager\Sound.cs" />
+    <Compile Include="Assets\Scripts\UI\onEnterMainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -318,9 +321,6 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

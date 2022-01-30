@@ -1,4 +1,4 @@
-using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Rank {
@@ -10,4 +10,9 @@ public class Rank {
         name = inputName;
         score = inputScore;
     }
+}
+
+[System.Serializable]
+public class Rankings {
+    public List<Rank> rankings;
 }

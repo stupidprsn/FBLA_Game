@@ -1,15 +1,26 @@
+/*
+ * Hanlin Zhang
+ * Purpose: Used to update and display the leaderboard
+ */
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
 
 public class leaderboard : MonoBehaviour {
-    public GameObject scrollRect;
-    public GameObject rankingPrefab;
-    public Transform content;
-    public gameManager gameManager;
+    // Referance to the json file containing the leaderboard data
+    public TextAsset jsonFile;
 
-    public List<Rank> rankings;
+    // Referances to the leaderboard display
+    public GameObject scrollRect;
+    public Transform content;
+
+    // Referance to the prefab that we can instantiate
+    public GameObject rankingPrefab;
+
+    // List of all leaderboard entries.
+    private List<Rank> rankings;
 
     public void updateScreen() {
         rankings = gameManager.theRankings.OrderByDescending(x => x.score).ToList();
@@ -30,10 +41,22 @@ public class leaderboard : MonoBehaviour {
             newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = rankings[i].score.ToString();
         }
     }
+
     private void Update() {
-        FindObjectOfType<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition = Input.GetAxis("Vertical");
+        FindObjectOfType<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition += Input.GetAxis("Vertical");
     }
+
     void Start() {
         updateScreen();
+
+        Rankings temp = JsonUtility.FromJson<Rankings>(jsonFile.text);
+        rankings = temp.rankings.ToList();
+
+        rankings.Add(new Rank("Test", 600 ));
+
+        temp.rankings = rankings;
+
+        string newJasonString = JsonUtility.ToJson(temp);
+        JsonUtility.FromJsonOverwrite(jsonFile.text, newJasonString);
     }
 }

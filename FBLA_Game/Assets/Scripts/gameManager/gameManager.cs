@@ -15,6 +15,9 @@ public class gameManager : MonoBehaviour {
 
     public static List<Rank> theRankings = new List<Rank>();
 
+    // Boolean to keep track of whether or not the game is in fullscreen.
+    private bool fullScreen = false;
+
     // Method for loading a game scene, it is used by the "play" and "2 players" buttons.
     public void toGameScene(string toScene) {
         SceneManager.LoadScene(toScene);
@@ -49,6 +52,11 @@ public class gameManager : MonoBehaviour {
         if(Input.GetKeyDown("escape"))
         {
             Application.Quit();
+        }
+
+        if (Input.GetKeyDown("left shift") || Input.GetKeyDown("right shift")) {
+            fullScreen = !fullScreen;
+            Screen.SetResolution(1920, 1080, fullScreen);
         }
     }
 }

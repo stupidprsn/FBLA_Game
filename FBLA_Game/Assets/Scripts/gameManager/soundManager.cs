@@ -1,18 +1,30 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class soundManager : MonoBehaviour {
     public Sound[] sounds;
+    private List<Sound> playingSounds = new List<Sound>();
 
     public void PlaySound(string name) {
         Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
         soundToPlay.source.Play();
+        playingSounds.Add(soundToPlay);
     }
 
     public void stopSound(string name) {
-        Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
-        soundToPlay.source.Stop();
+        Sound soundToStop = Array.Find(sounds, sound => sound.name == name);
+        soundToStop.source.Stop();
+        playingSounds.Remove(soundToStop);
+    }
+
+    public void stopAllSound() {
+        foreach(Sound soundToStop in playingSounds) {
+            soundToStop.source.Stop();
+        }
+
+        playingSounds.Clear();
     }
 
     private void Awake() {
