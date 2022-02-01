@@ -10,7 +10,7 @@ public class openedDoor : MonoBehaviour {
 
     private void Update() {
         if(playerCollider.IsTouching(doorCollider) && (Input.GetKeyDown("w") || Input.GetKeyDown("up"))) {
-            GameObject.Find("GameManager").GetComponent<gamePlayManager>().onWin();
+            GameObject.Find("GameManager").GetComponent<gamePlayManager>().winStage();
         }
     }
 }

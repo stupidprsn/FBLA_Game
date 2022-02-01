@@ -309,7 +309,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFile: {fileID: 4900000, guid: 0a94010ac5f6052479da4bf57c5f2378, type: 3}
-  scrollRect: {fileID: 1076417019}
   content: {fileID: 1934941909}
   rankingPrefab: {fileID: 7134840796099420412, guid: a3156f7e665e26d45a9899a6fed60566, type: 3}
 --- !u!114 &12834965
@@ -1970,7 +1969,7 @@ GameObject:
   - component: {fileID: 579309969}
   - component: {fileID: 579309968}
   m_Layer: 5
-  m_Name: CreditsText
+  m_Name: twoPlayerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2015,7 +2014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CREDITS
+  m_text: 2 PLAYERS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f83b23b9dbc16e2418653afb876c497f, type: 2}
   m_sharedMaterial: {fileID: 5497717155186647651, guid: f83b23b9dbc16e2418653afb876c497f, type: 2}
@@ -3318,7 +3317,7 @@ GameObject:
   - component: {fileID: 1059844674}
   - component: {fileID: 1059844676}
   m_Layer: 5
-  m_Name: CreditsButton (1)
+  m_Name: twoPlayerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3426,13 +3425,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2072435086}
-        m_TargetAssemblyTypeName: homeScreen, Assembly-CSharp
-        m_MethodName: changePanel
-        m_Mode: 2
+      - m_Target: {fileID: 2116500360}
+        m_TargetAssemblyTypeName: gameManager, Assembly-CSharp
+        m_MethodName: toMultiplayer
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1439524600}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4539,6 +4538,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98bb6741c31dcb34dbaab8f482422951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panels:
+  - {fileID: 1550697230}
+  - {fileID: 2072435082}
+  - {fileID: 1657673243}
+  - {fileID: 7947053}
+  - {fileID: 12834960}
 --- !u!4 &1354715527
 Transform:
   m_ObjectHideFlags: 0
@@ -5377,7 +5382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1550697231
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7216,6 +7221,7 @@ GameObject:
   - component: {fileID: 2116500360}
   - component: {fileID: 2116500359}
   - component: {fileID: 2116500362}
+  - component: {fileID: 2116500363}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -7236,6 +7242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 2116500360}
+  soundManager: {fileID: 2116500362}
+  jsonFile: {fileID: 4900000, guid: 0a94010ac5f6052479da4bf57c5f2378, type: 3}
 --- !u!114 &2116500360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7249,7 +7257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePlayManager: {fileID: 2116500359}
+  twoPlayerManager: {fileID: 2116500363}
   soundManager: {fileID: 2116500362}
+  mainMenuPanel: 0
 --- !u!4 &2116500361
 Transform:
   m_ObjectHideFlags: 0
@@ -7347,3 +7357,15 @@ MonoBehaviour:
     volume: 0.8
     loop: 0
     source: {fileID: 0}
+--- !u!114 &2116500363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116500358}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066462bd7fa40ed4d9bf68adde0890a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

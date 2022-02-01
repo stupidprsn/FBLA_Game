@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class homeScreen : MonoBehaviour {
     // Arrays of the 6 main menu buttons. They are set in metadata.
-    public UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
-    public UnityEngine.UI.Button[] bottomButtons = new UnityEngine.UI.Button[3];
+    [SerializeField] private UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
+    [SerializeField] private UnityEngine.UI.Button[] bottomButtons = new UnityEngine.UI.Button[3];
 
     // The two arrays are copied over to a multidimensional array.
     private UnityEngine.UI.Button[,] buttons = new UnityEngine.UI.Button[2, 3];
@@ -54,6 +54,9 @@ public class homeScreen : MonoBehaviour {
             {topButtons[0], topButtons[1], topButtons[2] },
             {bottomButtons[0], bottomButtons[1], bottomButtons[2] }
         };
+        // Since we don't need the original lists anymore, we can make them null so C# knows to clear them from ram
+        topButtons = null;
+        bottomButtons = null;
 
         // Update visual to "select" the play button
         buttons[verticalIndex, horizontalIndex].Select();

@@ -10,23 +10,29 @@ using TMPro;
 
 public class leaderboard : MonoBehaviour {
     // Referance to the json file containing the leaderboard data
-    public TextAsset jsonFile;
+    [SerializeField] private TextAsset jsonFile;
 
     // Referances to the leaderboard display
-    public GameObject scrollRect;
-    public Transform content;
+    [SerializeField] private Transform content;
 
     // Referance to the prefab that we can instantiate
-    public GameObject rankingPrefab;
+    [SerializeField] private GameObject rankingPrefab;
 
     // List of all leaderboard entries.
     private List<Rank> rankings;
 
     public void updateScreen() {
-        rankings = gameManager.theRankings.OrderByDescending(x => x.score).ToList();
-        rankings = rankings.Distinct().ToList();
+        //rankings = gameManager.theRankings.OrderByDescending(x => x.score).ToList();
+        //rankings = rankings.Distinct().ToList();
+
+        // Read the json file, then organize the list by the highest score. 
+        rankings = JsonUtility.FromJson<Rankings>(jsonFile.text).rankings.OrderByDescending(x => x.score).ToList();
+
+        // For each ranking, create a visual display.
         for (int i = 0; i < rankings.Count; i++) {
             GameObject newRank = Instantiate(rankingPrefab, content);
+            // Show the rank on the leaderboard.
+            // We need this as 1st, 2nd, and 3rd aren't standard, after that, we can use a standard n + "th".
             if(i == 0) {
                 newRank.transform.Find("place").gameObject.GetComponent<TMP_Text>().text = "1st";
             } else if (i == 1) {
@@ -37,26 +43,29 @@ public class leaderboard : MonoBehaviour {
                 newRank.transform.Find("place").gameObject.GetComponent<TMP_Text>().text = (i + 1).ToString() + "th";
             }
 
+            // Update the name and points on the screen.
             newRank.transform.Find("name").gameObject.GetComponent<TMP_Text>().text = rankings[i].name;
             newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = rankings[i].score.ToString();
         }
     }
 
+    // Allows the user to scroll up and down with arrow keys or with w and d.
     private void Update() {
         FindObjectOfType<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition += Input.GetAxis("Vertical");
     }
 
+    // Update the screen once when the panel loads. 
     void Start() {
         updateScreen();
 
-        Rankings temp = JsonUtility.FromJson<Rankings>(jsonFile.text);
-        rankings = temp.rankings.ToList();
+        //Rankings temp = JsonUtility.FromJson<Rankings>(jsonFile.text);
+        //rankings = temp.rankings.ToList();
 
-        rankings.Add(new Rank("Test", 600 ));
+        //rankings.Add(new Rank("Test", 600 ));
 
-        temp.rankings = rankings;
+        //temp.rankings = rankings;
 
-        string newJasonString = JsonUtility.ToJson(temp);
-        JsonUtility.FromJsonOverwrite(jsonFile.text, newJasonString);
+        //string newJasonString = JsonUtility.ToJson(temp);
+        //JsonUtility.FromJsonOverwrite(jsonFile.text, newJasonString);
     }
 }

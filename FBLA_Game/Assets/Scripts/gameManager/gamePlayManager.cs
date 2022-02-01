@@ -1,57 +1,107 @@
+/*
+ * Hanlin Zhang
+ * Purpose: Manages gameplay
+ */
+
+using System.IO;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class gamePlayManager : MonoBehaviour {
-    public gameManager gameManager;
+    // Used to determine which method to call 
+    // Determined by the player state: alive, won, or dead
+    private delegate void playerStateDelegate();
+    private playerStateDelegate updateMethod;
+
+    // Referance to the game manager and sound manager. Set in meta data
+    [SerializeField] private gameManager gameManager;
+    [SerializeField] private soundManager soundManager;
+
+    [SerializeField] private TextAsset jsonFile;
+
+    // Referance to the time display
     private TMP_Text timeShown;
 
-    private float time = 0;
-    private int health = 3;
-    private bool win = false;
-    private bool isDead = false;
+    // The time taken and health of the player
+    private float time;
+    private int health;
+    private bool doUpdateTime;
     private int finalScore;
 
+
+    // Reset the variables to their defaults
     public void initiateVariables() {
         health = 3;
-        isDead = false;
         time = 0;
+        doUpdateTime = false;
     }
 
-    public void onWin() {
-        FindObjectOfType<soundManager>().PlaySound("gameLevelWin");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    public void setTimeShown() {
+       timeShown = FindObjectOfType<Canvas>().transform.Find("ClockText").GetComponent<TMP_Text>();
+       doUpdateTime = true;
     }
 
+    public void updateCanvas() {
+        GameObject.Find("Canvas").transform.Find("HeartsImage").GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
+    }
+
+    // Called when the player dies
     public void onDeath() {
-        if(health > 1) {
+        // Decrement the health
+        health--;
+        // Reize the size of the heart display so that it displays one less heart
+        updateCanvas();
+
+        // Checks if the player still has health
+        if (health > 1) {
+            // Reset player position
             GameObject.Find("Jonathan").transform.position = new Vector3(6.3386f, -3.5686f, 1);
-            health--;
-            GameObject.Find("Canvas").transform.Find("HeartsImage").GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
+
         } else {
-            FindObjectOfType<soundManager>().stopSound("musicNormalLevel");
-            FindObjectOfType<soundManager>().stopSound("musicBossLevel");
-            FindObjectOfType<soundManager>().PlaySound("gameOver");
+            // Stop all sound and play the game over sound
+            soundManager.stopAllSound();
+            soundManager.PlaySound("gameOver");
 
-
+            // Find the death panel and activate it
+            // We have to search for it by transform because it is deactivated
             Transform[] transforms = GameObject.Find("Canvas").GetComponentsInChildren<Transform>(true);
             foreach (var t in transforms) {
-                if(t.gameObject.name == "DeathPanel") {
+                if (t.gameObject.name == "DeathPanel") {
                     t.gameObject.SetActive(true);
                 }
             }
 
-            isDead = true;
+            // Disable moving the player
             FindObjectOfType<playerMovement>().enabled = false;
-            health = 3;
+            // Change our update method to reflect the player's death
+            updateMethod = playerDead;
         }
     }
 
+    // Called when the player beats the current stage
+    // Plays win sound and loads the next stage
+    public void winStage() {
+        soundManager.PlaySound("gameLevelWin");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    // Called when the player wins the entire game
     public void winGame() {
-        FindObjectOfType<soundManager>().stopSound("playerWalk");
-        win = true;
+        // Stop all sound and play the win sound
+        soundManager.stopAllSound();
+        soundManager.PlaySound("gameLevelWin");
+
+        // Change our update method to reflect the player's victory
+        updateMethod = playerWon;
+
+        // Disable the player's movement
         FindObjectOfType<playerMovement>().enabled = false;
 
+        // Find the win panel
+        // We have to search for it by transform because it is deactivated
         Transform[] transforms = GameObject.Find("Canvas").GetComponentsInChildren<Transform>(true);
         foreach (var t in transforms) {
             if (t.gameObject.name == "winPanel") {
@@ -59,25 +109,26 @@ public class gamePlayManager : MonoBehaviour {
             }
         }
 
-        int score;
-        if(time < 999) {
-            score = 999 - Mathf.FloorToInt(time);
+        // Calculate the final score
+        int subtotalScore;
+        if (time < 999) {
+            subtotalScore = 999 - Mathf.FloorToInt(time);
         } else {
-            score = 0;
+            subtotalScore = 0;
         }
 
-        int healthBonus = 20 + health;
-        finalScore = score + healthBonus;
+        int healthBonus = 20 * health;
+        finalScore = subtotalScore + healthBonus;
 
         TMP_Text[] text = FindObjectsOfType<TMP_Text>();
         TMP_Text scoreDescription = FindObjectOfType<TMP_Text>();
         foreach (var item in text) {
-            if(item.name == "ScoreDescription") {
+            if (item.name == "ScoreDescription") {
                 scoreDescription = item;
             }
         }
 
-        scoreDescription.text = string.Format("Time ({0} seconds)..................{1}\nLives..................................................{2}\n------------------------------------------\nTotal: {3}", Mathf.FloorToInt(time), score, healthBonus, finalScore);
+        scoreDescription.text = string.Format("Time ({0} seconds)..................{1}\nLives..................................................{2}\n------------------------------------------\nTotal: {3}", Mathf.FloorToInt(time), subtotalScore, healthBonus, finalScore);
 
         FindObjectOfType<TMP_InputField>().ActivateInputField();
     }
@@ -86,37 +137,56 @@ public class gamePlayManager : MonoBehaviour {
         time += Time.deltaTime;
     }
 
-    public void updateCanvas() {
-            GameObject.Find("Canvas").transform.Find("HeartsImage").GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
+    private void newEntry(string name, int score) {
+        List<Rank> theRankings = JsonUtility.FromJson<Rankings>(jsonFile.text).rankings;
+        bool alreadyExists = false;
+
+        for(var i = 0; i < theRankings.Count; i++) {
+            if(theRankings[i].name == name) {
+                alreadyExists = true;
+                theRankings[i].score = score;
+                break;
+            }
+        }
+
+        if(!alreadyExists) {
+            theRankings.Add(new Rank(name, score));
+        }
+
+        File.WriteAllText(AssetDatabase.GetAssetPath(jsonFile), JsonUtility.ToJson(theRankings));
+    }
+
+    private void playerAlive() {
+        if(doUpdateTime) {
+            updateTime();
+        }
+
+        timeShown.text = Mathf.FloorToInt(time).ToString();
+
+        if (Input.GetKeyDown("r")) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    private void playerDead() {
+        if (Input.GetKeyDown("space")) {
+            gameManager.toMainMenu(1);
+        }
+    }
+
+    private void playerWon() {
+        if (Input.GetKeyDown("enter") || Input.GetKey("return")) {
+            FindObjectOfType<TMP_InputField>().DeactivateInputField();
+            newEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
+            gameManager.toMainMenu(4);
+        }
+    }
+
+    private void Start() {
+        updateMethod = playerAlive;
     }
 
     private void Update() {
-        if(win) {
-            if(Input.GetKeyDown("enter") || Input.GetKey("return")) {
-                FindObjectOfType<TMP_InputField>().DeactivateInputField();
-                gameManager.newEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
-                gameManager.toMainMenu();
-                gameObject.GetComponent<gamePlayManager>().enabled = false;
-            }
-        } else {
-            if (isDead) {
-                if (Input.GetKeyDown("space")) {
-                    gameManager.toMainMenu();
-                    gameObject.GetComponent<gamePlayManager>().enabled = false;
-                }
-            } else {
-                updateTime();
-
-                if (timeShown == null) {
-                    timeShown = GameObject.Find("Canvas").transform.Find("ClockText").gameObject.GetComponent<TMP_Text>();
-                }
-                timeShown.text = Mathf.FloorToInt(time).ToString();
-
-                if (Input.GetKeyDown("r")) {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                    GameObject.Find("Canvas").transform.Find("HeartsImage").GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
-                }
-            }
-        }
+        updateMethod();
     }
 }

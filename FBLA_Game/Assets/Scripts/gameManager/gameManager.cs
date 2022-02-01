@@ -1,7 +1,7 @@
 /*
  * Hanlin Zhang
  * Purpose: Misc methods used to manage the game
-*/
+ */
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,50 +10,62 @@ using System.Collections.Generic;
 public class gameManager : MonoBehaviour {
     // Referance to other scripts that manage gameplay and sound
     // Referances are set in meta data
-    public gamePlayManager gamePlayManager;
-    public soundManager soundManager;
-
-    public static List<Rank> theRankings = new List<Rank>();
+    [SerializeField] private gamePlayManager gamePlayManager;
+    [SerializeField] private twoPlayerManager twoPlayerManager;
+    [SerializeField] private soundManager soundManager;
 
     // Boolean to keep track of whether or not the game is in fullscreen.
     private bool fullScreen = false;
 
-    // Method for loading a game scene, it is used by the "play" and "2 players" buttons.
+    // Read by onEnterMainMenu to know what panel to load
+    public int mainMenuPanel = 0;
+
+    // Method for loading a game scene, it is used by the "play" buttons.
     public void toGameScene(string toScene) {
-        SceneManager.LoadScene(toScene);
         gamePlayManager.enabled = true;
         gamePlayManager.initiateVariables();
-        soundManager.stopSound("musicMainMenu");
-        soundManager.PlaySound("musicNormalLevel");
+        SceneManager.LoadScene(toScene);
     }
 
-    public void toMainMenu() {
+    // Method for loading two players.
+    public void toMultiplayer() {
+        twoPlayerManager.enabled = true;
+        twoPlayerManager.initiateVariables();
+        SceneManager.LoadScene("TwoPlayer");
+    }
+
+    // Method for returning to main menu.
+    // Takes in one parameter, panel, which dictates which panel to return to.
+    public void toMainMenu(int panel) {
+        gamePlayManager.enabled = false;
+        mainMenuPanel = panel;
         SceneManager.LoadScene(0);
-        soundManager.stopSound("musicNormalLevel");
     }
 
-    public void newEntry(string name, int score) {
-        theRankings.Add(new Rank(name, score));
-        foreach(var item in theRankings) {
-            Debug.Log(item.name);
-        }
-    }
+    //public void newEntry(string name, int score) {
+    //    theRankings.Add(new Rank(name, score));
+    //    foreach (var item in theRankings) {
+    //        Debug.Log(item.name);
+    //    }
+    //}
 
     private void Awake() {
+        // Keep the game manager in all scenes
         DontDestroyOnLoad(this.gameObject);
 
+        // Set the screen resolution and lock the mouse
         Screen.SetResolution(1920, 1080, false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown("escape"))
-        {
+    void Update() {
+        // Allow the application to quit with the esc key
+        if(Input.GetKeyDown("escape")) {
             Application.Quit();
         }
 
+        // Toggle fullscreen with the shift keys
         if (Input.GetKeyDown("left shift") || Input.GetKeyDown("right shift")) {
             fullScreen = !fullScreen;
             Screen.SetResolution(1920, 1080, fullScreen);
