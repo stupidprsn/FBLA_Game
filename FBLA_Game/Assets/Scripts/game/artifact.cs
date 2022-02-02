@@ -11,6 +11,8 @@ public class artifact : MonoBehaviour {
 
     private GameObject artifactPlacer;
 
+    private bool collected = false;
+
     private IEnumerator onCollect() {
         FindObjectOfType<soundManager>().PlaySound("playerCollectArtifact");
 
@@ -54,8 +56,9 @@ public class artifact : MonoBehaviour {
     }
 
     void Update() {
-        if (artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w")) {
+        if (Input.GetKeyDown("w") && artifactCollider.IsTouching(playerCollider) && !collected) {
             StartCoroutine(onCollect());
+            collected = true;
         }
     }
 }

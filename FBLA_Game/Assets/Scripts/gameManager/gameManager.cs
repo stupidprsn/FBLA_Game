@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class gameManager : MonoBehaviour {
+    public static gameManager singletonCheck;
+
     // Referance to other scripts that manage gameplay and sound
     // Referances are set in meta data
     [SerializeField] private gamePlayManager gamePlayManager;
@@ -20,20 +22,6 @@ public class gameManager : MonoBehaviour {
     // Read by onEnterMainMenu to know what panel to load
     public int mainMenuPanel = 0;
 
-    // Method for loading a game scene, it is used by the "play" buttons.
-    public void toGameScene(string toScene) {
-        gamePlayManager.enabled = true;
-        gamePlayManager.initiateVariables();
-        SceneManager.LoadScene(toScene);
-    }
-
-    // Method for loading two players.
-    public void toMultiplayer() {
-        twoPlayerManager.enabled = true;
-        twoPlayerManager.initiateVariables();
-        SceneManager.LoadScene("TwoPlayer");
-    }
-
     // Method for returning to main menu.
     // Takes in one parameter, panel, which dictates which panel to return to.
     public void toMainMenu(int panel) {
@@ -42,14 +30,13 @@ public class gameManager : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
-    //public void newEntry(string name, int score) {
-    //    theRankings.Add(new Rank(name, score));
-    //    foreach (var item in theRankings) {
-    //        Debug.Log(item.name);
-    //    }
-    //}
-
     private void Awake() {
+        if(singletonCheck == null) {
+            singletonCheck = this;
+        } else {
+            Destroy(gameObject);
+        }
+
         // Keep the game manager in all scenes
         DontDestroyOnLoad(this.gameObject);
 

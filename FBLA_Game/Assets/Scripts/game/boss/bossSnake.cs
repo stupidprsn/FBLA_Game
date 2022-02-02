@@ -92,7 +92,7 @@ public class bossSnake : MonoBehaviour {
     }
 
     private void Start() {
-        FindObjectOfType<soundManager>().stopSound("musicNormalLevel");
+        FindObjectOfType<soundManager>().stopAllSound();
         FindObjectOfType<soundManager>().PlaySound("musicBossLevel");
 
         hp = totalSnakes = roundOneSnakes + roundTwoSnakes + roundThreeSnakes;

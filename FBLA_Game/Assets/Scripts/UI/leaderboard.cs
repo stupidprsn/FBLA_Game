@@ -24,13 +24,18 @@ public class leaderboard : MonoBehaviour {
     public void updateScreen() {
         //rankings = gameManager.theRankings.OrderByDescending(x => x.score).ToList();
         //rankings = rankings.Distinct().ToList();
-
+        Debug.Log("Update Screen Called");
         // Read the json file, then organize the list by the highest score. 
         rankings = JsonUtility.FromJson<Rankings>(jsonFile.text).rankings.OrderByDescending(x => x.score).ToList();
+
+        foreach (Rank item in rankings) {
+            Debug.Log(item.name);
+        }
 
         // For each ranking, create a visual display.
         for (int i = 0; i < rankings.Count; i++) {
             GameObject newRank = Instantiate(rankingPrefab, content);
+            Debug.Log(newRank);
             // Show the rank on the leaderboard.
             // We need this as 1st, 2nd, and 3rd aren't standard, after that, we can use a standard n + "th".
             if(i == 0) {

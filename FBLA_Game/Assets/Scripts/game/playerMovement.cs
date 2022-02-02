@@ -101,6 +101,7 @@ public class playerMovement : MonoBehaviour {
         if (jump) {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
             animator.SetBool("isJumping", true);
+            FindObjectOfType<soundManager>().stopSound("playerWalk");
             FindObjectOfType<soundManager>().PlaySound("playerJump");
             jump = false;
         }

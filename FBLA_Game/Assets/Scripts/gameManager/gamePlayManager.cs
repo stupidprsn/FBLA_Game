@@ -4,8 +4,6 @@
  */
 
 using System.IO;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -23,7 +21,11 @@ public class gamePlayManager : MonoBehaviour {
     [SerializeField] private TextAsset jsonFile;
 
     // Referance to the time display
+    private GameObject player;
     private TMP_Text timeShown;
+    private GameObject deathPanel;
+    private GameObject winPanel;
+    private GameObject heartsImg;
 
     // The time taken and health of the player
     private float time;
@@ -39,13 +41,27 @@ public class gamePlayManager : MonoBehaviour {
         doUpdateTime = false;
     }
 
-    public void setTimeShown() {
-       timeShown = FindObjectOfType<Canvas>().transform.Find("ClockText").GetComponent<TMP_Text>();
-       doUpdateTime = true;
+    public void onStageEnter() {
+        player = GameObject.Find("Jonathan");
+
+        Canvas canvas = FindObjectOfType<Canvas>();
+        deathPanel = canvas.transform.Find("DeathPanel").gameObject;
+        timeShown = canvas.transform.Find("ClockText").GetComponent<TMP_Text>();
+        heartsImg = canvas.transform.Find("HeartsImage").gameObject;
+        winPanel = canvas.transform.Find("WinPanel").gameObject;
+
+        deathPanel.SetActive(false);
+        winPanel.SetActive(false);
+
+        updateCanvas();
+        doUpdateTime = true;
+
+        soundManager.stopAllSound();
+        soundManager.PlaySound("musicNormalLevel");
     }
 
     public void updateCanvas() {
-        GameObject.Find("Canvas").transform.Find("HeartsImage").GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
+        heartsImg.GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
     }
 
     // Called when the player dies
@@ -56,26 +72,19 @@ public class gamePlayManager : MonoBehaviour {
         updateCanvas();
 
         // Checks if the player still has health
-        if (health > 1) {
+        if (health > 0) {
             // Reset player position
-            GameObject.Find("Jonathan").transform.position = new Vector3(6.3386f, -3.5686f, 1);
+            player.transform.position = new Vector3(6.3386f, -3.5686f, 1);
 
         } else {
             // Stop all sound and play the game over sound
             soundManager.stopAllSound();
             soundManager.PlaySound("gameOver");
 
-            // Find the death panel and activate it
-            // We have to search for it by transform because it is deactivated
-            Transform[] transforms = GameObject.Find("Canvas").GetComponentsInChildren<Transform>(true);
-            foreach (var t in transforms) {
-                if (t.gameObject.name == "DeathPanel") {
-                    t.gameObject.SetActive(true);
-                }
-            }
+            deathPanel.SetActive(true);
 
             // Disable moving the player
-            FindObjectOfType<playerMovement>().enabled = false;
+            player.GetComponentInChildren<playerMovement>().enabled = false;
             // Change our update method to reflect the player's death
             updateMethod = playerDead;
         }
@@ -98,16 +107,11 @@ public class gamePlayManager : MonoBehaviour {
         updateMethod = playerWon;
 
         // Disable the player's movement
-        FindObjectOfType<playerMovement>().enabled = false;
+        player.GetComponentInChildren<playerMovement>().enabled = false;
 
         // Find the win panel
         // We have to search for it by transform because it is deactivated
-        Transform[] transforms = GameObject.Find("Canvas").GetComponentsInChildren<Transform>(true);
-        foreach (var t in transforms) {
-            if (t.gameObject.name == "winPanel") {
-                t.gameObject.SetActive(true);
-            }
-        }
+        winPanel.SetActive(true);
 
         // Calculate the final score
         int subtotalScore;
@@ -138,22 +142,40 @@ public class gamePlayManager : MonoBehaviour {
     }
 
     private void newEntry(string name, int score) {
-        List<Rank> theRankings = JsonUtility.FromJson<Rankings>(jsonFile.text).rankings;
+        Rankings theRankings = JsonUtility.FromJson<Rankings>(jsonFile.text);
+        string path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "Scripts" + Path.AltDirectorySeparatorChar + "gameManager" + Path.AltDirectorySeparatorChar + "leaderboard.json";
+
+        Debug.Log("The length is: " + theRankings.rankings.Count);
+        foreach (Rank item in theRankings.rankings) {
+            Debug.Log(item.name);
+        }
+
         bool alreadyExists = false;
 
-        for(var i = 0; i < theRankings.Count; i++) {
-            if(theRankings[i].name == name) {
+        for(var i = 0; i < theRankings.rankings.Count; i++) {
+            if(theRankings.rankings[i].name == name) {
+                Debug.Log("Already Exists!");
                 alreadyExists = true;
-                theRankings[i].score = score;
+                theRankings.rankings[i].score = score;
                 break;
             }
         }
 
         if(!alreadyExists) {
-            theRankings.Add(new Rank(name, score));
+            theRankings.rankings.Add(new Rank(name, score));
         }
 
-        File.WriteAllText(AssetDatabase.GetAssetPath(jsonFile), JsonUtility.ToJson(theRankings));
+        Debug.Log("The list has " + theRankings.rankings.Count + " items now");
+        foreach (Rank item in theRankings.rankings) {
+            Debug.Log(item.name);
+        }
+
+        Debug.Log("The string being written is:\n" + JsonUtility.ToJson(theRankings));
+
+        
+
+        using StreamWriter writer = new StreamWriter(path);
+        writer.Write(JsonUtility.ToJson(theRankings));
     }
 
     private void playerAlive() {

@@ -10,7 +10,10 @@ public class soundManager : MonoBehaviour {
     public void PlaySound(string name) {
         Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
         soundToPlay.source.Play();
-        playingSounds.Add(soundToPlay);
+
+        if(soundToPlay.loop == true) {
+            playingSounds.Add(soundToPlay);
+        }
     }
 
     public void stopSound(string name) {

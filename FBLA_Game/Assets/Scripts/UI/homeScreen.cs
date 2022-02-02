@@ -7,6 +7,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class homeScreen : MonoBehaviour {
+    private gamePlayManager gamePlayManager;
+    private twoPlayerManager twoPlayerManager;
+
     // Arrays of the 6 main menu buttons. They are set in metadata.
     [SerializeField] private UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
     [SerializeField] private UnityEngine.UI.Button[] bottomButtons = new UnityEngine.UI.Button[3];
@@ -17,6 +20,20 @@ public class homeScreen : MonoBehaviour {
     // Keep track of which button we are on. We start on the play button which has an index of 0, 1
     private int verticalIndex = 0;
     private int horizontalIndex = 1;
+
+    // Method for loading a game scene, it is used by the "play" buttons.
+    public void toGameScene(string toScene) {
+        gamePlayManager.enabled = true;
+        gamePlayManager.initiateVariables();
+        SceneManager.LoadScene(toScene);
+    }
+
+    // Method for loading two players.
+    public void toMultiplayer() {
+        twoPlayerManager.enabled = true;
+        twoPlayerManager.initiateVariables();
+        SceneManager.LoadScene("TwoPlayer");
+    }
 
     // Used by some of the buttons to go to another panel
     public void changePanel(GameObject toPanel) {
@@ -50,6 +67,9 @@ public class homeScreen : MonoBehaviour {
 
     // Copy over the arrays to the multidimensional array. 
     private void Start() {
+        gamePlayManager = FindObjectOfType<gamePlayManager>();
+        twoPlayerManager = FindObjectOfType<twoPlayerManager>();
+
         buttons = new UnityEngine.UI.Button[2, 3] {
             {topButtons[0], topButtons[1], topButtons[2] },
             {bottomButtons[0], bottomButtons[1], bottomButtons[2] }

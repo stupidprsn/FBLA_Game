@@ -18,7 +18,5 @@ public class onEnterMainMenu : MonoBehaviour {
         // Stop all previous music and start main menu music
         soundManager.stopAllSound();
         soundManager.PlaySound("musicMainMenu");
-        // Destroy this object after the script is finished
-        Destroy(gameObject);
     }
 }
