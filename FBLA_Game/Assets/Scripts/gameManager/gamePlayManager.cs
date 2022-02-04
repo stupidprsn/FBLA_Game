@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+using UnityEditor;
+
 public class gamePlayManager : MonoBehaviour {
     // Used to determine which method to call 
     // Determined by the player state: alive, won, or dead
@@ -33,12 +35,14 @@ public class gamePlayManager : MonoBehaviour {
     private bool doUpdateTime;
     private int finalScore;
 
+    public static TMP_Text DEBUG;
 
     // Reset the variables to their defaults
     public void initiateVariables() {
         health = 3;
         time = 0;
         doUpdateTime = false;
+        updateMethod = playerAlive;
     }
 
     public void onStageEnter() {
@@ -99,6 +103,7 @@ public class gamePlayManager : MonoBehaviour {
 
     // Called when the player wins the entire game
     public void winGame() {
+
         // Stop all sound and play the win sound
         soundManager.stopAllSound();
         soundManager.PlaySound("gameLevelWin");
@@ -112,6 +117,15 @@ public class gamePlayManager : MonoBehaviour {
         // Find the win panel
         // We have to search for it by transform because it is deactivated
         winPanel.SetActive(true);
+
+        DEBUG = FindObjectOfType<TMP_Text>();
+        Transform[] t = FindObjectOfType<Canvas>().GetComponentsInChildren<Transform>();
+        foreach (Transform item in t) {
+            if(item.gameObject.name == "DEBUG") {
+                DEBUG = item.GetComponent<TMP_Text>();
+            }
+        }
+        DEBUG.SetText("DEBUG");
 
         // Calculate the final score
         int subtotalScore;
@@ -172,9 +186,10 @@ public class gamePlayManager : MonoBehaviour {
 
         Debug.Log("The string being written is:\n" + JsonUtility.ToJson(theRankings));
 
-        
+
 
         using StreamWriter writer = new StreamWriter(path);
+        //using StreamWriter writer = new StreamWriter(AssetDatabase.GetAssetPath(jsonFile));
         writer.Write(JsonUtility.ToJson(theRankings));
     }
 
@@ -197,7 +212,9 @@ public class gamePlayManager : MonoBehaviour {
     }
 
     private void playerWon() {
+        DEBUG.SetText("method is called");
         if (Input.GetKeyDown("enter") || Input.GetKey("return")) {
+            DEBUG.SetText("e");
             FindObjectOfType<TMP_InputField>().DeactivateInputField();
             newEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
             gameManager.toMainMenu(4);
