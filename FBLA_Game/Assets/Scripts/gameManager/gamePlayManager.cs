@@ -188,8 +188,8 @@ public class gamePlayManager : MonoBehaviour {
 
 
 
-        using StreamWriter writer = new StreamWriter(path);
-        //using StreamWriter writer = new StreamWriter(AssetDatabase.GetAssetPath(jsonFile));
+        //using StreamWriter writer = new StreamWriter(path);
+        using StreamWriter writer = new StreamWriter(AssetDatabase.GetAssetPath(jsonFile));
         writer.Write(JsonUtility.ToJson(theRankings));
     }
 
