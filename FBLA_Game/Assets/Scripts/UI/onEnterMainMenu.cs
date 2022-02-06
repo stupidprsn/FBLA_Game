@@ -6,7 +6,8 @@
 using UnityEngine;
 
 public class onEnterMainMenu : MonoBehaviour {
-    // Referance to the 5 panels in the menu. Set in meta data.
+    // Referance to the 5 panels in the menu
+    // [0] 
     [SerializeField] private GameObject[] panels = new GameObject[5];
 
     private void Start() {

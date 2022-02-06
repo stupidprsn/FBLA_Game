@@ -50,8 +50,6 @@ public class homeScreen : MonoBehaviour {
     private void buttonSelect(ref int index, bool increment) {
         // Play sound
         FindObjectOfType<soundManager>().PlaySound("UISelectButton");
-        // Reset the button color of the previously selected button
-        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1, 0);
         
         // Increment or decrement the index
         if(increment) {
@@ -61,7 +59,6 @@ public class homeScreen : MonoBehaviour {
         }
 
         // Update visuals
-        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(0.4f, 0.4f, 0.4f, 0.4f);
         buttons[verticalIndex, horizontalIndex].Select();
     }
 
@@ -79,7 +76,6 @@ public class homeScreen : MonoBehaviour {
         bottomButtons = null;
 
         // Update visual to "select" the play button
-        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(0.4f, 0.4f, 0.4f, 0.4f);
         buttons[verticalIndex, horizontalIndex].Select();
     }
 

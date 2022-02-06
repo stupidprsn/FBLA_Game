@@ -79,8 +79,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -171,11 +173,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5776}
     - Class: 114
-      Script: {instanceID: 5826}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 5972}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6290}
+      Script: {instanceID: 6292}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -252,14 +254,12 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5776}
     - Class: 114
-      Script: {instanceID: 5826}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 5972}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6290}
+      Script: {instanceID: 6292}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -339,11 +339,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5776}
     - Class: 114
-      Script: {instanceID: 5826}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 5972}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6290}
+      Script: {instanceID: 6292}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -426,11 +426,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5776}
     - Class: 114
-      Script: {instanceID: 5826}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 5972}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6290}
+      Script: {instanceID: 6292}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -462,9 +462,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 49
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -543,45 +549,45 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5702}
     - Class: 114
-      Script: {instanceID: 5826}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 5964}
+      Script: {instanceID: 5966}
     - Class: 114
-      Script: {instanceID: 5972}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6038}
+      Script: {instanceID: 6040}
     - Class: 114
-      Script: {instanceID: 6044}
+      Script: {instanceID: 6046}
     - Class: 114
-      Script: {instanceID: 6144}
+      Script: {instanceID: 6146}
     - Class: 114
-      Script: {instanceID: 6178}
+      Script: {instanceID: 6180}
     - Class: 114
-      Script: {instanceID: 6222}
+      Script: {instanceID: 6224}
     - Class: 114
-      Script: {instanceID: 6290}
+      Script: {instanceID: 6292}
     - Class: 114
-      Script: {instanceID: 6300}
+      Script: {instanceID: 6302}
     - Class: 114
-      Script: {instanceID: 6358}
+      Script: {instanceID: 6360}
     - Class: 114
-      Script: {instanceID: 6400}
+      Script: {instanceID: 6402}
     - Class: 114
-      Script: {instanceID: 6406}
+      Script: {instanceID: 6408}
     - Class: 114
-      Script: {instanceID: 6538}
+      Script: {instanceID: 6540}
     - Class: 114
-      Script: {instanceID: 6654}
+      Script: {instanceID: 6656}
     - Class: 114
-      Script: {instanceID: 6710}
+      Script: {instanceID: 6712}
     - Class: 114
-      Script: {instanceID: 7330}
+      Script: {instanceID: 7332}
     - Class: 114
-      Script: {instanceID: 7644}
+      Script: {instanceID: 7646}
     - Class: 114
-      Script: {instanceID: 7772}
+      Script: {instanceID: 7774}
     - Class: 114
-      Script: {instanceID: 7880}
+      Script: {instanceID: 7882}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -662,11 +668,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5214}
     - Class: 114
-      Script: {instanceID: 5826}
+      Script: {instanceID: 5828}
     - Class: 114
-      Script: {instanceID: 5972}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6290}
+      Script: {instanceID: 6292}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -1358,7 +1364,7 @@ ScriptsOnlyBuild:
     className: UIFoldout
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 88671239fa2c3bf8efc6dd7cef773af2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: onEnterLevel
