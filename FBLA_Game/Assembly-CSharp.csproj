@@ -60,7 +60,7 @@
     <Compile Include="Assets\Scripts\game\closedDoor.cs" />
     <Compile Include="Assets\Scripts\game\boss\bossArtifact.cs" />
     <Compile Include="Assets\Scripts\game\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\UI\leaderboard.cs" />
+    <Compile Include="Assets\Scripts\UI\leaderboardScreen.cs" />
     <Compile Include="Assets\Scripts\gameManager\soundManager.cs" />
     <Compile Include="Assets\Scripts\game\boss\bossSnakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
@@ -74,8 +74,9 @@
     <Compile Include="Assets\Scripts\gameManager\twoPlayerManager.cs" />
     <Compile Include="Assets\Scripts\UI\onEnterMainMenu.cs" />
     <Compile Include="Assets\Scripts\gameManager\gameManager.cs" />
-    <Compile Include="Assets\Scripts\gameManager\Rank.cs" />
+    <Compile Include="Assets\Scripts\gameManager\leaderboard.cs" />
     <Compile Include="Assets\Scripts\gameManager\Sound.cs" />
+    <Compile Include="Assets\Scripts\gameManager\fileManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

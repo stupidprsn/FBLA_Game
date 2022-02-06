@@ -17,8 +17,6 @@ public class homeScreen : MonoBehaviour {
     // The two arrays are copied over to a multidimensional array.
     private UnityEngine.UI.Button[,] buttons = new UnityEngine.UI.Button[2, 3];
 
-    [SerializeField] private Color buttonColor;
-
     // Keep track of which button we are on. We start on the play button which has an index of 0, 1
     private int verticalIndex = 0;
     private int horizontalIndex = 1;
@@ -63,8 +61,8 @@ public class homeScreen : MonoBehaviour {
         }
 
         // Update visuals
+        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(0.4f, 0.4f, 0.4f, 0.4f);
         buttons[verticalIndex, horizontalIndex].Select();
-        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = buttonColor;
     }
 
     // Copy over the arrays to the multidimensional array. 
@@ -81,8 +79,8 @@ public class homeScreen : MonoBehaviour {
         bottomButtons = null;
 
         // Update visual to "select" the play button
+        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(0.4f, 0.4f, 0.4f, 0.4f);
         buttons[verticalIndex, horizontalIndex].Select();
-        buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(0.6f, 0.6f, 0.6f, 0.4f);
     }
 
     private void Update() {

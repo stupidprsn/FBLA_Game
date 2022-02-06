@@ -5,29 +5,35 @@ using UnityEngine.Audio;
 
 public class soundManager : MonoBehaviour {
     public Sound[] sounds;
-    private List<Sound> playingSounds = new List<Sound>();
+    //private List<Sound> playingSounds = new List<Sound>();
 
     public void PlaySound(string name) {
         Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
         soundToPlay.source.Play();
 
-        if(soundToPlay.loop == true) {
-            playingSounds.Add(soundToPlay);
-        }
+        //if(soundToPlay.loop == true) {
+        //    playingSounds.Add(soundToPlay);
+        //}
     }
 
     public void stopSound(string name) {
         Sound soundToStop = Array.Find(sounds, sound => sound.name == name);
         soundToStop.source.Stop();
-        playingSounds.Remove(soundToStop);
+        //playingSounds.Remove(soundToStop);
     }
 
     public void stopAllSound() {
-        foreach(Sound soundToStop in playingSounds) {
-            soundToStop.source.Stop();
+        foreach(Sound soundToStop in sounds) {
+            if(soundToStop.source.isPlaying) {
+                soundToStop.source.Stop();
+            }
         }
 
-        playingSounds.Clear();
+        //foreach(Sound soundToStop in playingSounds) {
+        //    soundToStop.source.Stop();
+        //}
+
+        //playingSounds.Clear();
     }
 
     private void Awake() {

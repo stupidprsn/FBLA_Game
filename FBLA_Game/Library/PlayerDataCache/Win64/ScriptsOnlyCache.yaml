@@ -10,7 +10,7 @@ ScriptsOnlyBuild:
     - gameManager
     - gamePlayManager
     - homeScreen
-    - leaderboard
+    - leaderboardScreen
     - onEnterLevel
     - onEnterMainMenu
     - openedDoor
@@ -23,6 +23,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -257,6 +258,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6290}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -917,10 +920,10 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: bd02adc02c4ca8398782a25d636159ac
+      Hash: 7e8bab897c6d83903306b2f2721c7c33
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: leaderboard
+    className: leaderboardScreen
   - hash:
       serializedVersion: 2
       Hash: 9b2d72155209a515197b0788f9f11a91

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-using UnityEditor;
+//using UnityEditor;
 
 public class gamePlayManager : MonoBehaviour {
     // Used to determine which method to call 
@@ -35,8 +35,6 @@ public class gamePlayManager : MonoBehaviour {
     private bool doUpdateTime;
     private int finalScore;
 
-    public static TMP_Text DEBUG;
-
     // Reset the variables to their defaults
     public void initiateVariables() {
         health = 3;
@@ -45,7 +43,7 @@ public class gamePlayManager : MonoBehaviour {
         updateMethod = playerAlive;
     }
 
-    public void onStageEnter() {
+    public void onStageEnter(string music) {
         player = GameObject.Find("Jonathan");
 
         Canvas canvas = FindObjectOfType<Canvas>();
@@ -118,15 +116,6 @@ public class gamePlayManager : MonoBehaviour {
         // We have to search for it by transform because it is deactivated
         winPanel.SetActive(true);
 
-        DEBUG = FindObjectOfType<TMP_Text>();
-        Transform[] t = FindObjectOfType<Canvas>().GetComponentsInChildren<Transform>();
-        foreach (Transform item in t) {
-            if(item.gameObject.name == "DEBUG") {
-                DEBUG = item.GetComponent<TMP_Text>();
-            }
-        }
-        DEBUG.SetText("DEBUG");
-
         // Calculate the final score
         int subtotalScore;
         if (time < 999) {
@@ -156,41 +145,43 @@ public class gamePlayManager : MonoBehaviour {
     }
 
     private void newEntry(string name, int score) {
-        Rankings theRankings = JsonUtility.FromJson<Rankings>(jsonFile.text);
-        string path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "Scripts" + Path.AltDirectorySeparatorChar + "gameManager" + Path.AltDirectorySeparatorChar + "leaderboard.json";
+        fileManager.saveLeaderboard(name, score);
 
-        Debug.Log("The length is: " + theRankings.rankings.Count);
-        foreach (Rank item in theRankings.rankings) {
-            Debug.Log(item.name);
-        }
+        //Rankings theRankings = JsonUtility.FromJson<Rankings>(jsonFile.text);
+        //string path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "Scripts" + Path.AltDirectorySeparatorChar + "gameManager" + Path.AltDirectorySeparatorChar + "leaderboard.json";
 
-        bool alreadyExists = false;
+        //Debug.Log("The length is: " + theRankings.rankings.Count);
+        //foreach (Rank item in theRankings.rankings) {
+        //    Debug.Log(item.name);
+        //}
 
-        for(var i = 0; i < theRankings.rankings.Count; i++) {
-            if(theRankings.rankings[i].name == name) {
-                Debug.Log("Already Exists!");
-                alreadyExists = true;
-                theRankings.rankings[i].score = score;
-                break;
-            }
-        }
+        //bool alreadyExists = false;
 
-        if(!alreadyExists) {
-            theRankings.rankings.Add(new Rank(name, score));
-        }
+        //for(var i = 0; i < theRankings.rankings.Count; i++) {
+        //    if(theRankings.rankings[i].name == name) {
+        //        Debug.Log("Already Exists!");
+        //        alreadyExists = true;
+        //        theRankings.rankings[i].score = score;
+        //        break;
+        //    }
+        //}
 
-        Debug.Log("The list has " + theRankings.rankings.Count + " items now");
-        foreach (Rank item in theRankings.rankings) {
-            Debug.Log(item.name);
-        }
+        //if(!alreadyExists) {
+        //    theRankings.rankings.Add(new Rank(name, score));
+        //}
 
-        Debug.Log("The string being written is:\n" + JsonUtility.ToJson(theRankings));
+        //Debug.Log("The list has " + theRankings.rankings.Count + " items now");
+        //foreach (Rank item in theRankings.rankings) {
+        //    Debug.Log(item.name);
+        //}
+
+        //Debug.Log("The string being written is:\n" + JsonUtility.ToJson(theRankings));
 
 
 
         //using StreamWriter writer = new StreamWriter(path);
-        using StreamWriter writer = new StreamWriter(AssetDatabase.GetAssetPath(jsonFile));
-        writer.Write(JsonUtility.ToJson(theRankings));
+        //using StreamWriter writer = new StreamWriter(AssetDatabase.GetAssetPath(jsonFile));
+        //writer.Write(JsonUtility.ToJson(theRankings));
     }
 
     private void playerAlive() {
@@ -206,17 +197,18 @@ public class gamePlayManager : MonoBehaviour {
     }
 
     private void playerDead() {
+        Debug.Log("player dead function called");
         if (Input.GetKeyDown("space")) {
+            Debug.Log("efg");
             gameManager.toMainMenu(1);
         }
     }
 
     private void playerWon() {
-        DEBUG.SetText("method is called");
         if (Input.GetKeyDown("enter") || Input.GetKey("return")) {
-            DEBUG.SetText("e");
             FindObjectOfType<TMP_InputField>().DeactivateInputField();
             newEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
+            Debug.Log(FindObjectOfType<TMP_InputField>().text);
             gameManager.toMainMenu(4);
         }
     }

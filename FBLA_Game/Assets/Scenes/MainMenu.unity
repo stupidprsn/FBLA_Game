@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a620d746d8f9aa4384718eddac6ecf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: {fileID: 4900000, guid: 0a94010ac5f6052479da4bf57c5f2378, type: 3}
   content: {fileID: 1934941909}
   rankingPrefab: {fileID: 7134840796099420412, guid: a3156f7e665e26d45a9899a6fed60566, type: 3}
 --- !u!114 &12834965
@@ -7134,7 +7133,6 @@ MonoBehaviour:
   - {fileID: 1465056204}
   - {fileID: 1544795395}
   - {fileID: 2055784547}
-  buttonColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &2102544725
 GameObject:
   m_ObjectHideFlags: 0
