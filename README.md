@@ -29,3 +29,4 @@ The source code can be found in "\FBLA_Game\Assets\".
 Images can be found in "\FBLA_Game\Assets\Images" and subsequent subfolders, all credit goes to Sophie Tian.  
 The game scripts can be found in "\FBLA_Game\Assets\Scripts" and subsequent subfolders.  
 Audio can be found in "\FBLA_Game\FBLA_Game\Assets\Audio" and subsequent subfolders.  
+The leaderboard and game logs can be found in "%userprofile%\appdata\locallow".
