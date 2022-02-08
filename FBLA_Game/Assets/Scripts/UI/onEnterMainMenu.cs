@@ -7,7 +7,11 @@ using UnityEngine;
 
 public class onEnterMainMenu : MonoBehaviour {
     // Referance to the 5 panels in the menu
-    // [0] 
+    // [0] - Title Screen
+    // [1] - Home Screen
+    // [2] - Instructions Screen
+    // [3] - Credits Screen
+    // [4] - Leaderborad Screen
     [SerializeField] private GameObject[] panels = new GameObject[5];
 
     private void Start() {

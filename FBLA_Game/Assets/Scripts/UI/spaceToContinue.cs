@@ -6,11 +6,11 @@
 using UnityEngine;
 
 public class spaceToContinue : MonoBehaviour {
-    // The panel we switch to. It is set in the meta data. 
-    public GameObject toPanel;
+    // The panel we switch to.
+    [SerializeField] private GameObject toPanel;
 
-    // Check for space
     private void Update() {
+        // Check for space
         if (Input.GetKeyDown("space")) {
             // Activate the new panel, deactivate the old one, and play the audio. 
             toPanel.SetActive(true);

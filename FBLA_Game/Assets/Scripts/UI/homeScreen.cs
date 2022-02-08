@@ -7,41 +7,44 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class homeScreen : MonoBehaviour {
+    // Referances to the scripts in charge of managing gameplay
     private gamePlayManager gamePlayManager;
     private twoPlayerManager twoPlayerManager;
 
-    // Arrays of the 6 main menu buttons. They are set in metadata.
+    // Arrays of the 6 main menu buttons 
     [SerializeField] private UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
     [SerializeField] private UnityEngine.UI.Button[] bottomButtons = new UnityEngine.UI.Button[3];
 
-    // The two arrays are copied over to a multidimensional array.
+    // A multidimensional array used to keep track of the buttons
     private UnityEngine.UI.Button[,] buttons = new UnityEngine.UI.Button[2, 3];
 
-    // Keep track of which button we are on. We start on the play button which has an index of 0, 1
+    // Variables for keeping track of which button is currently selected
+    // We start on the play button which has a vertical index of 0 and a horizontal index of 1
     private int verticalIndex = 0;
     private int horizontalIndex = 1;
 
-    // Method for loading a game scene, it is used by the "play" buttons.
-    public void toGameScene(string toScene) {
+    // Method for loading into a singleplayer game, it is used by the play button.
+    public void toGame() {
         gamePlayManager.enabled = true;
         gamePlayManager.initiateVariables();
-        SceneManager.LoadScene(toScene);
+        SceneManager.LoadScene("LevelOne");
     }
 
-    // Method for loading two players.
+    // Method for loading into a twoplayergame, it is used by the "2 Players" button.
     public void toMultiplayer() {
         twoPlayerManager.enabled = true;
         twoPlayerManager.initiateVariables();
         SceneManager.LoadScene("TwoPlayer");
     }
 
-    // Used by some of the buttons to go to another panel
+    // Loads another scene in the main menu
+    // Has one parameter which dictates which panel is loaded
     public void changePanel(GameObject toPanel) {
         toPanel.SetActive(true);
         gameObject.SetActive(false);
     }
 
-    // Used by the quit button
+    // Used by the quit button to leave the application
     public void quitButton() {
         Application.Quit();
     }
@@ -62,11 +65,12 @@ public class homeScreen : MonoBehaviour {
         buttons[verticalIndex, horizontalIndex].Select();
     }
 
-    // Copy over the arrays to the multidimensional array. 
     private void Start() {
+        // Create referances to the game play manager and two player manager
         gamePlayManager = FindObjectOfType<gamePlayManager>();
         twoPlayerManager = FindObjectOfType<twoPlayerManager>();
-
+        
+        // Copy over the arrays to the multidimensional array. 
         buttons = new UnityEngine.UI.Button[2, 3] {
             {topButtons[0], topButtons[1], topButtons[2] },
             {bottomButtons[0], bottomButtons[1], bottomButtons[2] }
@@ -101,10 +105,10 @@ public class homeScreen : MonoBehaviour {
             buttonSelect(ref horizontalIndex, true);
         }
 
-        // If the user presses space to "click" the button
+        // Checks if the user presses space to "click" the button
         if (Input.GetKeyDown("space")) {
             // Play sound
-            FindObjectOfType<soundManager>().PlaySound("UISelectButton");
+            FindObjectOfType<soundManager>().PlaySound("UISpacebar");
             // Reset button visuals
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(255, 255, 255, 0);
             // Perform the action associated with the button
