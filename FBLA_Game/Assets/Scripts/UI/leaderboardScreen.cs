@@ -17,7 +17,7 @@ public class leaderboardScreen : MonoBehaviour {
 
     public void updateScreen() {
         // Get the leaderboard from the fileManager as a list and order it by placement
-        List<Rank> leaderboard = fileManager.loadLeaderboard().leaderboard.OrderByDescending(x => x.score).ToList();
+        List<Rank> leaderboard = FindObjectOfType<fileManager>().loadLeaderboard().leaderboard.OrderByDescending(x => x.score).ToList();
 
         // For each ranking, create a visual display using our rankingPrefab template
         for (int i = 0; i < leaderboard.Count; i++) {

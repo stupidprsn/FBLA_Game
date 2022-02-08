@@ -76,6 +76,8 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    Unity.Timeline.Editor.dll:
+    - TimelineProjectSettings
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -944,7 +946,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: a9e81b43411e0c054562e6f8895cc82b
+      Hash: f06455c1d825a6dd4a419984de69a7d6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: soundManager
@@ -1310,7 +1312,7 @@ ScriptsOnlyBuild:
     className: ChannelMixer
   - hash:
       serializedVersion: 2
-      Hash: 6d32fb890c39ed8856174e7103d903f0
+      Hash: 71adf46999ddf71f1e2f116bf1933205
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: gamePlayManager
@@ -1712,4 +1714,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/BossLevel.unity
   - Assets/Scenes/LevelFour.unity
   - Assets/Scenes/TwoPlayer.unity
-  playerPath: C:/Hanlin/School/FBLA/2021-2022/FBLA_Game/Compiled Game/FBLA_Game.exe
+  playerPath: C:/Users/tsoph/Documents/FBLA_Game/Compiled Game/Jonathans_Adventure.exe

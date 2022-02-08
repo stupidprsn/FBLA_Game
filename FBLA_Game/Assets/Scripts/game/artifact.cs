@@ -1,11 +1,19 @@
+/*
+ * Hanlin Zhang
+ * Purpose: Functionality for the artifacts
+ */
+
 using UnityEngine;
 using System.Collections;
 
 public class artifact : MonoBehaviour {
-    public SpriteRenderer artifactRenderer;
-    public Sprite[] sprites = new Sprite[3];
 
-    public BoxCollider2D artifactCollider;
+    // References to the artifacts renderer and possible sprite images
+    // Used to randomize the artifact image
+    [SerializeField] private SpriteRenderer artifactRenderer;
+    [SerializeField] private Sprite[] sprites = new Sprite[3];
+
+    [SerializeField] private BoxCollider2D artifactCollider;
 
     private CapsuleCollider2D playerCollider;
 

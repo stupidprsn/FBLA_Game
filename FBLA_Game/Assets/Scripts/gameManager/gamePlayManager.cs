@@ -190,7 +190,7 @@ public class gamePlayManager : MonoBehaviour {
             // Deactivate the text input field
             FindObjectOfType<TMP_InputField>().DeactivateInputField();
             // Record the user's score
-            fileManager.saveLeaderboard(FindObjectOfType<TMP_InputField>().text, finalScore);
+            FindObjectOfType<fileManager>().saveLeaderboard(FindObjectOfType<TMP_InputField>().text, finalScore);
             // Return to the leaderboard screen
             gameManager.toMainMenu(4);
         }
