@@ -5,7 +5,6 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public class gameManager : MonoBehaviour {
     public static gameManager singletonCheck;
@@ -13,7 +12,6 @@ public class gameManager : MonoBehaviour {
     // Referance to other scripts that manage gameplay and sound
     // Referances are set in meta data
     [SerializeField] private gamePlayManager gamePlayManager;
-    [SerializeField] private twoPlayerManager twoPlayerManager;
     [SerializeField] private soundManager soundManager;
 
     // Boolean to keep track of whether or not the game is in fullscreen.

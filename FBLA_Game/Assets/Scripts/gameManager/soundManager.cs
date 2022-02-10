@@ -15,7 +15,7 @@ public class soundManager : MonoBehaviour {
 
     // Method for playing a sound
     // Takes in one parameter, name, which is used to indicate which song to play
-    public void PlaySound(string name) {
+    public void PlaySound(string name, bool playMultiple = false) {
         // Find the sound by its name
         Sound soundToPlay = Array.Find(sounds, sound => sound.name == name);
         // Checks to make sure the sound isn't already playing

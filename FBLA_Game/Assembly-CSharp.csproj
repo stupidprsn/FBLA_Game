@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\game\boss\bossSnake.cs" />
     <Compile Include="Assets\Scripts\game\closedDoor.cs" />
     <Compile Include="Assets\Scripts\game\boss\bossArtifact.cs" />
+    <Compile Include="Assets\Scripts\game\playerAnimation.cs" />
     <Compile Include="Assets\Scripts\game\playerMovement.cs" />
     <Compile Include="Assets\Scripts\UI\leaderboardScreen.cs" />
     <Compile Include="Assets\Scripts\gameManager\soundManager.cs" />

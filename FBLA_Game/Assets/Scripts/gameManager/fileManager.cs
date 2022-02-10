@@ -13,7 +13,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class fileManager : MonoBehaviour {
     // File location for storing the leaderboard
     // It is stored in %userprofile%\AppData\LocalLow\PeriwinkleGames\Jonathans_Adventure
-    private string path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "leaderboard.fbla";
+    private string path;
+
+    private void Start() {
+        path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "leaderboard.fbla";
+    }
 
     // Method for adding a new placement to the leaderboard
     // Takes in a name and its corresponding score to add
