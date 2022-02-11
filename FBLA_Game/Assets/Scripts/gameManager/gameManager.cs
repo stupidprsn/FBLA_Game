@@ -52,7 +52,7 @@ public class gameManager : MonoBehaviour {
         }
 
         // Toggle fullscreen with the shift keys
-        if (Input.GetKeyDown("left shift") || Input.GetKeyDown("right shift")) {
+        if (Input.GetKeyDown("tab")) {
             fullScreen = !fullScreen;
             Screen.SetResolution(1920, 1080, fullScreen);
         }

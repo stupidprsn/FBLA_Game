@@ -23,7 +23,7 @@ public class leaderboardScreen : MonoBehaviour {
         List<Rank> leaderboard = FindObjectOfType<fileManager>().loadLeaderboard().leaderboard;
 
         // Check if a leaderboard has been created
-        if(leaderboard != null) {
+        if(leaderboard.Count > 0) {
             // Sort the leaderboard
             leaderboard.OrderByDescending(x => x.score).ToList();
 
@@ -56,7 +56,7 @@ public class leaderboardScreen : MonoBehaviour {
 
     // Allows the user to scroll up and down with arrow keys or with w and d.
     private void Update() {
-        FindObjectOfType<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition += Input.GetAxis("Vertical");
+        FindObjectOfType<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition += Input.GetAxis("Vertical") * 0.005f;
     }
 
     // Update the screen once when the panel loads. 

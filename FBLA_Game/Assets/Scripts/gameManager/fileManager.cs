@@ -82,7 +82,7 @@ public class fileManager : MonoBehaviour {
         } else {
             // Return nothing and log an error
             Debug.LogError("Save file not found");
-            return null;
+            return new Leaderboard();
         }
     }
 }

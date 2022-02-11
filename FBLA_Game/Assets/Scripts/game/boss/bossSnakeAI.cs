@@ -1,4 +1,9 @@
-using System.Collections;
+/*
+ * Hanlin Zhang
+ * Purpose: AI for the snake enemies in the boss level
+ *          Very similar to regular snake AI script (see normal snake AI script for in-depth explanations)
+ */
+
 using UnityEngine;
 
 public class bossSnakeAI : MonoBehaviour {
@@ -12,6 +17,7 @@ public class bossSnakeAI : MonoBehaviour {
         Vector2 downVector2;
         Vector2 forwardDirection;
 
+        // Different values are needed as the snake is a different size
         if(facingRight) {
             forwardVector2 = new Vector2(transform.position.x + 0.7f, transform.position.y - 0.25f);
             downVector2 = new Vector2(transform.position.x + 0.45f, transform.position.y - 0.5f);
