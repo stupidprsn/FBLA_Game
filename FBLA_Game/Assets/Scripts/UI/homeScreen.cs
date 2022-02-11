@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class homeScreen : MonoBehaviour {
     // Referances to the scripts in charge of managing gameplay
     private gamePlayManager gamePlayManager;
-    private twoPlayerManager twoPlayerManager;
 
     // Arrays of the 6 main menu buttons 
     [SerializeField] private UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
@@ -28,13 +27,6 @@ public class homeScreen : MonoBehaviour {
         gamePlayManager.enabled = true;
         gamePlayManager.initiateVariables();
         SceneManager.LoadScene("LevelOne");
-    }
-
-    // Method for loading into a twoplayergame, it is used by the "2 Players" button.
-    public void toMultiplayer() {
-        twoPlayerManager.enabled = true;
-        twoPlayerManager.initiateVariables();
-        SceneManager.LoadScene("TwoPlayer");
     }
 
     // Loads another scene in the main menu
@@ -68,7 +60,6 @@ public class homeScreen : MonoBehaviour {
     private void Start() {
         // Create referances to the game play manager and two player manager
         gamePlayManager = FindObjectOfType<gamePlayManager>();
-        twoPlayerManager = FindObjectOfType<twoPlayerManager>();
         
         // Copy over the arrays to the multidimensional array. 
         buttons = new UnityEngine.UI.Button[2, 3] {

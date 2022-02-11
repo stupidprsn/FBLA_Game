@@ -1543,6 +1543,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3932877895517305982, guid: fd79dc4bc01aaea43bea0d472f8f652b, type: 3}
   m_PrefabInstance: {fileID: 133085543}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &497061475 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1604256245688274264, guid: fe23633297ccf994fb841e4eacdc02d5, type: 3}
+  m_PrefabInstance: {fileID: 6844556448526266412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510f84dff5d1f6a4681bc4a1147ccbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5184,6 +5195,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6844556448386597937, guid: fe23633297ccf994fb841e4eacdc02d5, type: 3}
+      propertyPath: playerAnimation
+      value: 
+      objectReference: {fileID: 497061475}
     - target: {fileID: 6844556448386597942, guid: fe23633297ccf994fb841e4eacdc02d5, type: 3}
       propertyPath: m_Name
       value: Jonathan

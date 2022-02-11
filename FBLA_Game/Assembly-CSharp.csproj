@@ -73,7 +73,6 @@
     <Compile Include="Assets\Scripts\gameManager\gamePlayManager.cs" />
     <Compile Include="Assets\Scripts\game\onEnterLevel.cs" />
     <Compile Include="Assets\Scripts\gameManager\fileManager.cs" />
-    <Compile Include="Assets\Scripts\gameManager\twoPlayerManager.cs" />
     <Compile Include="Assets\Scripts\UI\onEnterMainMenu.cs" />
     <Compile Include="Assets\Scripts\gameManager\gameManager.cs" />
     <Compile Include="Assets\Scripts\gameManager\leaderboard.cs" />

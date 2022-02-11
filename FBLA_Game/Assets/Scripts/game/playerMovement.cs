@@ -4,20 +4,18 @@ public class playerMovement : MonoBehaviour {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheckerObj;
     [SerializeField] private LayerMask jumpableLayer;
+    [SerializeField] private playerAnimation playerAnimation;
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight;
-
     private soundManager soundManager;
 
     private bool facingRight = true;
     private bool jump = false;
     private float movement;
-    private bool playWalkSound = false;
 
-    private bool walking;
-    private bool jumping;
-    private bool pushing;
+    private bool isWalking;
+    private bool isJumping;
 
     private bool GroundChecker() {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckerObj.position, 0.2f, jumpableLayer);
@@ -36,31 +34,18 @@ public class playerMovement : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-
-        if(collision.collider.tag == "Box") {
-            if (transform.position.y - collision.gameObject.transform.position.y < 0.9) {
-                pushing = true;
-            }
-        }
-
-        if (collision.gameObject.layer == 8) {
-            if (transform.position.y - collision.gameObject.transform.position.y > -0.15f) {
-                jumping = false;
-            }
+        if(collision.collider.gameObject.layer == 8 && collision.collider.transform.position.y + 0.1f < transform.position.y) {
+            isJumping = false;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision) {
-        if (collision.collider.tag == "Box") {
-            pushing = false;
-        }
-    }
-    
     private void Start() {
         soundManager = FindObjectOfType<soundManager>();
     }
 
     private void Update() {
+        Debug.DrawLine(groundCheckerObj.position, new Vector2(groundCheckerObj.position.x, groundCheckerObj.position.y - 0.2f), Color.green);
+
         movement = Input.GetAxis("Horizontal") * speed;
 
         if (Input.GetKeyDown("space") && GroundChecker()) {
@@ -68,13 +53,11 @@ public class playerMovement : MonoBehaviour {
         }
 
         if(transform.position.y < -5.5) {
-            FindObjectOfType<gamePlayManager>().onDeath();
+            StartCoroutine(FindObjectOfType<gamePlayManager>().onDeath());
         }
     }
 
     private void FixedUpdate() {
-        walking = false;
-
         flipPlayer();
 
         if (!facingRight) {
@@ -86,25 +69,19 @@ public class playerMovement : MonoBehaviour {
         );
 
         if (movement != 0) {
-            walking = true;
-            if(!playWalkSound) {
-                soundManager.PlaySound("playerWalk");
-                playWalkSound = true;
-            }
+            isWalking = true;
         } else {
-            if (playWalkSound) {
-                soundManager.stopSound("playerWalk");
-                playWalkSound = false;
-            }
+            isWalking = false;
         }
 
         if (jump) {
             rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-            jumping = true;
-            soundManager.stopSound("playerWalk");
             soundManager.PlaySound("playerJump");
+            isJumping = true;
             jump = false;
         }
+
+        playerAnimation.calcAnimation(isWalking, isJumping);
     }
 
 }

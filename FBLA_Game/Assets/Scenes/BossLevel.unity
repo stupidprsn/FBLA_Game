@@ -1338,6 +1338,10 @@ PrefabInstance:
       propertyPath: music
       value: musicBossLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 548742249891135375, guid: 17ebe68b894b6134689ddf5467b25f2f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ebe68b894b6134689ddf5467b25f2f, type: 3}
 --- !u!1001 &692820735
@@ -1971,6 +1975,9 @@ MonoBehaviour:
   snakes: {fileID: 449587699}
   door: {fileID: 2429659825764996590}
   rb: {fileID: 1070254962}
+  player: {fileID: 1070254958}
+  animator: {fileID: 1070254960}
+  spriteRenderer: {fileID: 1070254959}
   hp: 22
 --- !u!50 &1070254962
 Rigidbody2D:
@@ -3259,7 +3266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2028465017388534987, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2028465017388534991, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
       propertyPath: m_Pivot.x

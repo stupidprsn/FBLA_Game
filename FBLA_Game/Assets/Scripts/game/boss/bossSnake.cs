@@ -10,24 +10,29 @@ public class bossSnake : MonoBehaviour {
     private int totalSnakes;
 
     // Referances
-    public GameObject snake;
-    public GameObject warning;
-    public GameObject snakes;
-    public GameObject door;
-    public Rigidbody2D rb;
+    [SerializeField] private GameObject snake;
+    [SerializeField] private GameObject warning;
+    [SerializeField] private GameObject snakes;
+    [SerializeField] private GameObject door;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform player;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     //Stats
     public int hp;
     private int phase = 1;
     private List<Transform> positions;
 
+    private bool facingRight = false;
     public void onDamage() {
         hp--;
+        animator.SetTrigger("damage");
     }
 
     private IEnumerator onWin() {
         rb.constraints = RigidbodyConstraints2D.None;
-        rb.AddForce(new Vector2(20 * Time.deltaTime, 50 * Time.deltaTime), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(50 * Time.deltaTime, 100 * Time.deltaTime), ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(2);
 
@@ -70,6 +75,13 @@ public class bossSnake : MonoBehaviour {
         }
     }
 
+    private void flip() {
+        if ((player.position.x < 0 && facingRight) || (player.position.x > 0 && !facingRight)) {
+            transform.Rotate(new Vector3(0, 180, 0));
+            facingRight = !facingRight;
+        }
+    }
+
     private void phaseOne() {
         if (phase == 1) {
             StartCoroutine(spawnSnakes(3, roundOneSnakes));
@@ -92,8 +104,6 @@ public class bossSnake : MonoBehaviour {
     }
 
     private void Start() {
-        FindObjectOfType<soundManager>().stopAllSound();
-        FindObjectOfType<soundManager>().PlaySound("musicBossLevel");
 
         hp = totalSnakes = roundOneSnakes + roundTwoSnakes + roundThreeSnakes;
 
@@ -114,6 +124,8 @@ public class bossSnake : MonoBehaviour {
     }
 
     private void Update() {
+        flip();
+
         if (hp > totalSnakes - roundOneSnakes) {
             phaseOne();
         } else if(hp > totalSnakes - roundOneSnakes - roundTwoSnakes) {

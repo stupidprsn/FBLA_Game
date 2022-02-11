@@ -46,7 +46,7 @@ public class snakeAI : MonoBehaviour {
                 FindObjectOfType<soundManager>().PlaySound("playerKillSnake");
                 Destroy(this.gameObject);
             } else {
-                GameObject.Find("GameManager").GetComponent<gamePlayManager>().onDeath();
+                StartCoroutine(FindObjectOfType<gamePlayManager>().onDeath());
             }
         }
     }

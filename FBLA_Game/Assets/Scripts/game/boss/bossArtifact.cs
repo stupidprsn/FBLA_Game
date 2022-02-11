@@ -12,8 +12,9 @@ public class bossArtifact : MonoBehaviour {
     private IEnumerator onCollect() {
         FindObjectOfType<soundManager>().PlaySound("playerCollectArtifact");
 
+        transform.SetParent(boss.transform);
         Vector3 startPos = transform.localPosition;
-        Vector3 finishPos = boss.transform.position;
+        Vector3 finishPos = new Vector3 (0, 0, 1);
         float t = 0;
 
         artifactRenderer.sortingLayerName = "Foreground";

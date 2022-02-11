@@ -15,6 +15,7 @@ public class fileManager : MonoBehaviour {
     // It is stored in %userprofile%\AppData\LocalLow\PeriwinkleGames\Jonathans_Adventure
     private string path;
 
+    // Set the path
     private void Start() {
         path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "leaderboard.fbla";
     }

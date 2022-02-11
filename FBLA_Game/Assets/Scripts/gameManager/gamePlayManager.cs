@@ -3,6 +3,7 @@
  * Purpose: Manages gameplay
  */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -19,12 +20,16 @@ public class gamePlayManager : MonoBehaviour {
 
     // Referances to various in game objects
     private GameObject player;
+    private playerMovement playerMovement;
+    private playerAnimation playerAnimation;
+    private Rigidbody2D playerRB;
     private TMP_Text timeShown;
     private GameObject deathPanel;
     private GameObject winPanel;
     private GameObject heartsImg;
     private TMP_Text scoreText;
     private TMP_Text scoreNumbers;
+    private GameObject CongratulatoryText;
 
     // The time the player has taken
     private float time;
@@ -32,11 +37,26 @@ public class gamePlayManager : MonoBehaviour {
     // The health of the player
     private int health;
 
+    // Used to decide if the congratulatory message should be shown
+    private bool win = false;
+
     // Boolean to keep track of whether to increment the time
     private bool doUpdateTime;
 
     // The user's final score
     private int finalScore;
+
+    // Spanw location of player upon death
+    private Vector3 spawnPosition;
+
+    // List of possible congratulatory messages
+    private string[] congratulatoryMsgs = new string[] {
+        "GOOD JOB, LEVEL CLEARED!",
+        "CONGRATULATIONS, LEVEL CLEARED!",
+        "NICELY DONE, LEVEL CLEARED!",
+        "PHENOMENAL, LEVEL CLEARED!",
+        "WELL DONE, LEVEL CLEARED!"
+    };
 
     // Reset the variables to their defaults
     public void initiateVariables() {
@@ -48,9 +68,12 @@ public class gamePlayManager : MonoBehaviour {
 
     // Method that is called by onEnterLevel every time a new stage is loaded
     // Takes in one paramenter, music, which dictates what music should be played for that stage
-    public void onStageEnter(string music) {
+    public void onStageEnter(string music, Vector3 position) {
         // Create referances to the various game objects on the stage
         player = GameObject.Find("Jonathan");
+        playerMovement = player.GetComponent<playerMovement>();
+        playerAnimation = player.GetComponent<playerAnimation>();
+        playerRB = player.GetComponent<Rigidbody2D>();
 
         Canvas canvas = FindObjectOfType<Canvas>();
         deathPanel = canvas.transform.Find("DeathPanel").gameObject;
@@ -59,6 +82,10 @@ public class gamePlayManager : MonoBehaviour {
         winPanel = canvas.transform.Find("WinPanel").gameObject;
         scoreText = winPanel.transform.Find("Image").Find("ScoreText").GetComponent<TMP_Text>();
         scoreNumbers = winPanel.transform.Find("Image").Find("ScoreNumbers").GetComponent<TMP_Text>();
+        CongratulatoryText = canvas.transform.Find("CongratulatoryText").gameObject;
+
+        // Set spawn location
+        spawnPosition = position;
 
         // Disable the UI screens for when the player dies and wins
         deathPanel.SetActive(false);
@@ -75,6 +102,18 @@ public class gamePlayManager : MonoBehaviour {
         // This is so that the music is continous between stages with the same music
         soundManager.stopAllSound(music, "gameLevelWin");
         soundManager.PlaySound(music);
+
+        // Show the congratulatory message if the player has won a stage
+        if(win) {
+            // Pick a random message
+            CongratulatoryText.GetComponent<TMP_Text>().SetText(
+                congratulatoryMsgs[Random.Range(0, congratulatoryMsgs.Length)]    
+            );
+
+            // Display the message
+            CongratulatoryText.GetComponent<Animator>().Play("CongratulatoryText");
+            win = false;
+        }
     }
 
     // Method for updating the UI to reflect the health of the user
@@ -85,20 +124,30 @@ public class gamePlayManager : MonoBehaviour {
     }
 
     // Called when the player dies
-    public void onDeath() {
+    public IEnumerator onDeath() {
         // Decrement the health
         health--;
         // Update the user's health
         updateHealthDisplay();
 
+        playerMovement.enabled = false;
+        playerAnimation.playAnimation("JonathanDead");
+        soundManager.PlaySound("playerDied");
+        playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
+        yield return new WaitForSeconds(2);
+
         // Checks if the player still has health
         if (health > 0) {
             // Reset player position
-            player.transform.position = new Vector3(6.3386f, -3.5686f, 1);
+            player.transform.position = spawnPosition;
+            playerAnimation.playAnimation("JonathanIdle");
+            soundManager.PlaySound("playerRevive");
+            playerMovement.enabled = true;
+            playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         } else {
             // Disable moving the player
-            player.GetComponentInChildren<playerMovement>().enabled = false;
+            playerMovement.enabled = false;
             // Change our update method to reflect the player's death
             updateMethod = playerDead;
 
@@ -118,13 +167,13 @@ public class gamePlayManager : MonoBehaviour {
         soundManager.PlaySound("gameLevelWin");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         doUpdateTime = false;
-
+        win = true;
     }
 
     // Called when the player wins the entire game
     public void winGame() {
         // Disable the player's movement
-        player.GetComponentInChildren<playerMovement>().enabled = false;
+        playerMovement.enabled = false;
 
         // Change our update method to reflect the player's victory
         updateMethod = playerWon;
@@ -177,8 +226,9 @@ public class gamePlayManager : MonoBehaviour {
 
     // Method to run if the player lost
     private void playerDead() {
-        // Wait for the user to press space, then return to the main menu
+        // Wait for the user to press space, then return to the main menu and play the sound effect
         if (Input.GetKeyDown("space")) {
+            soundManager.PlaySound("UISpacebar");
             gameManager.toMainMenu(1);
         }
     }
@@ -187,6 +237,8 @@ public class gamePlayManager : MonoBehaviour {
     private void playerWon() {
         // Check if the user has pressed enter or return
         if (Input.GetKeyDown("enter") || Input.GetKey("return")) {
+            // Play sound effect
+            soundManager.PlaySound("UISpacebar");
             // Deactivate the text input field
             FindObjectOfType<TMP_InputField>().DeactivateInputField();
             // Record the user's score
@@ -194,6 +246,12 @@ public class gamePlayManager : MonoBehaviour {
             // Return to the leaderboard screen
             gameManager.toMainMenu(4);
         }
+    }
+
+    // Initiate variables when the script runs
+    // This is for debugging for when initiate variables isn't called by game manager 
+    private void Start() {
+        initiateVariables();
     }
 
     // Call the chosen update method every frame

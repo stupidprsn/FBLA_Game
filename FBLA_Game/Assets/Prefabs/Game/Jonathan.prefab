@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6844556448386597939}
   - component: {fileID: 6844556448386597938}
   - component: {fileID: 6844556448386597937}
+  - component: {fileID: 1604256245688274264}
   - component: {fileID: 812763256}
   m_Layer: 0
   m_Name: Jonathan
@@ -104,7 +105,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 561768347
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b9bd29a462cd6ad49ab65169d40b3676, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -167,13 +168,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6844556448386597939}
-  animator: {fileID: 812763256}
+  groundCheckerObj: {fileID: 999879364}
   jumpableLayer:
     serializedVersion: 2
     m_Bits: 256
+  playerAnimation: {fileID: 1604256245688274264}
   speed: 3
   jumpHeight: 10
-  groundCheckerObj: {fileID: 999879364}
+--- !u!114 &1604256245688274264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844556448386597942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510f84dff5d1f6a4681bc4a1147ccbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 812763256}
 --- !u!95 &812763256
 Animator:
   serializedVersion: 3

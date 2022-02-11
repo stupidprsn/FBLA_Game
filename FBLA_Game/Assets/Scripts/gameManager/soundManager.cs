@@ -22,7 +22,7 @@ public class soundManager : MonoBehaviour {
         if(!soundToPlay.source.isPlaying) {
             soundToPlay.source.Play();
         } else {
-            Debug.LogError("The sound " + soundToPlay.name + " is already playing");
+            Debug.Log("The sound " + soundToPlay.name + " is already playing");
         }
     }
 
@@ -35,7 +35,7 @@ public class soundManager : MonoBehaviour {
         if (soundToStop.source.isPlaying) {
             soundToStop.source.Stop();
         } else {
-            Debug.LogError("The sound " + soundToStop.name + " is not playing");
+            Debug.Log("The sound " + soundToStop.name + " is not playing");
         }
     }
 
