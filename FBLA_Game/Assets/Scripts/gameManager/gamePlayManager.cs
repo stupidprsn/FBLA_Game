@@ -60,7 +60,7 @@ public class gamePlayManager : MonoBehaviour {
 
     // Reset the variables to their defaults
     public void initiateVariables() {
-        health = 3;
+        health = 10;
         time = 0f;
         doUpdateTime = false;
         updateMethod = playerAlive;
