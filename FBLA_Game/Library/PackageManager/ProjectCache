@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637791741782083270
-    m_Hash: 2557336910
+      ticks: 637845946784586263
+    m_Hash: 1290601876
   m_LockFileStatus:
     m_FilePath: C:/Hanlin/School/FBLA/2021-2022/FBLA_Game/FBLA_Game/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637791741782133257
-    m_Hash: 1108100296
+      ticks: 637845946784666301
+    m_Hash: 1841648453
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -83,6 +83,7 @@ m_PackageAssets:
         - 3.2.14
         - 3.2.15
         - 3.2.16
+        - 3.2.17
         - 4.0.0
         - 4.0.1
         - 4.1.0
@@ -106,6 +107,8 @@ m_PackageAssets:
         - 5.0.9
         - 5.0.10
         - 5.1.0
+        - 5.1.1
+        - 5.2.0
         - 6.0.0-pre.1
         - 6.0.0-pre.2
         - 6.0.1
@@ -119,12 +122,16 @@ m_PackageAssets:
         - 7.0.1
         - 7.0.2
         - 7.0.3
+        - 7.0.4
         - 8.0.0-pre.3
         - 8.0.0-pre.4
+        - 8.0.0
+        - 8.0.1
         compatible:
         - 5.0.9
         - 5.0.10
         - 5.1.0
+        - 5.1.1
         verified: 5.0.10
       dependencies:
       - name: com.unity.2d.common
@@ -299,6 +306,7 @@ m_PackageAssets:
         - 2.1.8
         - 2.1.9
         - 2.1.10
+        - 2.1.11
         - 3.0.0
         - 3.1.1
         - 3.1.3
@@ -314,6 +322,7 @@ m_PackageAssets:
         - 4.1.2
         - 4.1.3
         - 4.2.0
+        - 4.3.0
         - 5.0.0-pre.1
         - 5.0.0-pre.2
         - 5.0.1
@@ -326,8 +335,10 @@ m_PackageAssets:
         - 6.0.0
         - 6.0.1
         - 6.0.2
+        - 6.0.3
         - 7.0.0-pre.3
         - 7.0.0-pre.4
+        - 7.0.0
         compatible:
         - 4.1.2
         - 4.1.3
@@ -513,6 +524,7 @@ m_PackageAssets:
         - 5.1.6
         - 5.1.7
         - 5.2.0
+        - 5.3.0
         - 6.0.0-pre.1
         - 6.0.0-pre.2
         - 6.0.0
@@ -523,8 +535,10 @@ m_PackageAssets:
         - 7.0.0
         - 7.0.2
         - 7.0.3
+        - 7.0.4
         - 8.0.0-pre.4
         - 8.0.0-pre.5
+        - 8.0.0
         compatible:
         - 5.1.6
         - 5.1.7
@@ -637,12 +651,12 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
-    - packageId: com.unity.collab-proxy@1.15.12
+    - packageId: com.unity.collab-proxy@1.15.15
       testable: 0
       isDirectDependency: 1
-      version: 1.15.12
+      version: 1.15.15
       source: 1
-      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.collab-proxy@1.15.12
+      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.collab-proxy@1.15.15
       assetPath: Packages/com.unity.collab-proxy
       name: com.unity.collab-proxy
       displayName: Version Control
@@ -692,11 +706,15 @@ m_PackageAssets:
         - 1.14.7
         - 1.14.9
         - 1.14.12
+        - 1.14.13
+        - 1.14.15
         - 1.15.1
         - 1.15.4
         - 1.15.7
         - 1.15.9
         - 1.15.12
+        - 1.15.13
+        - 1.15.15
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -712,6 +730,8 @@ m_PackageAssets:
         - 1.15.7
         - 1.15.9
         - 1.15.12
+        - 1.15.13
+        - 1.15.15
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -722,7 +742,7 @@ m_PackageAssets:
         - 2.1.0-preview.3
         - 2.1.0-preview.5
         - 2.1.0-preview.6
-        verified: 1.15.12
+        verified: 1.15.15
       dependencies:
       - name: com.unity.services.core
         version: 1.0.1
@@ -757,13 +777,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637789721280000000
+      datePublishedTicks: 637828649420000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.cloud.collaborate.git
-        revision: 5ca1fd4ca9f999e087d19e98afaf99905a582771
+        revision: abf10445fb869983dbe4f8f87ec63c58f4cd36e0
         path: 
     - packageId: com.unity.ide.rider@2.0.7
       testable: 0
@@ -815,6 +835,7 @@ m_PackageAssets:
         - 3.0.9
         - 3.0.10
         - 3.0.12
+        - 3.0.13
         compatible:
         - 1.0.2
         - 1.0.6
@@ -844,13 +865,14 @@ m_PackageAssets:
         - 3.0.9
         - 3.0.10
         - 3.0.12
+        - 3.0.13
         verified: 2.0.7
       dependencies:
       - name: com.unity.test-framework
         version: 1.1.1
       resolvedDependencies:
       - name: com.unity.test-framework
-        version: 1.1.30
+        version: 1.1.31
       - name: com.unity.ext.nunit
         version: 1.0.6
       - name: com.unity.modules.imgui
@@ -878,12 +900,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.rider.git
         revision: abb44f053e9a41d2e00e149e32a19bcec76e98b4
         path: 
-    - packageId: com.unity.ide.visualstudio@2.0.14
+    - packageId: com.unity.ide.visualstudio@2.0.15
       testable: 0
       isDirectDependency: 1
-      version: 2.0.14
+      version: 2.0.15
       source: 1
-      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.ide.visualstudio@2.0.14
+      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.ide.visualstudio@2.0.15
       assetPath: Packages/com.unity.ide.visualstudio
       name: com.unity.ide.visualstudio
       displayName: Visual Studio Editor
@@ -917,6 +939,7 @@ m_PackageAssets:
         - 2.0.11
         - 2.0.12
         - 2.0.14
+        - 2.0.15
         compatible:
         - 1.0.2
         - 1.0.3
@@ -935,13 +958,14 @@ m_PackageAssets:
         - 2.0.11
         - 2.0.12
         - 2.0.14
-        verified: 2.0.14
+        - 2.0.15
+        verified: 2.0.15
       dependencies:
       - name: com.unity.test-framework
         version: 1.1.9
       resolvedDependencies:
       - name: com.unity.test-framework
-        version: 1.1.30
+        version: 1.1.31
       - name: com.unity.ext.nunit
         version: 1.0.6
       - name: com.unity.modules.imgui
@@ -961,84 +985,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637782923640000000
-      documentationUrl: 
-      hasRepository: 0
-      repository:
-        type: 
-        url: 
-        revision: 
-        path: 
-    - packageId: com.unity.ide.vscode@1.2.4
-      testable: 0
-      isDirectDependency: 1
-      version: 1.2.4
-      source: 1
-      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.ide.vscode@1.2.4
-      assetPath: Packages/com.unity.ide.vscode
-      name: com.unity.ide.vscode
-      displayName: Visual Studio Code Editor
-      author:
-        name: 
-        email: 
-        url: 
-      category: 
-      type: 
-      description: Code editor integration for supporting Visual Studio Code as code
-        editor for unity. Adds support for generating csproj files for intellisense
-        purposes, auto discovery of installations, etc.
-      status: 4
-      errors: []
-      versions:
-        all:
-        - 1.0.2
-        - 1.0.3
-        - 1.0.7
-        - 1.1.0
-        - 1.1.2
-        - 1.1.3
-        - 1.1.4
-        - 1.2.0
-        - 1.2.1
-        - 1.2.2
-        - 1.2.3
-        - 1.2.4
-        compatible:
-        - 1.0.2
-        - 1.0.3
-        - 1.0.7
-        - 1.1.0
-        - 1.1.2
-        - 1.1.3
-        - 1.1.4
-        - 1.2.0
-        - 1.2.1
-        - 1.2.2
-        - 1.2.3
-        - 1.2.4
-        verified: 1.2.4
-      dependencies: []
-      resolvedDependencies: []
-      keywords: []
-      registry:
-        id: main
-        name: 
-        url: https://packages.unity.com
-        scopes: []
-        isDefault: 1
-        capabilities: 7
-      hasRegistry: 1
-      hideInEditor: 1
-      entitlements:
-        isAllowed: 1
-      isAssetStorePackage: 0
-      datePublishedTicks: 637660806170000000
+      datePublishedTicks: 637841884840000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
-        url: git+https://github.com/Unity-Technologies/com.unity.ide.vscode.git
-        revision: 1f4f605d5c988cb610c372b5c5216c46cc8f5d30
+        url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
+        revision: ca1ece42f5a2c5484ba15a15bb975ccc1f6a1a3c
         path: 
     - packageId: com.unity.render-pipelines.universal@10.7.0
       testable: 0
@@ -1163,12 +1116,12 @@ m_PackageAssets:
         url: https://github.com/Unity-Technologies/Graphics.git
         revision: 65f895bbddc2d4875c1b605a1921764ddcb0f703
         path: 
-    - packageId: com.unity.test-framework@1.1.30
+    - packageId: com.unity.test-framework@1.1.31
       testable: 0
       isDirectDependency: 1
-      version: 1.1.30
+      version: 1.1.31
       source: 1
-      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.test-framework@1.1.30
+      resolvedPath: C:\Hanlin\School\FBLA\2021-2022\FBLA_Game\FBLA_Game\Library\PackageCache\com.unity.test-framework@1.1.31
       assetPath: Packages/com.unity.test-framework
       name: com.unity.test-framework
       displayName: Test Framework
@@ -1215,14 +1168,16 @@ m_PackageAssets:
         - 1.1.27
         - 1.1.29
         - 1.1.30
+        - 1.1.31
         - 2.0.1-pre.12
         - 2.0.1-pre.18
         compatible:
         - 1.1.29
         - 1.1.30
+        - 1.1.31
         - 2.0.1-pre.12
         - 2.0.1-pre.18
-        verified: 1.1.30
+        verified: 1.1.31
       dependencies:
       - name: com.unity.ext.nunit
         version: 1.0.6
@@ -1252,13 +1207,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637702469360000000
+      datePublishedTicks: 637804266210000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.com/Unity-Technologies/com.unity.test-framework.git
-        revision: 4a3f541cb46e2f6875b3a938daba8c7113020873
+        revision: 438b0defc147c9be5c969ca79ff03a722b4590ed
         path: 
     - packageId: com.unity.textmeshpro@3.0.6
       testable: 0
@@ -1362,6 +1317,7 @@ m_PackageAssets:
         - 2.1.6
         - 2.2.0-preview.1
         - 2.2.0-preview.2
+        - 2.2.0-preview.3
         - 3.0.0-preview.1
         - 3.0.0-preview.3
         - 3.0.0-preview.4
@@ -1381,11 +1337,13 @@ m_PackageAssets:
         - 3.0.6
         - 3.2.0-pre.1
         - 3.2.0-pre.2
+        - 3.2.0-pre.3
         - 4.0.0-pre.1
         compatible:
         - 3.0.6
         - 3.2.0-pre.1
         - 3.2.0-pre.2
+        - 3.2.0-pre.3
         verified: 3.0.6
       dependencies:
       - name: com.unity.ugui
@@ -1514,6 +1472,8 @@ m_PackageAssets:
         - 1.6.4
         - 1.7.0-pre.1
         - 1.7.0-pre.2
+        - 1.7.0
+        - 1.7.1
         compatible:
         - 1.4.8
         - 1.5.0-pre.2
@@ -1540,6 +1500,8 @@ m_PackageAssets:
         - 1.6.4
         - 1.7.0-pre.1
         - 1.7.0-pre.2
+        - 1.7.0
+        - 1.7.1
         verified: 1.4.8
       dependencies:
       - name: com.unity.modules.director
@@ -3490,6 +3452,7 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.4
         - 1.2.5
+        - 1.2.6
         compatible:
         - 0.0.12-preview.2
         - 0.0.12-preview.5
@@ -3507,7 +3470,8 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.4
         - 1.2.5
-        verified: 1.2.5
+        - 1.2.6
+        verified: 1.2.6
       dependencies: []
       resolvedDependencies: []
       keywords:
@@ -3892,6 +3856,8 @@ m_PackageAssets:
         - 1.1.0-pre.10
         - 1.1.0-pre.11
         - 1.1.0-pre.41
+        - 1.1.0-pre.69
+        - 1.2.0
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -3900,6 +3866,8 @@ m_PackageAssets:
         - 1.1.0-pre.10
         - 1.1.0-pre.11
         - 1.1.0-pre.41
+        - 1.1.0-pre.69
+        - 1.2.0
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest
@@ -3960,6 +3928,7 @@ m_PackageAssets:
         - 2.0.2
         - 2.1.0
         - 2.1.1
+        - 2.1.2
         - 3.0.0
         - 3.0.1
         - 4.0.0
@@ -3968,6 +3937,7 @@ m_PackageAssets:
         - 4.0.3
         - 4.0.4
         - 4.1.0
+        - 4.2.0
         - 5.0.0-pre.1
         - 5.0.0-pre.2
         - 5.0.0
@@ -3977,8 +3947,10 @@ m_PackageAssets:
         - 6.0.0
         - 6.0.1
         - 6.0.2
+        - 6.0.3
         - 7.0.0-pre.3
         - 7.0.0-pre.4
+        - 7.0.0
         compatible:
         - 4.0.3
         - 4.0.4
@@ -4065,6 +4037,7 @@ m_PackageAssets:
         - 5.0.0-pre.2
         - 5.0.0
         - 5.0.1
+        - 5.0.2
         compatible:
         - 4.0.2
         verified: 4.0.2
@@ -4129,6 +4102,7 @@ m_PackageAssets:
         - 4.6.0-preview
         - 4.7.0-preview
         - 4.9.1
+        - 4.9.2
         compatible:
         - 4.0.0-preview
         - 4.0.0
@@ -4145,6 +4119,7 @@ m_PackageAssets:
         - 4.6.0-preview
         - 4.7.0-preview
         - 4.9.1
+        - 4.9.2
         verified: 4.3.2
       dependencies: []
       resolvedDependencies: []

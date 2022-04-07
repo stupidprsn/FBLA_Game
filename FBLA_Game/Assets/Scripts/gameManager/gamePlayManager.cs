@@ -50,7 +50,7 @@ public class gamePlayManager : MonoBehaviour {
     private Vector3 spawnPosition;
 
     // List of possible congratulatory messages
-    private string[] congratulatoryMsgs = new string[] {
+    private readonly string[] congratulatoryMsgs = new string[] {
         "GOOD JOB, LEVEL CLEARED!",
         "CONGRATULATIONS, LEVEL CLEARED!",
         "NICELY DONE, LEVEL CLEARED!",

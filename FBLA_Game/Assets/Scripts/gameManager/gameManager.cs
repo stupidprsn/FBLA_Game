@@ -23,7 +23,6 @@ public class gameManager : MonoBehaviour {
     // Method for returning to main menu.
     // Takes in one parameter, panel, which dictates which panel to return to.
     public void toMainMenu(int panel) {
-        Debug.Log("tomainmenu called");
         gamePlayManager.enabled = false;
         mainMenuPanel = panel;
         SceneManager.LoadScene(0);

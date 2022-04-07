@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class bossArtifact : MonoBehaviour {
+public class BossArtifact : MonoBehaviour {
     public SpriteRenderer artifactRenderer;
     public Sprite[] sprites = new Sprite[3];
 
@@ -17,7 +17,7 @@ public class bossArtifact : MonoBehaviour {
     // The artifact goes to hit the boss instead of into the artifact holder
     private GameObject boss;
 
-    private IEnumerator onCollect() {
+    private IEnumerator OnCollect() {
         FindObjectOfType<soundManager>().PlaySound("playerCollectArtifact");
 
         // Put the artifact under the boss
@@ -38,13 +38,13 @@ public class bossArtifact : MonoBehaviour {
         }
 
         // Damage the boss snake and destroy this artifact
-        boss.GetComponent<bossSnake>().onDamage();
+        boss.GetComponent<BossSnake>().onDamage();
         Destroy(gameObject);
     }
 
     void Start() {
         // Set the reference to the boss
-        boss = FindObjectOfType<bossSnake>().gameObject;
+        boss = FindObjectOfType<BossSnake>().gameObject;
         playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
 
         artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
@@ -52,7 +52,7 @@ public class bossArtifact : MonoBehaviour {
 
     void Update() {
         if (artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w")) {
-            StartCoroutine(onCollect());
+            StartCoroutine(OnCollect());
         }
     }
 }

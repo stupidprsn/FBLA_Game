@@ -11,13 +11,18 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class fileManager : MonoBehaviour {
-    // File location for storing the leaderboard
-    // It is stored in %userprofile%\AppData\LocalLow\PeriwinkleGames\Jonathans_Adventure
-    private string path;
+    public void loadDefaults() {
+        if(!File.Exists(Paths.leaderboard)) {
+            saveData<Leaderboard>(Paths.leaderboard, new Leaderboard());
+        }
 
-    // Set the path
-    private void Start() {
-        path = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "leaderboard.fbla";
+        if (!File.Exists(Paths.userSettings)) {
+            saveData<UserSettings>(Paths.userSettings, new UserSettings());
+        }
+
+        if (!File.Exists(Paths.userProgress)) {
+            saveData<UserProgress>(Paths.userProgress, new UserProgress());
+        }
     }
 
     // Method for adding a new placement to the leaderboard
@@ -31,26 +36,18 @@ public class fileManager : MonoBehaviour {
         bool isNewEntry;
 
         // Checks if the leaderboard already exists, 
-        if (File.Exists(path)) {
+        if (File.Exists(Paths.leaderboard)) {
             // Load the current leaderboard
             leaderboard = loadLeaderboard();
-
         } else {
             // Define a new leaderboard
             leaderboard = new Leaderboard();
         }
 
         // Add the new rank and keep track of if the name already exists
-        isNewEntry = leaderboard.newEntry(name, score);
+        isNewEntry = leaderboard.NewEntry(name, score);
 
-        // Create a binary formatter to encrypt our leaderboard
-        BinaryFormatter formatter = new BinaryFormatter();
-        // Create a filestream to write to our file
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        // Save the file and close the string
-        formatter.Serialize(stream, leaderboard);
-        stream.Close();
+        saveData<Leaderboard>(Paths.leaderboard, leaderboard);
 
         // Return true if a new entry was added
         // Return false if a preexisting entry was updated
@@ -59,30 +56,68 @@ public class fileManager : MonoBehaviour {
 
     // Method for loading the leaderboard
     public Leaderboard loadLeaderboard() {
+        return loadData<Leaderboard>(Paths.leaderboard);
+    }
+
+    public void saveUserSettings(UserSettings userSettings) {
+        saveData<UserSettings>(Paths.userSettings, userSettings);
+    }
+
+    public UserSettings loadUserSettings() {
+        return loadData<UserSettings>(Paths.userSettings);
+    }
+
+    public void saveUserProgress(UserProgress userProgress) {
+        saveData<UserProgress>(Paths.userProgress, userProgress);
+    }
+
+    public UserProgress loadUserProgress() {
+        return loadData<UserProgress>(Paths.userProgress);
+    }
+
+    private void saveData<T>(string path, T data) {
+        // Create a binary formatter to encrypt our leaderboard
+        BinaryFormatter formatter = new BinaryFormatter();
+        // Create a filestream to write to our file
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        // Save the file and close the string
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    private T loadData<T>(string path) where T : class, new() {
         // Check if the file exists
-        if(File.Exists(path)) {
-            // Create a binary formatter for encrypting our leaderboard
+        if (File.Exists(path)) {
+            // Create a binary formatter for encrypting our data
             BinaryFormatter formatter = new BinaryFormatter();
             // Create a filestreaem for reading the file
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            // Variable for storing our leaderboard
-            Leaderboard leaderboard;
-            // Make sure the leaderboard is not empty, if it is, create an empty leaderboard
-            if(stream.Length != 0) {
+            // Variable for storing retrieved data
+            T data;
+            // Make sure the leaderboard is not empty, if it is, create an empty data
+            if (stream.Length != 0) {
                 // Read the leaderboard and store it in the leaderboard variable
-                leaderboard = formatter.Deserialize(stream) as Leaderboard;
+                data = formatter.Deserialize(stream) as T;
             } else {
-                leaderboard = new Leaderboard();
+                data = new T();
+                Debug.LogError($"Save file: \"{path}\" is empty");
             }
 
             // Close the file stream and return the leaderboard
             stream.Close();
-            return leaderboard;
+            return data;
         } else {
             // Return nothing and log an error
-            Debug.LogError("Save file not found");
-            return new Leaderboard();
+            Debug.LogError($"Save file: \"{path}\" not found");
+            return new T();
         }
     }
+}
+
+public static class Paths {
+    public static readonly string leaderboard = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "leaderboard.fbla";
+    public static readonly string userSettings = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "userSettings.fbla";
+    public static readonly string userProgress = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "userProgress.fbla";
 }

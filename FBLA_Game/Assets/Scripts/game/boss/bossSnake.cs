@@ -7,8 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bossSnake : MonoBehaviour {
-
+public class BossSnake : MonoBehaviour {
     // Number of snakes that spawn each round
     [SerializeField] private int roundOneSnakes;
     [SerializeField] private int roundTwoSnakes;
@@ -32,7 +31,7 @@ public class bossSnake : MonoBehaviour {
     private List<Transform> positions;
 
     // Method for the boss taking damage
-    public void onDamage() {
+    public void OnDamage() {
         // Decrement the hp
         hp--;
         // Show the damage animation
@@ -41,7 +40,7 @@ public class bossSnake : MonoBehaviour {
 
     // Method for winning the game
     // An IEnumerator is used because the method utilizes time
-    private IEnumerator onWin() {
+    private IEnumerator OnWin() {
         // Allow the boss to move
         rb.constraints = RigidbodyConstraints2D.None;
         // Give the boss a slight nudge
@@ -57,7 +56,7 @@ public class bossSnake : MonoBehaviour {
     // Method for spawning the snake enemies
     // Takes in an int for the amount of time to wait before spawning the snakes and an int for the number of snakes to spawn
     // An IEnumerator is used because the method utilizes time
-    private IEnumerator spawnSnakes(int secondsToWait, int numOfSnakes) {
+    private IEnumerator SpawnSnakes(int secondsToWait, int numOfSnakes) {
         // Wait the wait time
         yield return new WaitForSeconds(secondsToWait);
 
@@ -104,7 +103,7 @@ public class bossSnake : MonoBehaviour {
     }
 
     // Method for flipping the boss snake horizontally
-    private void flip() {
+    private void Flip() {
         if ((player.position.x < 0 && facingRight) || (player.position.x > 0 && !facingRight)) {
             transform.Rotate(new Vector3(0, 180, 0));
             facingRight = !facingRight;
@@ -112,7 +111,7 @@ public class bossSnake : MonoBehaviour {
     }
 
     // Method for phase one of the boss
-    private void phaseOne() {
+    private void PhaseOne() {
         if (phase == 1) {
             StartCoroutine(spawnSnakes(3, roundOneSnakes));
             phase = 2;
