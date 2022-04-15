@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class homeScreen : MonoBehaviour {
     // Referances to the scripts in charge of managing gameplay
-    private gamePlayManager gamePlayManager;
+    private GamePlayManager gamePlayManager;
 
     // Arrays of the 6 main menu buttons 
     [SerializeField] private UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
@@ -25,7 +25,7 @@ public class homeScreen : MonoBehaviour {
     // Method for loading into a singleplayer game, it is used by the play button.
     public void toGame() {
         gamePlayManager.enabled = true;
-        gamePlayManager.initiateVariables();
+        gamePlayManager.InitiateVariables();
         SceneManager.LoadScene("LevelOne");
     }
 
@@ -44,7 +44,7 @@ public class homeScreen : MonoBehaviour {
     // For updating the selected button. Takes in the index (vertical or horizontal) and whether to incremenmt or decrement.
     private void buttonSelect(ref int index, bool increment) {
         // Play sound
-        FindObjectOfType<soundManager>().PlaySound("UISelectButton");
+        FindObjectOfType<SoundManager>().PlaySound("UISelectButton");
         
         // Increment or decrement the index
         if(increment) {
@@ -59,7 +59,7 @@ public class homeScreen : MonoBehaviour {
 
     private void Start() {
         // Create referances to the game play manager and two player manager
-        gamePlayManager = FindObjectOfType<gamePlayManager>();
+        gamePlayManager = FindObjectOfType<GamePlayManager>();
         
         // Copy over the arrays to the multidimensional array. 
         buttons = new UnityEngine.UI.Button[2, 3] {
@@ -99,7 +99,7 @@ public class homeScreen : MonoBehaviour {
         // Checks if the user presses space to "click" the button
         if (Input.GetKeyDown("space")) {
             // Play sound
-            FindObjectOfType<soundManager>().PlaySound("UISpacebar");
+            FindObjectOfType<SoundManager>().PlaySound("UISpacebar");
             // Reset button visuals
             buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(255, 255, 255, 0);
             // Perform the action associated with the button

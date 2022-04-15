@@ -18,7 +18,7 @@ public class finalArtifact : MonoBehaviour {
     // An IEnumerator is used because it allows the use of time
     private IEnumerator onCollect() {
         // Play the sound effect for collecting an artifact
-        FindObjectOfType<soundManager>().PlaySound("gameLevelWin");
+        FindObjectOfType<SoundManager>().PlaySound("gameLevelWin");
 
         // Variables for setting up the animation
         Vector3 startPos = transform.localPosition;
@@ -39,7 +39,7 @@ public class finalArtifact : MonoBehaviour {
         }
 
         // Call function for winning the game
-        FindObjectOfType<gamePlayManager>().winGame();
+        FindObjectOfType<GamePlayManager>().winGame();
     }
 
     void Start() {

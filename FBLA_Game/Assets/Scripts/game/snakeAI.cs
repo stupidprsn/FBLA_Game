@@ -67,12 +67,12 @@ public class snakeAI : MonoBehaviour {
                 // Drop an artifact
                 Instantiate(artifact, transform.position, Quaternion.identity, transform.parent);
                 // Play the sound effect
-                FindObjectOfType<soundManager>().PlaySound("playerKillSnake");
+                FindObjectOfType<SoundManager>().PlaySound("playerKillSnake");
                 // Destroy the snake
                 Destroy(this.gameObject);
             } else {
                 // Run the death animation for the player
-                StartCoroutine(FindObjectOfType<gamePlayManager>().onDeath());
+                StartCoroutine(FindObjectOfType<GamePlayManager>().onDeath());
             }
         }
     }

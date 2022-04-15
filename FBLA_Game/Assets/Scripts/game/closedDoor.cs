@@ -27,7 +27,7 @@ public class closedDoor : MonoBehaviour {
             // Turn off the sprite for the door so that the door is open
             doorPieceRenderer.enabled = false;
             // Play the sound for opening the door
-            FindObjectOfType<soundManager>().PlaySound("gameDoorOpen");
+            FindObjectOfType<SoundManager>().PlaySound("gameDoorOpen");
             // Turn on the script for opening the door
             openedDoorScript.enabled = true;
         }

@@ -16,7 +16,7 @@ public class playerMovement : MonoBehaviour {
     [SerializeField] private float jumpHeight;
 
     // Reference to sound manager
-    private soundManager soundManager;
+    private SoundManager soundManager;
 
     // Variables for motion
     private bool facingRight = true;
@@ -56,7 +56,7 @@ public class playerMovement : MonoBehaviour {
 
     // Set a reference to the sound manager
     private void Start() {
-        soundManager = FindObjectOfType<soundManager>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     // Check for user input in the update method
@@ -72,7 +72,7 @@ public class playerMovement : MonoBehaviour {
 
         // Checks if the user has fallen out out of the game
         if(transform.position.y < -5.5) {
-            StartCoroutine(FindObjectOfType<gamePlayManager>().onDeath());
+            StartCoroutine(FindObjectOfType<GamePlayManager>().onDeath());
         }
     }
 

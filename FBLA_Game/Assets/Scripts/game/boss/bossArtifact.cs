@@ -18,7 +18,7 @@ public class BossArtifact : MonoBehaviour {
     private GameObject boss;
 
     private IEnumerator OnCollect() {
-        FindObjectOfType<soundManager>().PlaySound("playerCollectArtifact");
+        FindObjectOfType<SoundManager>().PlaySound("playerCollectArtifact");
 
         // Put the artifact under the boss
         transform.SetParent(boss.transform);
@@ -38,7 +38,7 @@ public class BossArtifact : MonoBehaviour {
         }
 
         // Damage the boss snake and destroy this artifact
-        boss.GetComponent<BossSnake>().onDamage();
+        boss.GetComponent<BossSnake>().OnDamage();
         Destroy(gameObject);
     }
 

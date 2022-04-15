@@ -20,7 +20,7 @@ public class leaderboardScreen : MonoBehaviour {
 
     public void updateScreen() {
         // Get the leaderboard from the fileManager as a list and order it by placement
-        List<Rank> leaderboard = FindObjectOfType<fileManager>().loadLeaderboard().leaderboard;
+        List<Rank> leaderboard = FindObjectOfType<FileManager>().LoadLeaderboard().leaderboard;
 
         // Check if a leaderboard has been created
         if(leaderboard.Count > 0) {

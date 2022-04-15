@@ -113,7 +113,7 @@ public class BossSnake : MonoBehaviour {
     // Method for phase one of the boss
     private void PhaseOne() {
         if (phase == 1) {
-            StartCoroutine(spawnSnakes(3, roundOneSnakes));
+            StartCoroutine(SpawnSnakes(3, roundOneSnakes));
             phase = 2;
         }
     }
@@ -121,7 +121,7 @@ public class BossSnake : MonoBehaviour {
     // Method for phase one of the boss
     private void phaseTwo() {
         if (phase == 2) {
-            StartCoroutine(spawnSnakes(1, roundTwoSnakes));
+            StartCoroutine(SpawnSnakes(1, roundTwoSnakes));
             phase = 3;
         }
     }
@@ -129,7 +129,7 @@ public class BossSnake : MonoBehaviour {
     // Method for phase one of the boss
     private void phaseThree() {
         if (phase == 3) {
-            StartCoroutine(spawnSnakes(1, roundThreeSnakes));
+            StartCoroutine(SpawnSnakes(1, roundThreeSnakes));
             phase = 4;
         }
     }
@@ -164,18 +164,18 @@ public class BossSnake : MonoBehaviour {
 
     private void Update() {
         // Check if the snake should flip horizontally
-        flip();
+        Flip();
 
         // Check which phase the snake is on depending on its health
         if (hp > totalSnakes - roundOneSnakes) {
-            phaseOne();
+            PhaseOne();
         } else if(hp > totalSnakes - roundOneSnakes - roundTwoSnakes) {
             phaseTwo();
         } else if(hp > 0){
             phaseThree();
         } else {
             // Once the snake has ran out of lives, run the win method
-            StartCoroutine(onWin());
+            StartCoroutine(OnWin());
         }
     }
 }

@@ -15,7 +15,7 @@ public class spaceToContinue : MonoBehaviour {
             // Activate the new panel, deactivate the old one, and play the audio. 
             toPanel.SetActive(true);
             gameObject.SetActive(false);
-            FindObjectOfType<soundManager>().PlaySound("UISpacebar");
+            FindObjectOfType<SoundManager>().PlaySound("UISpacebar");
         }
     }
 }

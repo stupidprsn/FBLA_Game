@@ -28,7 +28,7 @@ public class artifact : MonoBehaviour {
     // An IEnumerator is used because it allows the use of time
     private IEnumerator onCollect() {
         // Play the sound effect for collecting an artifact
-        FindObjectOfType<soundManager>().PlaySound("playerCollectArtifact");
+        FindObjectOfType<SoundManager>().PlaySound("playerCollectArtifact");
 
         // Find the number of amulets already collected and total number of amulets in the level
         // This is used for placing the amulets

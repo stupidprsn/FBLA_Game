@@ -16,10 +16,10 @@ public class onEnterMainMenu : MonoBehaviour {
 
     private void Start() {
         // Check gameManager for which panel we should open to. Default is title screen.
-        panels[FindObjectOfType<gameManager>().mainMenuPanel].SetActive(true);
+        panels[FindObjectOfType<GameManager>().mainMenuPanel].SetActive(true);
 
         // Find the sound manager
-        soundManager soundManager = FindObjectOfType<soundManager>();
+        SoundManager soundManager = FindObjectOfType<SoundManager>();
         // Stop all previous music and start main menu music
         soundManager.stopAllSound();
         soundManager.PlaySound("musicMainMenu");

@@ -9,7 +9,7 @@ public class playerAnimation : MonoBehaviour {
     // Reference to the player's animator 
     [SerializeField] private Animator animator;
     // Reference to the sound manager
-    private soundManager soundManager;
+    private SoundManager soundManager;
 
     // Keep track of what animation is currently playing
     private string currentAnimation;
@@ -82,6 +82,6 @@ public class playerAnimation : MonoBehaviour {
 
     // Set a reference to the sound manager
     private void Start() {
-        soundManager = FindObjectOfType<soundManager>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 }

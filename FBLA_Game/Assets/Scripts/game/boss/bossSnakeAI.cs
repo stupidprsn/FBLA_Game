@@ -50,10 +50,10 @@ public class bossSnakeAI : MonoBehaviour {
         if(collision.gameObject.tag == "Player") {
             if(collision.transform.position.y - transform.position.y > 0.1f) {
                 Instantiate(artifact, transform.position, Quaternion.identity, transform.parent);
-                FindObjectOfType<soundManager>().PlaySound("playerKillSnake");
+                FindObjectOfType<SoundManager>().PlaySound("playerKillSnake");
                 Destroy(this.gameObject);
             } else {
-                StartCoroutine(FindObjectOfType<gamePlayManager>().onDeath());
+                StartCoroutine(FindObjectOfType<GamePlayManager>().onDeath());
             }
         }
     }

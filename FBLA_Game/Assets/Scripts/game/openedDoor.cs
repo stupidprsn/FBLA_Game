@@ -18,7 +18,7 @@ public class openedDoor : MonoBehaviour {
         // Check if the player is touching the door and has pressed w
         if(playerCollider.IsTouching(doorCollider) && (Input.GetKeyDown("w") || Input.GetKeyDown("up"))) {
             // Call the game play manager's method for winning a stage
-            FindObjectOfType<gamePlayManager>().winStage();
+            FindObjectOfType<GamePlayManager>().winStage();
         }
     }
 }

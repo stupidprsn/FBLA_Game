@@ -1,3 +1,8 @@
+/*
+ * Hanlin Zhang
+ * Purpose: Sets up classes for storing the user's settings
+ */
+
 [System.Serializable]
 public class UserSettings {
     public Display display;
