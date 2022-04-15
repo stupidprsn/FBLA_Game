@@ -3,6 +3,7 @@
  * Purpose: Manages encrypting and decrypting data
  * 
  * This script was inspired by "SAVE & LOAD SYSTEM in Unity" by "Brackeys" 2018.
+ * Credits for SaveData and LoadData to "Brackeys"
  * https://www.youtube.com/watch?v=XOjd_qU2Ido
  */
 

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
     // Applys the user's saved settings
     public void SetSettings(UserSettings userSettings) {
         Screen.SetResolution(userSettings.display.x, userSettings.display.y, userSettings.display.fullScreen);
-        soundManager.setVolume(userSettings.volume);
+        soundManager.SetVolume(userSettings.volume);
     }
 
     private void Awake() {

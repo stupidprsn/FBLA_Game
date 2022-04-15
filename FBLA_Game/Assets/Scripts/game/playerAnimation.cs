@@ -54,7 +54,7 @@ public class playerAnimation : MonoBehaviour {
         if (newAnimation == "JonathanPushing" || newAnimation == "JonathanWalking") {
             soundManager.PlaySound("playerWalk");
         } else {
-            soundManager.stopSound("playerWalk");
+            soundManager.StopSound("playerWalk");
         }
 
     }

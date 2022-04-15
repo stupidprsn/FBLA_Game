@@ -14,6 +14,19 @@ public class GamePlayManager : MonoBehaviour {
     private delegate void PlayerStateDelegate();
     private PlayerStateDelegate updateMethod;
 
+    [Header("Set Game Settings")]
+
+    [Tooltip("Set the number of lives that the user has.")]
+    [Range(1, 10)]
+    [SerializeField] private int playerHealth;
+
+    [Tooltip("Set the amount of time (in seconds) it takes for the user to respawn.")]
+    [Range(1, 10)]
+    [SerializeField] private int respawnTime;
+
+    [Tooltip("Set the congratulatory messages that can be shown when the player finishes a level")]
+    [SerializeField] private string[] congratulatoryMsgs;
+
     [Header("Prefab Reference")]
     [SerializeField] private GameObject fileManagerPrefab;
 
@@ -41,17 +54,9 @@ public class GamePlayManager : MonoBehaviour {
     // Used to decide if the congratulatory message should be shown
     private bool win = false;
 
-    private readonly string[] congratulatoryMsgs = new string[] {
-        "GOOD JOB, LEVEL CLEARED!",
-        "CONGRATULATIONS, LEVEL CLEARED!",
-        "NICELY DONE, LEVEL CLEARED!",
-        "PHENOMENAL, LEVEL CLEARED!",
-        "WELL DONE, LEVEL CLEARED!"
-    };
-
     // Reset the variables to their defaults
     public void InitiateVariables() {
-        health = 5;
+        health = playerHealth;
         time = 0f;
         doUpdateTime = false;
         updateMethod = playerAlive;
@@ -81,7 +86,7 @@ public class GamePlayManager : MonoBehaviour {
         winPanel.SetActive(false);
 
         // Update the UI to reflect the health of the user
-        updateHealthDisplay();
+        UpdateHealthDisplay();
         // Start incrementing the user's time
         doUpdateTime = true;
 
@@ -89,7 +94,7 @@ public class GamePlayManager : MonoBehaviour {
         //  1) the music for that stage and play it if it's not already playing
         //  2) the win sound
         // This is so that the music is continous between stages with the same music
-        soundManager.stopAllSound(music, "gameLevelWin");
+        soundManager.StopAllSound(music, "gameLevelWin");
         soundManager.PlaySound(music);
 
         // Show the congratulatory message if the player has won a stage
@@ -105,39 +110,19 @@ public class GamePlayManager : MonoBehaviour {
         }
     }
 
-    // Return to main menu.
-    // Parameters: panel (dictates which panel to return to)
-    private void ToMainMenu(int panel) {
-        GameObject fileManager = Instantiate(fileManagerPrefab, transform.parent);
-        DontDestroyOnLoad(fileManager);
-        FindObjectOfType<GameManager>().mainMenuPanel = panel;
-        SceneManager.LoadScene(1);
-        Destroy(gameObject);
-    }
-
-    // Method for updating the UI to reflect the health of the user
-    private void updateHealthDisplay() {
-        // The image for displaying the health repeats the heart sprite which is 50 pixels
-        // We can dictate how many hearts are shown by editing the size of this image
-        heartsImg.GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
-    }
-
     // Called when the player dies
-    public IEnumerator onDeath() {
-        // Decrement the health
+    public IEnumerator onDeath() { 
         health--;
-        // Update the user's health
-        updateHealthDisplay();
+        UpdateHealthDisplay();
 
         playerMovement.enabled = false;
         playerAnimation.playAnimation("JonathanDead");
         soundManager.PlaySound("playerDied");
         playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(respawnTime);
 
         // Checks if the player still has health
         if (health > 0) {
-            // Reset player position
             player.transform.position = spawnPosition;
             playerAnimation.playAnimation("JonathanIdle");
             soundManager.PlaySound("playerRevive");
@@ -145,43 +130,35 @@ public class GamePlayManager : MonoBehaviour {
             playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         } else {
-            // Disable moving the player
             playerMovement.enabled = false;
-            // Change our update method to reflect the player's death
             updateMethod = playerDead;
 
-            // Stop all sound and play the game over sound
-            soundManager.stopAllSound();
+            soundManager.StopAllSound();
             soundManager.PlaySound("gameOver");
 
-            // Turn on the death screen
             deathPanel.SetActive(true);
         }
     }
 
     // Called when the player beats the current stage
-    // Plays win sound and loads the next stage
     // Set doUpdateTime to false so the time doesn't update while the next level loads
     public void winStage() {
-        soundManager.PlaySound("gameLevelWin");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         doUpdateTime = false;
+        soundManager.PlaySound("gameLevelWin");
         win = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Called when the player wins the entire game
     public void winGame() {
-        // Disable the player's movement
         playerMovement.enabled = false;
+        playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
 
-        // Change our update method to reflect the player's victory
         updateMethod = playerWon;
 
-        // Stop all sound and play the win sound
-        soundManager.stopAllSound();
+        soundManager.StopAllSound();
         soundManager.PlaySound("gameLevelWin");
 
-        // Turn on the win panel
         winPanel.SetActive(true);
 
         // Calculate the subtotal score from the user's time
@@ -199,34 +176,56 @@ public class GamePlayManager : MonoBehaviour {
         finalScore = subtotalScore + healthBonus;
 
         // Display the user's score
-        scoreText.SetText(string.Format("Time ({0} seconds)\nLives\n------------------------------------------\nTotal: ", Mathf.FloorToInt(time)));
-        scoreNumbers.SetText(string.Format("{0}\n{1}\n\n{2}", subtotalScore, healthBonus, finalScore));
+        scoreText.SetText(string.Format($"Time ({Mathf.FloorToInt(time)} seconds)\nLives ({health})\n--------------------------------------\nTotal: "));
+        scoreNumbers.SetText(string.Format($"{subtotalScore}\n{healthBonus}\n\n{finalScore}"));
 
         // Enable the field for the user to type their name
         FindObjectOfType<TMP_InputField>().ActivateInputField();
     }
 
+    // Return to main menu
+    // Parameters: panel (dictates which panel to return to)
+    // [0] - Title Screen
+    // [1] - Home Screen
+    // [2] - Instructions Screen
+    // [3] - Credits Screen
+    // [4] - Leaderborad Screen
+    private void ToMainMenu(int panel) {
+        GameObject fileManager = Instantiate(fileManagerPrefab, transform.parent);
+        DontDestroyOnLoad(fileManager);
+        FindObjectOfType<GameManager>().mainMenuPanel = panel;
+        SceneManager.LoadScene(1);
+        Destroy(gameObject);
+    }
+
+    // Method for updating the UI to reflect the health of the user
+    private void UpdateHealthDisplay() {
+        // The image for displaying the health repeats the heart sprite which is 50 pixels
+        // We can dictate how many hearts are shown by editing the size of this image
+        heartsImg.GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
+    }
+
     // Method to run if the player is alive
     private void playerAlive() {
-        // Check if we should update time
         if(doUpdateTime) {
-            // Update the time counter with the time since the last frame
             time += Time.deltaTime;
         }
 
-        // Show the time
         timeShown.SetText(Mathf.FloorToInt(time).ToString());
 
         // Allow the user to reload the game by pressing r
-        if (Input.GetKeyDown("r")) {
+        if (Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            ToMainMenu(1);
         }
     }
 
-    // Method to run if the player lost
+    // Method to run if the player lost 
     private void playerDead() {
-        // Wait for the user to press space, then return to the main menu and play the sound effect
-        if (Input.GetKeyDown("space")) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             soundManager.PlaySound("UISpacebar");
             ToMainMenu(1);
         }
@@ -234,22 +233,17 @@ public class GamePlayManager : MonoBehaviour {
 
     // Method to run if the player has won
     private void playerWon() {
-        // Check if the user has pressed enter or return
-        if (Input.GetKeyDown("enter") || Input.GetKey("return")) {
-            // Play sound effect
+        if (Input.GetKeyDown(KeyCode.Return)) {
             soundManager.PlaySound("UISpacebar");
-            // Deactivate the text input field
             FindObjectOfType<TMP_InputField>().DeactivateInputField();
-            // Record the user's score
             FindObjectOfType<FileManager>().SaveLeaderboard(FindObjectOfType<TMP_InputField>().text, finalScore);
-            // Return to the leaderboard screen
             ToMainMenu(4);
         }
     }
 
     // Initiate variables when the script runs
     // This is for debugging for when initiate variables isn't called by game manager 
-    private void Start() {
+    private void Awake() {
         InitiateVariables();
     }
 

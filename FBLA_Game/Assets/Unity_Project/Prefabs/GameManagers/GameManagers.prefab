@@ -76,7 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c10822ac8bd1254887c636a0c28989b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePlayManager: {fileID: 0}
+  gamePlayManagerPrefab: {fileID: 5335932078357382204, guid: c971444191885574794b74a73d66f2f8, type: 3}
+  fileManagerPrefab: {fileID: 2695981560311630129, guid: 3129e831a17054f4b8c08f926ed3da84, type: 3}
   soundManager: {fileID: 604561884765082109}
   mainMenuPanel: 0
 --- !u!1 &5665900780605161321

@@ -7,13 +7,14 @@
  */
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class CutsceneManager : MonoBehaviour {
+    [Header("Object/Prefab References")]
     [SerializeField] private GameObject gameManagerPreset;
     [SerializeField] private GameObject fileManagerPreset;
     [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private Animator animator;
 
     private void Awake() {
         if(FindObjectOfType<GameManager>() == null) {
@@ -45,7 +46,6 @@ public class CutsceneManager : MonoBehaviour {
     }
 
     private void transition() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
+        StartCoroutine(FindObjectOfType<TransitionManager>().transition(animator, "Exit", true));
     }
 }

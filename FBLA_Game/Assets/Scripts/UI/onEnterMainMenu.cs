@@ -21,7 +21,7 @@ public class onEnterMainMenu : MonoBehaviour {
         // Find the sound manager
         SoundManager soundManager = FindObjectOfType<SoundManager>();
         // Stop all previous music and start main menu music
-        soundManager.stopAllSound();
+        soundManager.StopAllSound();
         soundManager.PlaySound("musicMainMenu");
     }
 }

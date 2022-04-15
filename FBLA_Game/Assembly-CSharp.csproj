@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Game\boss\BossSnake.cs" />
     <Compile Include="Assets\Scripts\Game\closedDoor.cs" />
     <Compile Include="Assets\Scripts\Game\boss\BossArtifact.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\Game\playerAnimation.cs" />
     <Compile Include="Assets\Scripts\Game\playerMovement.cs" />
     <Compile Include="Assets\Scripts\UI\leaderboardScreen.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
     <Compile Include="Assets\Scripts\Classes\UserProgress.cs" />
     <Compile Include="Assets\Scripts\Game\artifact.cs" />
+    <Compile Include="Assets\Scripts\UI\CutsceneManager.cs" />
     <Compile Include="Assets\Scripts\Game\finalArtifact.cs" />
     <Compile Include="Assets\Scripts\Game\openedDoor.cs" />
     <Compile Include="Assets\Scripts\Game\snakeAI.cs" />
@@ -79,8 +81,6 @@
     <Compile Include="Assets\Scripts\Classes\Leaderboard.cs" />
     <Compile Include="Assets\Scripts\Classes\UserSettings.cs" />
     <Compile Include="Assets\Scripts\Classes\Sound.cs" />
-    <Compile Include="Assets\Scripts\UI\CutsceneManager.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\TransitionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Unity_Editor\TextMesh Pro\Shaders\TMPro.cginc" />
