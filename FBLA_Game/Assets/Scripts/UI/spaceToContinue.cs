@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class spaceToContinue : MonoBehaviour {
     // The panel we switch to.
+    [Tooltip("Set a reference to the panel this screen should switch to.")]
     [SerializeField] private GameObject toPanel;
 
     private void Update() {

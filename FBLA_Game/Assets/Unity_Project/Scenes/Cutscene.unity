@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 1408626344}
   - component: {fileID: 1408626343}
   m_Layer: 5
-  m_Name: Transition
+  m_Name: CrossFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -609,8 +609,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1408626339}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1621528968
 GameObject:
