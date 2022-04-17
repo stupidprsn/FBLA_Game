@@ -6,6 +6,7 @@
  *          loaded first.
  */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -13,39 +14,58 @@ public class CutsceneManager : MonoBehaviour {
     [Header("Object/Prefab References")]
     [SerializeField] private GameObject gameManagerPreset;
     [SerializeField] private GameObject fileManagerPreset;
-    [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private VideoPlayer backgroundVideoPlayer;
     [SerializeField] private Animator animator;
+    [SerializeField] private VideoClip[] textClips;
+
+    [SerializeField] private VideoPlayer currentTextPlayer;
+    [SerializeField] private VideoPlayer nextTextPlayer;
+    private int videoIndex = 0;
+    private UserSettings userSettings;
 
     private void Awake() {
         if(FindObjectOfType<GameManager>() == null) {
-            GameObject gameManager = Instantiate(gameManagerPreset);
-            Instantiate(fileManagerPreset, gameManager.transform);
+            Instantiate(gameManagerPreset);
+            GameObject fileManager = Instantiate(fileManagerPreset);
+            DontDestroyOnLoad(fileManager);
         }
 
         SetSettings();
+    }
+
+    private void Start() {
+        if (userSettings.playCutScene)
+        {
+            StartPlayVideo();
+        }
+        else
+        {
+            Transition();
+        }
     }
 
     private void SetSettings() {
         FileManager fileManager = FindObjectOfType<FileManager>();
 
         fileManager.LoadDefaults();
-        UserSettings userSettings = fileManager.LoadUserSettings();
+        userSettings = fileManager.LoadUserSettings();
         FindObjectOfType<GameManager>().SetSettings(userSettings);
+    }
 
-        if (userSettings.playCutScene) {
-            videoPlayer.SetDirectAudioVolume(0, userSettings.volume);
-            videoPlayer.Play();
-            videoPlayer.loopPointReached += onVideoEnd;
-        } else {
-            transition();
+    private void StartPlayVideo() {
+        currentTextPlayer.clip = textClips[videoIndex];
+        videoIndex++;
+        currentTextPlayer.Prepare();
+    }
+
+    private IEnumerator IsVideoPrepared() {
+        while (!currentTextPlayer.isPrepared) {
+            yield return null;
         }
+        yield return;
     }
 
-    private void onVideoEnd(VideoPlayer vp) {
-        transition();
-    }
-
-    private void transition() {
+    private void Transition() {
         StartCoroutine(FindObjectOfType<TransitionManager>().transition(animator, "Exit", true));
     }
 }
