@@ -9,6 +9,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Video;
+using TMPro;
 
 public class CutsceneManager : MonoBehaviour {
     [Header("Object/Prefab References")]
@@ -16,11 +17,8 @@ public class CutsceneManager : MonoBehaviour {
     [SerializeField] private GameObject fileManagerPreset;
     [SerializeField] private VideoPlayer backgroundVideoPlayer;
     [SerializeField] private Animator animator;
-    [SerializeField] private VideoClip[] textClips;
+    [SerializeField] private CutsceneText text;
 
-    [SerializeField] private VideoPlayer currentTextPlayer;
-    [SerializeField] private VideoPlayer nextTextPlayer;
-    private int videoIndex = 0;
     private UserSettings userSettings;
 
     private void Awake() {
@@ -34,12 +32,9 @@ public class CutsceneManager : MonoBehaviour {
     }
 
     private void Start() {
-        if (userSettings.playCutScene)
-        {
-            StartPlayVideo();
-        }
-        else
-        {
+        if (userSettings.playCutScene) {
+            StartCutscene();
+        } else {
             Transition();
         }
     }
@@ -52,20 +47,12 @@ public class CutsceneManager : MonoBehaviour {
         FindObjectOfType<GameManager>().SetSettings(userSettings);
     }
 
-    private void StartPlayVideo() {
-        currentTextPlayer.clip = textClips[videoIndex];
-        videoIndex++;
-        currentTextPlayer.Prepare();
+    private void StartCutscene() {
+        backgroundVideoPlayer.Play();
+        StartCoroutine(text.StartText());
     }
 
-    private IEnumerator IsVideoPrepared() {
-        while (!currentTextPlayer.isPrepared) {
-            yield return null;
-        }
-        yield return;
-    }
-
-    private void Transition() {
+    public void Transition() {
         StartCoroutine(FindObjectOfType<TransitionManager>().transition(animator, "Exit", true));
     }
 }
