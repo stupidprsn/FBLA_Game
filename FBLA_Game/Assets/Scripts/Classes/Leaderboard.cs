@@ -5,16 +5,18 @@
 
 using System.Collections.Generic;
 
-// Rank Class for each individual ranking on the leaderboard
+/// <summary>
+///     Rank Class for each individual ranking on the leaderboard
+/// </summary>
 [System.Serializable]
 public class Rank {
 
-    public string name;
-    public int score;
+    public string Name { get; set; }
+    public int Score { get; set; }
 
-    public Rank(string inputName, int inputScore) {
-        name = inputName;
-        score = inputScore;
+    public Rank(string name, int score) {
+        Name = name;
+        Score = score;
     }
 }
 
@@ -33,10 +35,10 @@ public class Leaderboard {
         // Checks if the name already exists
         // If it does, update the score for the corresponding name if the score is higher
         foreach (Rank rank in leaderboard) {
-            if (rank.name == name) {
+            if (rank.Name == name) {
                 // Checks if the score is higher
-                if(score > rank.score) {
-                    rank.score = score;
+                if(score > rank.Score) {
+                    rank.Score = score;
                 }
                 return false;
             }

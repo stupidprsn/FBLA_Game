@@ -66,9 +66,10 @@
     <Compile Include="Assets\Scripts\GameManagers\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Game\boss\bossSnakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
+    <Compile Include="Assets\Scripts\UI\Cutscene\ContinueCue.cs" />
     <Compile Include="Assets\Scripts\Classes\UserProgress.cs" />
     <Compile Include="Assets\Scripts\Game\artifact.cs" />
-    <Compile Include="Assets\Scripts\UI\CutsceneManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneManager.cs" />
     <Compile Include="Assets\Scripts\Game\finalArtifact.cs" />
     <Compile Include="Assets\Scripts\Game\openedDoor.cs" />
     <Compile Include="Assets\Scripts\Game\snakeAI.cs" />
@@ -76,12 +77,15 @@
     <Compile Include="Assets\Scripts\GameManagers\GamePlayManager.cs" />
     <Compile Include="Assets\Scripts\Game\onEnterLevel.cs" />
     <Compile Include="Assets\Scripts\GameManagers\FileManager.cs" />
-    <Compile Include="Assets\Scripts\UI\onEnterMainMenu.cs" />
+    <Compile Include="Assets\Scripts\Classes\DataFile.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuTransitions.cs" />
+    <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneText.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Classes\Leaderboard.cs" />
     <Compile Include="Assets\Scripts\Classes\UserSettings.cs" />
     <Compile Include="Assets\Scripts\Classes\Sound.cs" />
-    <Compile Include="Assets\CutsceneText.cs" />
+    <Compile Include="Assets\Scripts\Classes\MenuPanels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Unity_Editor\TextMesh Pro\Shaders\TMPro.cginc" />

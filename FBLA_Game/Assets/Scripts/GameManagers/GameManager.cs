@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private SoundManager soundManager;
 
     // Read by onEnterMainMenu to know what panel to load
-    [HideInInspector] public int mainMenuPanel = 0;
+    [HideInInspector] public MenuPanels mainMenuPanel = MenuPanels.TitleScreen;
 
     // Applys the user's saved settings
     public void SetSettings(UserSettings userSettings) {

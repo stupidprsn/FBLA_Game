@@ -190,7 +190,7 @@ public class GamePlayManager : MonoBehaviour {
     // [2] - Instructions Screen
     // [3] - Credits Screen
     // [4] - Leaderborad Screen
-    private void ToMainMenu(int panel) {
+    private void ToMainMenu(MenuPanels panel) {
         GameObject fileManager = Instantiate(fileManagerPrefab, transform.parent);
         DontDestroyOnLoad(fileManager);
         FindObjectOfType<GameManager>().mainMenuPanel = panel;
@@ -219,7 +219,7 @@ public class GamePlayManager : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
-            ToMainMenu(1);
+            ToMainMenu(MenuPanels.HomeScreen);
         }
     }
 
@@ -227,7 +227,7 @@ public class GamePlayManager : MonoBehaviour {
     private void playerDead() {
         if (Input.GetKeyDown(KeyCode.Space)) {
             soundManager.PlaySound("UISpacebar");
-            ToMainMenu(1);
+            ToMainMenu(MenuPanels.HomeScreen);
         }
     }
 
@@ -236,8 +236,8 @@ public class GamePlayManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Return)) {
             soundManager.PlaySound("UISpacebar");
             FindObjectOfType<TMP_InputField>().DeactivateInputField();
-            FindObjectOfType<FileManager>().SaveLeaderboard(FindObjectOfType<TMP_InputField>().text, finalScore);
-            ToMainMenu(4);
+            FindObjectOfType<FileManager>().LeaderboardData.SaveEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
+            ToMainMenu(MenuPanels.LeaderboardScreen);
         }
     }
 

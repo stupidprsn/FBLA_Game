@@ -20,12 +20,12 @@ public class leaderboardScreen : MonoBehaviour {
 
     public void updateScreen() {
         // Get the leaderboard from the fileManager as a list and order it by placement
-        List<Rank> leaderboard = FindObjectOfType<FileManager>().LoadLeaderboard().leaderboard;
+        List<Rank> leaderboard = FindObjectOfType<FileManager>().LeaderboardData.load().leaderboard;
 
         // Check if a leaderboard has been created
         if(leaderboard.Count > 0) {
             // Sort the leaderboard
-            leaderboard.OrderByDescending(x => x.score).ToList();
+            leaderboard.OrderByDescending(x => x.Score).ToList();
 
             // For each ranking, create a visual display using our rankingPrefab template
             for (int i = 0; i < leaderboard.Count; i++) {
@@ -45,8 +45,8 @@ public class leaderboardScreen : MonoBehaviour {
                 }
 
                 // Update the name and points on the screen
-                newRank.transform.Find("name").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].name;
-                newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].score.ToString();
+                newRank.transform.Find("name").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Name;
+                newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Score.ToString();
             }
         } else {
             // Show the message that says the leaderboard is empty
