@@ -32,7 +32,7 @@ public class CutsceneText : MonoBehaviour {
     public IEnumerator StartText() {
         yield return new WaitForSeconds(buffer);
 
-        while (index < texts.Length) {
+        while (index < texts.Length) { 
             StartCoroutine(DisplayText());
             yield return new WaitUntil(() => canContinue);
             canContinue = false;

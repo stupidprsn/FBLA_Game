@@ -56,26 +56,26 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\game\boss\bossSnake.cs" />
-    <Compile Include="Assets\Scripts\game\closedDoor.cs" />
-    <Compile Include="Assets\Scripts\game\boss\bossArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\boss\BossSnake.cs" />
+    <Compile Include="Assets\Scripts\Game\closedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\boss\BossArtifact.cs" />
     <Compile Include="Assets\Scripts\GameManagers\TransitionManager.cs" />
-    <Compile Include="Assets\Scripts\game\playerAnimation.cs" />
-    <Compile Include="Assets\Scripts\game\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\Game\playerAnimation.cs" />
+    <Compile Include="Assets\Scripts\Game\playerMovement.cs" />
     <Compile Include="Assets\Scripts\UI\leaderboardScreen.cs" />
     <Compile Include="Assets\Scripts\GameManagers\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\game\boss\bossSnakeAI.cs" />
+    <Compile Include="Assets\Scripts\Game\boss\bossSnakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\ContinueCue.cs" />
     <Compile Include="Assets\Scripts\Classes\UserProgress.cs" />
-    <Compile Include="Assets\Scripts\game\artifact.cs" />
+    <Compile Include="Assets\Scripts\Game\artifact.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneManager.cs" />
-    <Compile Include="Assets\Scripts\game\finalArtifact.cs" />
-    <Compile Include="Assets\Scripts\game\openedDoor.cs" />
-    <Compile Include="Assets\Scripts\game\snakeAI.cs" />
+    <Compile Include="Assets\Scripts\Game\finalArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\openedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\snakeAI.cs" />
     <Compile Include="Assets\Scripts\UI\spaceToContinue.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\game\onEnterLevel.cs" />
+    <Compile Include="Assets\Scripts\Game\onEnterLevel.cs" />
     <Compile Include="Assets\Scripts\GameManagers\FileManager.cs" />
     <Compile Include="Assets\Scripts\Classes\DataFile.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuManager.cs" />

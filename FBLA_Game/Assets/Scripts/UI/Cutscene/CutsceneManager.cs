@@ -26,6 +26,8 @@ public class CutsceneManager : MonoBehaviour {
     private UserSettings userSettings;
     private bool skip = false;
 
+    private SoundManager soundManager;
+
     private void Awake() {
         if(FindObjectOfType<GameManager>() == null) {
             Instantiate(gameManagerPreset);
@@ -72,10 +74,13 @@ public class CutsceneManager : MonoBehaviour {
 
     private void StartCutscene() {
         backgroundVideoPlayer.Play();
+        soundManager = FindObjectOfType<SoundManager>();
+        soundManager.PlaySound("musicCutscene");
         StartCoroutine(text.StartText());
     }
 
     public void Transition() {
+        soundManager.StopAllSound();
         StartCoroutine(FindObjectOfType<TransitionManager>().transition(animator, "Exit", true));
     }
 }
