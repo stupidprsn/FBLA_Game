@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>JonathansAdventure</RootNamespace>
     <ProjectGuid>{090C563A-8008-DC3A-2C63-15EEF9B5341D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -57,35 +57,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\boss\BossSnake.cs" />
-    <Compile Include="Assets\Scripts\Game\closedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\closedDoor.cs" />
     <Compile Include="Assets\Scripts\Game\boss\BossArtifact.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\TransitionManager.cs" />
-    <Compile Include="Assets\Scripts\Game\playerAnimation.cs" />
-    <Compile Include="Assets\Scripts\Game\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\UI\leaderboardScreen.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Core\TransitionManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\playerAnimation.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\leaderboardScreen.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Core\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Game\boss\bossSnakeAI.cs" />
-    <Compile Include="Assets\Scripts\UI\homeScreen.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\homeScreen.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\ContinueCue.cs" />
-    <Compile Include="Assets\Scripts\Classes\UserProgress.cs" />
-    <Compile Include="Assets\Scripts\Game\artifact.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\UserProgress.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\artifact.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneManager.cs" />
-    <Compile Include="Assets\Scripts\Game\finalArtifact.cs" />
-    <Compile Include="Assets\Scripts\Game\openedDoor.cs" />
-    <Compile Include="Assets\Scripts\Game\snakeAI.cs" />
-    <Compile Include="Assets\Scripts\UI\spaceToContinue.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\GamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\Game\onEnterLevel.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\FileManager.cs" />
-    <Compile Include="Assets\Scripts\Classes\DataFile.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenuManager.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenuTransitions.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\finalArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\openedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\snakeAI.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\spaceToContinue.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\GamePlayManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Normal\onEnterLevel.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\FileManager.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\DataFile.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\MainMenuManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\MainMenuTransitions.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneText.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Classes\Leaderboard.cs" />
-    <Compile Include="Assets\Scripts\Classes\UserSettings.cs" />
-    <Compile Include="Assets\Scripts\Classes\Sound.cs" />
-    <Compile Include="Assets\Scripts\Classes\MenuPanels.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Core\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\Leaderboard.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\UserSettings.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Core\Sound.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\MenuPanels.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\Rank.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\Data\LeaderboardDataFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Unity_Editor\TextMesh Pro\Shaders\TMPro.cginc" />

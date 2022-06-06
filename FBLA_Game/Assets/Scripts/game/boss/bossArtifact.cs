@@ -7,52 +7,63 @@
 using UnityEngine;
 using System.Collections;
 
-public class BossArtifact : MonoBehaviour {
-    public SpriteRenderer artifactRenderer;
-    public Sprite[] sprites = new Sprite[3];
+namespace JonathansAdventure.Game.Boss
+{
+    public class BossArtifact : MonoBehaviour
+    {
+        public SpriteRenderer artifactRenderer;
+        public Sprite[] sprites = new Sprite[3];
 
-    public BoxCollider2D artifactCollider;
-    private CapsuleCollider2D playerCollider;
+        public BoxCollider2D artifactCollider;
+        private CapsuleCollider2D playerCollider;
 
-    // The artifact goes to hit the boss instead of into the artifact holder
-    private GameObject boss;
+        // The artifact goes to hit the boss instead of into the artifact holder
+        private GameObject boss;
 
-    private IEnumerator OnCollect() {
-        FindObjectOfType<SoundManager>().PlaySound("playerCollectArtifact");
+        private IEnumerator OnCollect()
+        {
+            FindObjectOfType<SoundManager>().PlaySound("playerCollectArtifact");
 
-        // Put the artifact under the boss
-        transform.SetParent(boss.transform);
+            // Put the artifact under the boss
+            transform.SetParent(boss.transform);
 
-        // Set up variables for the animation
-        Vector3 startPos = transform.localPosition;
-        // Since the artifact is a child of the boss, the boss is the origin so we can make it go to 0, 0
-        Vector3 finishPos = new Vector3 (0, 0, 1);
-        float t = 0;
+            // Set up variables for the animation
+            Vector3 startPos = transform.localPosition;
+            // Since the artifact is a child of the boss, the boss is the origin so we can make it go to 0, 0
+            Vector3 finishPos = new Vector3(0, 0, 1);
+            float t = 0;
 
-        artifactRenderer.sortingLayerName = "Foreground";
+            artifactRenderer.sortingLayerName = "Foreground";
 
-        while(t<1) {
-            t += Time.deltaTime / 0.3f;
-            transform.localPosition = Vector3.Lerp(startPos, finishPos, t);
-            yield return null;
+            while (t < 1)
+            {
+                t += Time.deltaTime / 0.3f;
+                transform.localPosition = Vector3.Lerp(startPos, finishPos, t);
+                yield return null;
+            }
+
+            // Damage the boss snake and destroy this artifact
+            boss.GetComponent<BossSnake>().OnDamage();
+            Destroy(gameObject);
         }
 
-        // Damage the boss snake and destroy this artifact
-        boss.GetComponent<BossSnake>().OnDamage();
-        Destroy(gameObject);
-    }
+        void Start()
+        {
+            // Set the reference to the boss
+            boss = FindObjectOfType<BossSnake>().gameObject;
+            playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
 
-    void Start() {
-        // Set the reference to the boss
-        boss = FindObjectOfType<BossSnake>().gameObject;
-        playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
+            artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
+        }
 
-        artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
-    }
-
-    void Update() {
-        if (artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w")) {
-            StartCoroutine(OnCollect());
+        void Update()
+        {
+            if (artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w"))
+            {
+                StartCoroutine(OnCollect());
+            }
         }
     }
+
 }
+
