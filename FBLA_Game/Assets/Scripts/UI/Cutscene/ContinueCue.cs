@@ -10,41 +10,34 @@ namespace JonathansAdventure.UI.Cutscene
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/10/2022
+    ///     Last Modified: 6/11/2022
     /// </remarks>
-    [RequireComponent(typeof(TMP_Text), typeof(CanvasGroup))]
-    public class ContinueCue : MonoBehaviour
+    [RequireComponent(typeof(TMP_Text))]
+    public class ContinueCue : FadeObject
     {
         #region Settings
 
         [Header("Settings")]
 
-        [
-            SerializeField, 
+        [SerializeField, 
             Range(0f, 1f),
-            Tooltip("Set the amount of time in seconds it takes for the text to fade in")
-        ]
+            Tooltip("Set the amount of time in seconds it takes for the text to fade in")]
         private float fadeInDuration;
 
-        [
-            SerializeField,
+        [SerializeField,
             Range(0f, 1f),
             Tooltip("Set the amount of time in seconds it takes for the text to fade out." +
-                "This should be less than the fade in duration.")
-]
+                "This should be less than the fade in duration.")]
         private float fadeOutDuration;
 
-        [
-            SerializeField, 
+        [SerializeField, 
             Range(0f, 1f),
-            Tooltip("Set the amount of time in seconds for the text to flash from one frame to the next")
-        ]
+
+            Tooltip("Set the amount of time in seconds for the text to flash from one frame to the next")]
         private float blinkSpeed;
 
-        [
-            SerializeField, 
-            Tooltip("Set the different frames of text that the program flashes between")
-        ]
+        [SerializeField, 
+            Tooltip("Set the different frames of text that the program flashes between")]
         private string[] texts;
 
         #endregion

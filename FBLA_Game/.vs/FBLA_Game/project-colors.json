@@ -10,7 +10,32 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "2b0a851c-ac92-ff24-91c1-d5c34661962c": {
+      "ProjectGuid": "2b0a851c-ac92-ff24-91c1-d5c34661962c",
+      "DisplayName": "Core",
+      "ColorIndex": 1
+    },
+    "5fd53aa3-f9da-55a3-b9bf-812066426c7e": {
+      "ProjectGuid": "5fd53aa3-f9da-55a3-b9bf-812066426c7e",
+      "DisplayName": "Cutscene",
+      "ColorIndex": 2
+    },
+    "b0a9f07e-31c1-6087-00cc-f947304ef05f": {
+      "ProjectGuid": "b0a9f07e-31c1-6087-00cc-f947304ef05f",
+      "DisplayName": "Game",
+      "ColorIndex": 3
+    },
+    "d5910436-4e1d-59e4-dd01-779484f98bf3": {
+      "ProjectGuid": "d5910436-4e1d-59e4-dd01-779484f98bf3",
+      "DisplayName": "Data",
+      "ColorIndex": 4
+    },
+    "02261220-f6f8-db37-9e8a-fa1d00f53e82": {
+      "ProjectGuid": "02261220-f6f8-db37-9e8a-fa1d00f53e82",
+      "DisplayName": "Program",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 6
 }

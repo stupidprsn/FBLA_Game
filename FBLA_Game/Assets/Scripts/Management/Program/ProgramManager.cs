@@ -1,5 +1,6 @@
 using UnityEngine;
 using JonathansAdventure.Sound;
+using JonathansAdventure.Data;
 
 namespace JonathansAdventure.Management
 {

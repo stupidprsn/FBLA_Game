@@ -14,7 +14,7 @@ namespace JonathansAdventure.Data
     ///         It incorporates an extra method that allows a new ranking to be appended
     ///     </para>
     /// </remarks>
-    internal class LeaderboardDataFile : DataFile<Leaderboard>
+    public class LeaderboardDataFile : DataFile<Leaderboard>
     {
         /// <summary>
         ///     Same constructor as base DataFile class: <see cref="DataFile{T}"/>

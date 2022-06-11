@@ -58,13 +58,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Management\Data\Rank.cs" />
     <Compile Include="Assets\Scripts\Management\Data\UserProgress.cs" />
+    <Compile Include="Assets\Scripts\Management\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\Management\Data\FileManagement\LeaderboardDataFile.cs" />
     <Compile Include="Assets\Scripts\Management\Data\FileManagement\FileManager.cs" />
     <Compile Include="Assets\Scripts\Management\Data\FileManagement\DataFile.cs" />
     <Compile Include="Assets\Scripts\Management\Data\Leaderboard.cs" />
     <Compile Include="Assets\Scripts\Management\Data\UserSettings.cs" />
     <Compile Include="Assets\Scripts\Management\Data\MenuPanels.cs" />
-    <Compile Include="Assets\Scripts\Management\Data\GameData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Management\Data\Data.asmdef" />

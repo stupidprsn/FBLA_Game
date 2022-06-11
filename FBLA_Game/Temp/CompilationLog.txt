@@ -1,4 +1,0 @@
-# Starting compiling Data.dll
-C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-2729655de2e45024c98e241128e08007
-# Starting compiling Core.dll
-C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-7ad23a5e85efdc54aa0752968d4229dd

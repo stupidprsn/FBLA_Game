@@ -57,9 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Management\Core\TransitionManager.cs" />
+    <Compile Include="Assets\Scripts\Management\Core\Sound\SoundNames.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\Sound.cs" />
-    <Compile Include="Assets\Scripts\Management\Core\Sound\SoundNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Management\Core\Core.asmdef" />

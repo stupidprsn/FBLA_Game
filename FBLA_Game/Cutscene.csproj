@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneManager.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneText.cs" />
     <Compile Include="Assets\Scripts\UI\Cutscene\SkipMessage.cs" />
+    <Compile Include="Assets\Scripts\UI\Cutscene\FadeObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\Cutscene\Cutscene.asmdef" />
