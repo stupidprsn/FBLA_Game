@@ -1,22 +1,20 @@
-/*
- * Hanlin Zhang
- * Purpose: Trigger code to run when the cutscene is loaded.
- *          This script also manages some code that runs
- *          when the game first loads since the cutscene is
- *          loaded first.
- */
-
 using UnityEngine;
 using UnityEngine.Video;
 using System.Collections;
 
 namespace JonathansAdventure.UI.Cutscene
 {
+    /// <summary>
+    ///     Trigger Code to run when the cutscene is loaded.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     Last Modified: 6/10/2022
+    /// </remarks>
     public class CutsceneManager : MonoBehaviour
     {
-        [Tooltip("Set the amount of time the message confirming the user's choice to skip the cutscene shows up for.")]
-        [Range(0f, 10f)]
-        [SerializeField] private float skipMsgTime;
+
+        #region References
 
         [Header("Object/Prefab References")]
         [SerializeField] private GameObject gameManagerPreset;
@@ -24,58 +22,15 @@ namespace JonathansAdventure.UI.Cutscene
         [SerializeField] private VideoPlayer backgroundVideoPlayer;
         [SerializeField] private Animator animator;
         [SerializeField] private CutsceneText text;
-        [SerializeField] private CanvasGroup skipText;
 
-        private UserSettings userSettings;
-        private bool skip = false;
-
-        private SoundManager soundManager;
-
-        private void Awake()
-        {
-            if (FindObjectOfType<GameManager>() == null)
-            {
-                Instantiate(gameManagerPreset);
-                GameObject fileManager = Instantiate(fileManagerPreset);
-                DontDestroyOnLoad(fileManager);
-            }
-
-            SetSettings();
-        }
+        #endregion
 
         private void Start()
         {
-            if (userSettings.playCutScene)
-            {
-                StartCutscene();
-            } else
-            {
-                Transition();
-            }
+            StartCutscene();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                if (skip)
-                {
-                    Transition();
-                } else
-                {
-                    skip = true;
-                    skipText.alpha = 1;
-                    StartCoroutine(confirmSkip());
-                }
-            }
-        }
 
-        private IEnumerator confirmSkip()
-        {
-            yield return new WaitForSeconds(skipMsgTime);
-            skip = false;
-            skipText.alpha = 0;
-        }
 
         private void SetSettings()
         {
@@ -94,7 +49,7 @@ namespace JonathansAdventure.UI.Cutscene
             StartCoroutine(text.StartText());
         }
 
-        public void Transition()
+        internal void Transition()
         {
             soundManager.StopAllSound();
             StartCoroutine(FindObjectOfType<TransitionManager>().transition(animator, "Exit", true));

@@ -56,38 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game\boss\BossSnake.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\closedDoor.cs" />
-    <Compile Include="Assets\Scripts\Game\boss\BossArtifact.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Core\TransitionManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\playerAnimation.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\leaderboardScreen.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Core\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\Game\boss\bossSnakeAI.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\homeScreen.cs" />
-    <Compile Include="Assets\Scripts\UI\Cutscene\ContinueCue.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\UserProgress.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\artifact.cs" />
-    <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\finalArtifact.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\openedDoor.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\snakeAI.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\spaceToContinue.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\GamePlayManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Normal\onEnterLevel.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\FileManager.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\DataFile.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\MainMenuManager.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\MainMenuTransitions.cs" />
-    <Compile Include="Assets\Scripts\UI\Cutscene\CutsceneText.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Core\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\Leaderboard.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\UserSettings.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Core\Sound.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\MenuPanels.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\Rank.cs" />
-    <Compile Include="Assets\Scripts\GameManagers\Data\LeaderboardDataFile.cs" />
+    <Compile Include="Assets\Scripts\Management\MenuPanels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Unity_Editor\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -799,6 +768,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Data.csproj">
+      <Project>{D5910436-4E1D-59E4-DD01-779484F98BF3}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="Title.csproj">
+      <Project>{D9AC106D-A394-EC0F-F949-D7218F83C49D}</Project>
+      <Name>Title</Name>
+    </ProjectReference>
+    <ProjectReference Include="Program.csproj">
+      <Project>{02261220-F6F8-DB37-9E8A-FA1D00F53E82}</Project>
+      <Name>Program</Name>
+    </ProjectReference>
+    <ProjectReference Include="Game.csproj">
+      <Project>{B0A9F07E-31C1-6087-00CC-F947304EF05F}</Project>
+      <Name>Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="Core.csproj">
+      <Project>{2B0A851C-AC92-FF24-91C1-D5C34661962C}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cutscene.csproj">
+      <Project>{5FD53AA3-F9DA-55A3-B9BF-812066426C7E}</Project>
+      <Name>Cutscene</Name>
+    </ProjectReference>
+    <ProjectReference Include="MainMenu.csproj">
+      <Project>{D022022F-BA17-A6EB-0F79-FAABC98FCD91}</Project>
+      <Name>MainMenu</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
