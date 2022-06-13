@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Video;
-using System.Collections;
+using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.UI.Cutscene
 {
@@ -9,7 +9,7 @@ namespace JonathansAdventure.UI.Cutscene
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/10/2022
+    ///     Last Modified: 6/12/2022
     /// </remarks>
     public class CutsceneManager : MonoBehaviour
     {
@@ -17,36 +17,24 @@ namespace JonathansAdventure.UI.Cutscene
         #region References
 
         [Header("Object/Prefab References")]
-        [SerializeField] private GameObject gameManagerPreset;
-        [SerializeField] private GameObject fileManagerPreset;
         [SerializeField] private VideoPlayer backgroundVideoPlayer;
         [SerializeField] private Animator animator;
         [SerializeField] private CutsceneText text;
+        private SoundManager soundManager;
 
         #endregion
 
         private void Start()
         {
+            soundManager = SoundManager.Instance;
             StartCutscene();
-        }
-
-
-
-        private void SetSettings()
-        {
-            FileManager fileManager = FindObjectOfType<FileManager>();
-
-            fileManager.LoadDefaults();
-            userSettings = fileManager.UserSettingsData.load();
-            FindObjectOfType<GameManager>().SetSettings(userSettings);
         }
 
         private void StartCutscene()
         {
             backgroundVideoPlayer.Play();
-            soundManager = FindObjectOfType<SoundManager>();
-            soundManager.PlaySound("musicCutscene");
-            StartCoroutine(text.StartText());
+            soundManager.PlaySound(SoundNames.MusicCutscene);
+            text.StartText();
         }
 
         internal void Transition()

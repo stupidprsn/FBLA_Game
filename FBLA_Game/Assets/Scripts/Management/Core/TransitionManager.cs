@@ -9,20 +9,10 @@ namespace JonathansAdventure
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/8/2022
+    ///     Last Modified: 6/12/2022
     /// </remarks>
     public class TransitionManager : MonoBehaviour
     {
-        // Method that sets a trigger in an animator
-        /// <summary>
-        ///     Plays a transition.
-        /// </summary>
-        /// <param name="animator"> Reference to the <see cref="Animator"/> that has the animation. </param>
-        /// <param name="trigger"> Name of the trigger used to start the animation. </param>
-        public void Transition(Animator animator, string trigger)
-        {
-            animator.SetTrigger(trigger);
-        }
 
         /// <summary>
         ///     Overload that plays a transition and loads the next sceen.

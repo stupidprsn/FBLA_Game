@@ -56,21 +56,21 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\game\boss\bossSnake.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\closedDoor.cs" />
-    <Compile Include="Assets\Scripts\game\boss\bossArtifact.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\playerAnimation.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\playerMovement.cs" />
-    <Compile Include="Assets\Scripts\game\boss\bossSnakeAI.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\artifact.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\finalArtifact.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\openedDoor.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\snakeAI.cs" />
-    <Compile Include="Assets\Scripts\game\GameManager.cs" />
-    <Compile Include="Assets\Scripts\game\Environment\onEnterLevel.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\BossSnake.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\closedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\BossArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\playerAnimation.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\bossSnakeAI.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\artifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\finalArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\openedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\snakeAI.cs" />
+    <Compile Include="Assets\Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\onEnterLevel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\game\Game.asmdef" />
+    <None Include="Assets\Scripts\Game\Game.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.UI.Cutscene
 {
@@ -18,7 +19,7 @@ namespace JonathansAdventure.UI.Cutscene
     ///         Last Modified: 6/10/2022
     ///     </para>
     /// </remarks>
-    public class SkipMessage : MonoBehaviour
+    public class SkipMessage : FadableObject
     {
         #region Settings
 
@@ -30,9 +31,11 @@ namespace JonathansAdventure.UI.Cutscene
 
         #endregion
 
+        #region References
 
-        [SerializeField] private CanvasGroup skipText;
         [SerializeField] private CutsceneManager cutsceneManager;
+        private SoundManager soundManager;
+        #endregion
 
         /// <summary>
         ///     Used to check if the user is on the step
@@ -40,30 +43,62 @@ namespace JonathansAdventure.UI.Cutscene
         /// </summary>
         private bool skip = false;
 
+        /// <summary>
+        ///     If the cutscene is currently prompting the 
+        ///     user to press space to continue.
+        /// </summary>
+        /// <remarks>
+        ///     This way, the skip message does not appear
+        ///     if the user is simply trying to move on
+        ///     with the cutscene.
+        /// </remarks>
         private bool voidSpace = false;
 
+        /// <summary>
+        ///     Set Property for <see cref="voidSpace"/>.
+        /// </summary>
+        /// <param name="value"> Value to set. </param>
         internal void SetVoidSpace(bool value)
         {
             voidSpace = value;
         }
 
+        /// <summary>
+        ///     Manages displaying the message prompting
+        ///     the user to confirm if they want to 
+        ///     skip the cutscene.
+        /// </summary>
+        /// <returns> null </returns>
         private IEnumerator ConfirmSkipCoroutine()
         {
+            FadeIn();
             yield return new WaitForSeconds(skipMsgTime);
+            FadeOut();
             skip = false;
-            skipText.alpha = 0;
+        }
+
+        private void Start()
+        {
+            soundManager = SoundManager.Instance;
         }
 
         private void Update()
         {
+            // Guard clause that checks if a key was pressed.
             if (!Input.anyKeyDown) return;
+            // If the user is trying to skip (false) or confirming their skip (true).
             if (skip)
             {
-                if (Input.GetKey(KeyCode.Return)) cutsceneManager.Transition();
+                // Guard clause checks that the button pressed was the return key.
+                if (!Input.GetKey(KeyCode.Return)) return;
+                soundManager.PlaySound(SoundNames.SpaceContinue);
+                cutsceneManager.Transition();
             }
             else
             {
+                // Guard clause to check that the user wasn't pressing space to continue.
                 if (voidSpace && Input.GetKeyDown(KeyCode.Space)) return;
+                soundManager.PlaySound(SoundNames.SpaceContinue);
                 StartCoroutine(ConfirmSkipCoroutine());
             }
         }
