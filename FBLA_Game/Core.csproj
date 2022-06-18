@@ -56,9 +56,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Management\Core\Singleton.cs" />
     <Compile Include="Assets\Scripts\Management\Core\TransitionManager.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\SoundNames.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Management\Core\Axis.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\Sound.cs" />
   </ItemGroup>
   <ItemGroup>

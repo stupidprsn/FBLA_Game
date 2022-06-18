@@ -70,6 +70,10 @@ namespace JonathansAdventure.UI.Cutscene
         /// </remarks>
         private protected void FadeOut()
         {
+            // Stop the fade in animations.
+            // Do not call in the Coroutine as it will end the coroutine that called it.
+            StopAllCoroutines();
+
             StartCoroutine(FadeOutCoroutine());
         }
 
@@ -130,8 +134,6 @@ namespace JonathansAdventure.UI.Cutscene
         /// <returns> null </returns>
         private IEnumerator FadeOutCoroutine()
         {
-            // Stop the fade in animations.
-            StopAllCoroutines();
             // Record the alpha the fade in animation left off at.
             float startingAlpha = canvasGroup.alpha;
             // Dynamically changes the duration. 
@@ -144,6 +146,9 @@ namespace JonathansAdventure.UI.Cutscene
                 // Required for loop.
                 yield return null;
             }
+
+            // Confirm that the alpha is 0 by the end of the animation.
+            canvasGroup.alpha = 0f;
         }
 
     }

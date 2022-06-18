@@ -15,6 +15,7 @@
     public enum SoundNames
     {
         MusicCutscene,
+        MusicMainMenu,
         MusicNormalLevel,
         MusicBoss,
 

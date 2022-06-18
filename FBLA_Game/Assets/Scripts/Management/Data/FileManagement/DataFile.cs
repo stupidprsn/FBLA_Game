@@ -8,12 +8,12 @@ namespace JonathansAdventure.Data
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/5/2022
+    ///     Last Modified: 6/13/2022
     /// </remarks>
     /// <typeparam name="T">
     ///     The data class stored in the file.
     /// </typeparam>
-    internal class DataFile<T> where T : class, new()
+    public class DataFile<T> where T : class, new()
     {
         /// <summary>
         ///     The absolute file path.
@@ -38,7 +38,7 @@ namespace JonathansAdventure.Data
         /// <param name="data">
         ///     Data to be saved.
         /// </param>
-        internal void save(T data)
+        public void Save(T data)
         {
             FileManager.SaveData(path, data);
         }
@@ -49,17 +49,17 @@ namespace JonathansAdventure.Data
         /// <returns>
         ///     Data in the format of data class <see cref="T"/>.
         /// </returns>
-        internal T load() => FileManager.LoadData<T>(path);
+        public T Load() => FileManager.LoadData<T>(path);
 
         /// <summary>
         ///     Checks if the file exists yet, and if it doesn't
         ///     it creates the file with the default data.
         /// </summary>
-        internal void saveDefault()
+        internal void SaveDefault()
         {
             if (!File.Exists(path))
             {
-                save(new T());
+                Save(new T());
             }
         }
     }

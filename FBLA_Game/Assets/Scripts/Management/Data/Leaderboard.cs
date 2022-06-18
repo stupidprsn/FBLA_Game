@@ -15,7 +15,7 @@ namespace JonathansAdventure.Data
         /// <summary>
         ///     A list of <see cref="Rank"/> that stores the leaderboard data.
         /// </summary>
-        internal List<Rank> Data { get; private set; }
+        public List<Rank> Data { get; private set; }
 
         /// <summary>
         ///     Primary constructor for <see cref="leaderboard"/>.

@@ -1,44 +1,59 @@
-/*
- * Hanlin Zhang
- * Purpose: Manages singleplayer gameplay
- */
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using JonathansAdventure.Sound;
+using JonathansAdventure.Game.Normal;
 
-namespace JonathansAdventure.Game.Normal
+namespace JonathansAdventure.Game
 {
-    public class GameManager : MonoBehaviour
+    /// <summary>
+    ///     Manages singleplayer gameplay.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     Last Modified: 6/14/2022
+    /// </remarks>
+    public class GameManager : Singleton<GameManager>
     {
+
         // Used to determine which method to call every frame
         // Determined by the player state: alive, won, or dead
         private delegate void PlayerStateDelegate();
         private PlayerStateDelegate updateMethod;
 
+        #region Settings
+
         [Header("Set Game Settings")]
 
-        [Tooltip("Set the number of lives that the user has.")]
-        [Range(1, 10)]
-        [SerializeField] private int playerHealth;
+        [SerializeField,
+            Range(1, 10),
+            Tooltip("Set the number of lives that the user has.")] 
+        private int playerHealth;
 
-        [Tooltip("Set the amount of time (in seconds) it takes for the user to respawn.")]
-        [Range(1, 10)]
+        [Range(1, 10), 
+            Tooltip("Set the amount of time (in seconds) it takes for the user to respawn.")]
         [SerializeField] private int respawnTime;
 
-        [Tooltip("Set the congratulatory messages that can be shown when the player finishes a level")]
-        [SerializeField] private string[] congratulatoryMsgs;
+        [SerializeField, 
+            Tooltip("Set the congratulatory messages that can be shown when the player finishes a level")]
+        private string[] congratulatoryMsgs;
 
-        [Header("Prefab Reference")]
-        [SerializeField] private GameObject fileManagerPrefab;
+        [SerializeField,
+            Header("Prefab Reference")]
+        private GameObject fileManagerPrefab;
+
+        #endregion
+
+        internal CapsuleCollider2D PlayerCollider { get; private set; }
 
         // Referances to various objects in the game 
         private SoundManager soundManager;
         private GameObject player;
-        private playerMovement playerMovement;
-        private playerAnimation playerAnimation;
+        private PlayerMovement playerMovement;
+        //private PlayerAnimation playerAnimation;
         private Rigidbody2D playerRB;
+        
         private TMP_Text timeShown;
         private GameObject deathPanel;
         private GameObject winPanel;
@@ -72,8 +87,8 @@ namespace JonathansAdventure.Game.Normal
         {
             // Create referances to the various game objects on the stage
             player = GameObject.Find("Jonathan");
-            playerMovement = player.GetComponent<playerMovement>();
-            playerAnimation = player.GetComponent<playerAnimation>();
+            playerMovement = player.GetComponent<PlayerMovement>();
+            //playerAnimation = player.GetComponent<PlayerAnimation>();
             playerRB = player.GetComponent<Rigidbody2D>();
             Canvas canvas = FindObjectOfType<Canvas>();
             deathPanel = canvas.transform.Find("DeathPanel").gameObject;
@@ -91,7 +106,7 @@ namespace JonathansAdventure.Game.Normal
             winPanel.SetActive(false);
 
             // Update the UI to reflect the health of the user
-            UpdateHealthDisplay();
+            //UpdateHealthDisplay();
             // Start incrementing the user's time
             doUpdateTime = true;
 
@@ -99,8 +114,8 @@ namespace JonathansAdventure.Game.Normal
             //  1) the music for that stage and play it if it's not already playing
             //  2) the win sound
             // This is so that the music is continous between stages with the same music
-            soundManager.StopAllSound(music, "gameLevelWin");
-            soundManager.PlaySound(music);
+            //soundManager.StopAllSound(music, "gameLevelWin");
+            //soundManager.PlaySound(music);
 
             // Show the congratulatory message if the player has won a stage
             if (win)
@@ -120,11 +135,11 @@ namespace JonathansAdventure.Game.Normal
         public IEnumerator onDeath()
         {
             health--;
-            UpdateHealthDisplay();
+            //UpdateHealthDisplay();
 
             playerMovement.enabled = false;
-            playerAnimation.playAnimation("JonathanDead");
-            soundManager.PlaySound("playerDied");
+            //playerAnimation.playAnimation("JonathanDead");
+            //soundManager.PlaySound("playerDied");
             playerRB.constraints = RigidbodyConstraints2D.FreezeAll;
             yield return new WaitForSeconds(respawnTime);
 
@@ -132,8 +147,8 @@ namespace JonathansAdventure.Game.Normal
             if (health > 0)
             {
                 player.transform.position = spawnPosition;
-                playerAnimation.playAnimation("JonathanIdle");
-                soundManager.PlaySound("playerRevive");
+                //playerAnimation.playAnimation("JonathanIdle");
+                //soundManager.PlaySound("playerRevive");
                 playerMovement.enabled = true;
                 playerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -143,7 +158,7 @@ namespace JonathansAdventure.Game.Normal
                 updateMethod = playerDead;
 
                 soundManager.StopAllSound();
-                soundManager.PlaySound("gameOver");
+                //soundManager.PlaySound("gameOver");
 
                 deathPanel.SetActive(true);
             }
@@ -154,7 +169,7 @@ namespace JonathansAdventure.Game.Normal
         public void winStage()
         {
             doUpdateTime = false;
-            soundManager.PlaySound("gameLevelWin");
+            //soundManager.PlaySound("gameLevelWin");
             win = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -168,7 +183,7 @@ namespace JonathansAdventure.Game.Normal
             updateMethod = playerWon;
 
             soundManager.StopAllSound();
-            soundManager.PlaySound("gameLevelWin");
+            //soundManager.PlaySound("gameLevelWin");
 
             winPanel.SetActive(true);
 
@@ -196,29 +211,17 @@ namespace JonathansAdventure.Game.Normal
             FindObjectOfType<TMP_InputField>().ActivateInputField();
         }
 
-        // Return to main menu
-        // Parameters: panel (dictates which panel to return to)
-        // [0] - Title Screen
-        // [1] - Home Screen
-        // [2] - Instructions Screen
-        // [3] - Credits Screen
-        // [4] - Leaderborad Screen
-        private void ToMainMenu(MenuPanels panel)
+        /// <summary>
+        /// Returns to the main menu.
+        /// </summary>
+        private void ToMainMenu()
         {
-            GameObject fileManager = Instantiate(fileManagerPrefab, transform.parent);
-            DontDestroyOnLoad(fileManager);
-            FindObjectOfType<GameManager>().mainMenuPanel = panel;
+            Instantiate(fileManagerPrefab);
             SceneManager.LoadScene(1);
             Destroy(gameObject);
         }
 
-        // Method for updating the UI to reflect the health of the user
-        private void UpdateHealthDisplay()
-        {
-            // The image for displaying the health repeats the heart sprite which is 50 pixels
-            // We can dictate how many hearts are shown by editing the size of this image
-            heartsImg.GetComponent<RectTransform>().sizeDelta = new Vector2((health * 50), 50);
-        }
+
 
         // Method to run if the player is alive
         private void playerAlive()
@@ -238,7 +241,7 @@ namespace JonathansAdventure.Game.Normal
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                ToMainMenu(MenuPanels.HomeScreen);
+                ToMainMenu();
             }
         }
 
@@ -247,8 +250,8 @@ namespace JonathansAdventure.Game.Normal
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                soundManager.PlaySound("UISpacebar");
-                ToMainMenu(MenuPanels.HomeScreen);
+                //soundManager.PlaySound("UISpacebar");
+                //ToMainMenu(MenuPanels.HomeScreen);
             }
         }
 
@@ -257,10 +260,10 @@ namespace JonathansAdventure.Game.Normal
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                soundManager.PlaySound("UISpacebar");
+                //soundManager.PlaySound("UISpacebar");
                 FindObjectOfType<TMP_InputField>().DeactivateInputField();
-                FindObjectOfType<FileManager>().LeaderboardData.SaveEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
-                ToMainMenu(MenuPanels.LeaderboardScreen);
+                //FindObjectOfType<FileManager>().LeaderboardData.SaveEntry(FindObjectOfType<TMP_InputField>().text, finalScore);
+                //ToMainMenu(MenuPanels.LeaderboardScreen);
             }
         }
 
@@ -268,6 +271,7 @@ namespace JonathansAdventure.Game.Normal
         // This is for debugging for when initiate variables isn't called by game manager 
         private void Awake()
         {
+            SingletonCheck(this);
             InitiateVariables();
         }
 

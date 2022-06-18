@@ -1,66 +1,106 @@
-/*
- * Hanlin Zhang
- * Purpose: Used to update and display the leaderboard
- */
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using JonathansAdventure.Data;
 
-public class leaderboardScreen : MonoBehaviour {
-    // Referances to the leaderboard display
-    [SerializeField] private Transform content;
+namespace JonathansAdventure.UI.Main
+{
+    /// <summary>
+    ///     Displays the leaderboard.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     Last Modified: 6/17/2022
+    /// </remarks>
+    public class LeaderboardScreen : MonoBehaviour
+    {
 
-    // Referance to message that pops up if the leaderboard is empty
-    [SerializeField] private GameObject noLeaderboardMsg;
+        #region Settings
 
-    // Referance to a template that we can instantiate to use for the different leaderboard tiers
-    [SerializeField] private GameObject rankingPrefab;
+        [SerializeField,
+            Range(0.001f, 0.01f),
+            Tooltip("The speed at which the user can scroll through" +
+            "the leaderboard. This should be a really small number.")]
+        private float speed;
 
-    public void updateScreen() {
-        // Get the leaderboard from the fileManager as a list and order it by placement
-        List<Rank> leaderboard = FindObjectOfType<FileManager>().LeaderboardData.load().leaderboard;
+        #endregion
 
-        // Check if a leaderboard has been created
-        if(leaderboard.Count > 0) {
-            // Sort the leaderboard
-            leaderboard.OrderByDescending(x => x.Score).ToList();
+        #region References
 
-            // For each ranking, create a visual display using our rankingPrefab template
-            for (int i = 0; i < leaderboard.Count; i++) {
-                GameObject newRank = Instantiate(rankingPrefab, content);
+        [Header("Object/Prefab References")]
+        [SerializeField] private Transform content;
+        [SerializeField] private GameObject noLeaderboardMsg;
+        [SerializeField] private GameObject rankingPrefab;
 
-                // Show the placement on the leaderboard
-                // We need this as 1st, 2nd, and 3rd aren't standard
-                // After that, we can use the conjugation  n + "th" where n is the numberic placement
-                if (i == 0) {
-                    newRank.transform.Find("place").gameObject.GetComponent<TMP_Text>().text = "1st";
-                } else if (i == 1) {
-                    newRank.transform.Find("place").gameObject.GetComponent<TMP_Text>().text = "2nd";
-                } else if (i == 2) {
-                    newRank.transform.Find("place").gameObject.GetComponent<TMP_Text>().text = "3rd";
-                } else {
-                    newRank.transform.Find("place").gameObject.GetComponent<TMP_Text>().text = (i + 1).ToString() + "th";
+        #endregion
+
+        /// <summary>
+        ///     Updates the leaderboard display.
+        /// </summary>
+        public void UpdateScreen()
+        {
+            // Get the leaderboard from the fileManager.
+            List<Rank> leaderboard = FindObjectOfType<FileManager>().SingleLeaderboard.Load().Data;
+
+            // Check if there is content in the leaderboard.
+            if (leaderboard.Count > 0)
+            {
+                // Sort the leaderboard
+                leaderboard.OrderByDescending(x => x.Score).ToList();
+
+                // For each ranking, create a visual display using our rankingPrefab template
+                for (int i = 0; i < leaderboard.Count; i++)
+                {
+                    GameObject newRank = Instantiate(rankingPrefab, content);
+                    TMP_Text text = newRank.transform.Find("place").GetComponent<TMP_Text>();
+
+                    // Show the placement on the leaderboard
+                    // We need this as "1st", "2nd", and "3rd" aren't standard
+                    // After that, we can use the conjugation n + "th" where n is the numberic placement
+                    if (i == 0)
+                    {
+                        text.text = "1st";
+                    }
+                    else if (i == 1)
+                    {
+                        text.text = "2nd";
+                    }
+                    else if (i == 2)
+                    {
+                        text.text = "3rd";
+                    }
+                    else
+                    {
+                        text.text = (i + 1).ToString() + "th";
+                    }
+
+                    // Update the name and points on the screen
+                    newRank.transform.Find("name").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Name;
+                    newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Score.ToString();
                 }
-
-                // Update the name and points on the screen
-                newRank.transform.Find("name").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Name;
-                newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Score.ToString();
             }
-        } else {
-            // Show the message that says the leaderboard is empty
-            noLeaderboardMsg.SetActive(true);
+            else
+            {
+                // Show the message that says the leaderboard is empty
+                noLeaderboardMsg.SetActive(true);
+            }
+        }
+
+        /// <summary>
+        ///     Allows the user to scroll up and down.
+        /// </summary>
+        private void Update()
+        {
+            FindObjectOfType<ScrollRect>().verticalNormalizedPosition += Input.GetAxis(nameof(Axis.Vertical)) * speed;
+        }
+
+        void Start()
+        {
+            UpdateScreen();
         }
     }
 
-    // Allows the user to scroll up and down with arrow keys or with w and d.
-    private void Update() {
-        FindObjectOfType<UnityEngine.UI.ScrollRect>().verticalNormalizedPosition += Input.GetAxis("Vertical") * 0.005f;
-    }
-
-    // Update the screen once when the panel loads. 
-    void Start() {
-        updateScreen();
-    }
 }
+

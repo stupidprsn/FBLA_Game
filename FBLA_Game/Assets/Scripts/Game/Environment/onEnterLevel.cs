@@ -1,16 +1,19 @@
-/*
- * Hanlin Zhang
- * Purpose: Used to tell the game play manager when a new scene is loaded
- */
 using UnityEngine;
 
 namespace JonathansAdventure.Game.Normal
 {
-    public class onEnterLevel : MonoBehaviour
+    /// <summary>
+    ///     Used to run code when a new scene is loaded.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     6/15/2022
+    /// </remarks>
+    public class OnEnterLevel : MonoBehaviour
     {
-        // Music to be played
-        // Set in unity inspector depending on what music should be played for the current stage
-        [SerializeField] private string music;
+        [SerializeField,
+            Tooltip("The music to be played for this stage.")] 
+        private string music;
 
         private void Awake()
         {

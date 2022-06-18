@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
+using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.Game.Boss
 {
@@ -22,7 +23,7 @@ namespace JonathansAdventure.Game.Boss
 
         private IEnumerator OnCollect()
         {
-            FindObjectOfType<SoundManager>().PlaySound("playerCollectArtifact");
+            FindObjectOfType<SoundManager>().PlaySound(SoundNames.ArtifactCollect);
 
             // Put the artifact under the boss
             transform.SetParent(boss.transform);
@@ -43,14 +44,14 @@ namespace JonathansAdventure.Game.Boss
             }
 
             // Damage the boss snake and destroy this artifact
-            boss.GetComponent<BossSnake>().OnDamage();
+            boss.GetComponent<Boss>().OnDamage();
             Destroy(gameObject);
         }
 
         void Start()
         {
             // Set the reference to the boss
-            boss = FindObjectOfType<BossSnake>().gameObject;
+            boss = FindObjectOfType<Boss>().gameObject;
             playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
 
             artifactRenderer.sprite = sprites[Random.Range(0, sprites.Length)];

@@ -8,10 +8,10 @@ namespace JonathansAdventure.Data
     /// <remarks>
     ///     <para>
     ///         Hanlin Zhang
-    ///         Last Modified: 6/5/2022
+    ///         Last Modified: 6/13/2022
     ///     </para>
     ///     <para>
-    ///         It incorporates an extra method that allows a new ranking to be appended
+    ///         It incorporates an extra method that allows a new ranking to be appended.
     ///     </para>
     /// </remarks>
     public class LeaderboardDataFile : DataFile<Leaderboard>
@@ -19,9 +19,6 @@ namespace JonathansAdventure.Data
         /// <summary>
         ///     Same constructor as base DataFile class: <see cref="DataFile{T}"/>
         /// </summary>
-        /// <param name="fileName">
-        ///     See: <see cref="DataFile{T}"/>
-        /// </param>
         public LeaderboardDataFile(string fileName) : base(fileName) { }
 
         /// <summary>
@@ -42,7 +39,7 @@ namespace JonathansAdventure.Data
             // Checks if the leaderboard already exists, 
             if (File.Exists(base.path))
             {
-                leaderboard = base.load();
+                leaderboard = base.Load();
             } else
             {
                 leaderboard = new Leaderboard();

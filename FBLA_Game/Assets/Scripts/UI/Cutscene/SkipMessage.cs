@@ -86,6 +86,7 @@ namespace JonathansAdventure.UI.Cutscene
         {
             // Guard clause that checks if a key was pressed.
             if (!Input.anyKeyDown) return;
+
             // If the user is trying to skip (false) or confirming their skip (true).
             if (skip)
             {
@@ -100,6 +101,7 @@ namespace JonathansAdventure.UI.Cutscene
                 if (voidSpace && Input.GetKeyDown(KeyCode.Space)) return;
                 soundManager.PlaySound(SoundNames.SpaceContinue);
                 StartCoroutine(ConfirmSkipCoroutine());
+                skip = true;
             }
         }
     }

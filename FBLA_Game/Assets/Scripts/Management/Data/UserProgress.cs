@@ -1,22 +1,35 @@
-/*
- * Hanlin Zhang
- * Purpose: Sets up a class to store which level the user has gotten to
- */
-
 namespace JonathansAdventure.Data
 {
+    /// <summary>
+    ///     Stores which level the user has reached.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     6/13/2022
+    /// </remarks>
     [System.Serializable]
     public class UserProgress
     {
-        public int level;
-        public UserProgress(int inputLevel)
+        /// <summary>
+        ///     The level the user has reached.
+        /// </summary>
+        public int Level { get; set; }
+
+        /// <summary>
+        ///     Primary constructor.
+        /// </summary>
+        /// <param name="level"> The level the user has reached. </param>
+        public UserProgress(int level)
         {
-            this.level = inputLevel;
+            this.Level = level;
         }
 
+        /// <summary>
+        ///     Sets level to default (1).
+        /// </summary>
         public UserProgress()
         {
-            this.level = 1;
+            this.Level = 1;
         }
     }
 }

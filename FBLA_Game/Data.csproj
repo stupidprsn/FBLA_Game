@@ -59,11 +59,11 @@
     <Compile Include="Assets\Scripts\Management\Data\Rank.cs" />
     <Compile Include="Assets\Scripts\Management\Data\UserProgress.cs" />
     <Compile Include="Assets\Scripts\Management\Data\GameData.cs" />
+    <Compile Include="Assets\Scripts\Management\Data\Display.cs" />
     <Compile Include="Assets\Scripts\Management\Data\FileManagement\LeaderboardDataFile.cs" />
     <Compile Include="Assets\Scripts\Management\Data\FileManagement\FileManager.cs" />
     <Compile Include="Assets\Scripts\Management\Data\FileManagement\DataFile.cs" />
     <Compile Include="Assets\Scripts\Management\Data\Leaderboard.cs" />
-    <Compile Include="Assets\Scripts\Management\Data\UserSettings.cs" />
     <Compile Include="Assets\Scripts\Management\Data\MenuPanels.cs" />
   </ItemGroup>
   <ItemGroup>

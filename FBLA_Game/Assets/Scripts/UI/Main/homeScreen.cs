@@ -1,109 +1,119 @@
-/*
- * Hanlin Zhang
- * Purpose: Navigation system for the home screen
- */
-
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using JonathansAdventure.Sound;
 
-public class homeScreen : MonoBehaviour {
-    // Referances to the scripts in charge of managing gameplay
-    private GamePlayManager gamePlayManager;
+namespace JonathansAdventure.UI.Main
+{
+    /// <summary>
+    ///     Creates navigation on the home screen.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     Last Modified: 6/17/2022
+    /// </remarks>
+    public class HomeScreen : MonoBehaviour
+    {
 
-    // Arrays of the 6 main menu buttons 
-    [SerializeField] private UnityEngine.UI.Button[] topButtons = new UnityEngine.UI.Button[3];
-    [SerializeField] private UnityEngine.UI.Button[] bottomButtons = new UnityEngine.UI.Button[3];
+        #region References
 
-    // A multidimensional array used to keep track of the buttons
-    private UnityEngine.UI.Button[,] buttons = new UnityEngine.UI.Button[2, 3];
+        [Header("Object References")]
 
-    // Variables for keeping track of which button is currently selected
-    // We start on the play button which has a vertical index of 0 and a horizontal index of 1
-    private int verticalIndex = 0;
-    private int horizontalIndex = 1;
+        [SerializeField,
+            Tooltip("Drag in the buttons from top to bottom.")]
+        private Button[] buttons;
 
-    // Method for loading into a singleplayer game, it is used by the play button.
-    public void toGame() {
-        gamePlayManager.enabled = true;
-        gamePlayManager.InitiateVariables();
-        SceneManager.LoadScene("LevelOne");
-    }
+        private SoundManager soundManager;
 
-    // Loads another scene in the main menu
-    // Has one parameter which dictates which panel is loaded
-    public void changePanel(GameObject toPanel) {
-        toPanel.SetActive(true);
-        gameObject.SetActive(false);
-    }
+        #endregion
 
-    // Used by the quit button to leave the application
-    public void quitButton() {
-        Application.Quit();
-    }
+        /// <summary>
+        ///     The last valid index to <see cref="buttons"/>.
+        /// </summary>
+        private int lastIndex;
 
-    // For updating the selected button. Takes in the index (vertical or horizontal) and whether to incremenmt or decrement.
-    private void buttonSelect(ref int index, bool increment) {
-        // Play sound
-        FindObjectOfType<SoundManager>().PlaySound("UISelectButton");
-        
-        // Increment or decrement the index
-        if(increment) {
-            index++;
-        } else {
-            index--;
+        private int buttonIndex;
+
+        /// <summary>
+        ///     The index of the current button selected.
+        /// </summary>
+        /// <remarks>
+        ///     Wraps the value of <see cref="buttonIndex"/>
+        ///     from 0 to <see cref="lastIndex"/>.
+        /// </remarks>
+        private int ButtonIndex
+        {
+            get => buttonIndex;
+            set
+            {
+                if (value < 0)
+                {
+                    buttonIndex = lastIndex;
+                    return;
+                }
+                if(value > lastIndex)
+                {
+                    buttonIndex = 0;
+                    return;
+                }
+                buttonIndex = value;
+            }
         }
 
-        // Update visuals
-        buttons[verticalIndex, horizontalIndex].Select();
-    }
-
-    private void Start() {
-        // Create referances to the game play manager and two player manager
-        gamePlayManager = FindObjectOfType<GamePlayManager>();
-        
-        // Copy over the arrays to the multidimensional array. 
-        buttons = new UnityEngine.UI.Button[2, 3] {
-            {topButtons[0], topButtons[1], topButtons[2] },
-            {bottomButtons[0], bottomButtons[1], bottomButtons[2] }
-        };
-        // Since we don't need the original lists anymore, we can make them null so C# knows to clear them from ram
-        topButtons = null;
-        bottomButtons = null;
-
-        // Update visual to "select" the play button
-        buttons[verticalIndex, horizontalIndex].Select();
-    }
-
-    private void Update() {
-        // Check if we get wasd or the corresponding arrow key.
-        // Then check if we stay inside the bounds.
-        // Call the buttonSelect method with the corresponding index and action
-        if ((Input.GetKeyDown("w") || Input.GetKeyDown("up")) && verticalIndex == 1) {
-            buttonSelect(ref verticalIndex, false);
+        /// <summary>
+        ///     Closes the application.
+        /// </summary>
+        /// <remarks>
+        ///     Used by the quit button.
+        /// </remarks>
+        public void QuitButton()
+        {
+            Application.Quit();
         }
 
-        if((Input.GetKeyDown("a") || Input.GetKeyDown("left")) && horizontalIndex != 0) {
-            buttonSelect(ref horizontalIndex, false);
-
+        private void Awake()
+        {
+            soundManager = SoundManager.Instance;
         }
 
-        if ((Input.GetKeyDown("s") || Input.GetKeyDown("down")) && verticalIndex == 0) {
-            buttonSelect(ref verticalIndex, true);
-
+        /// <summary>
+        ///     Select the default (play) button.
+        /// </summary>
+        private void Start()
+        {
+            buttons[buttonIndex].Select();
         }
 
-        if ((Input.GetKeyDown("d") || Input.GetKeyDown("right")) && horizontalIndex != 2) {
-            buttonSelect(ref horizontalIndex, true);
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                buttons[++buttonIndex].Select();
+            }
+
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                buttons[--buttonIndex].Select();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                soundManager.PlaySound(SoundNames.SpaceContinue);
+
+                // Reset button visuals
+                buttons[buttonIndex].GetComponent<Image>().color = new Color(255, 255, 255, 0);
+
+                // Perform the action associated with the button
+                buttons[buttonIndex].onClick.Invoke();
+            }
         }
 
-        // Checks if the user presses space to "click" the button
-        if (Input.GetKeyDown("space")) {
-            // Play sound
-            FindObjectOfType<SoundManager>().PlaySound("UISpacebar");
-            // Reset button visuals
-            buttons[verticalIndex, horizontalIndex].GetComponent<UnityEngine.UI.Image>().color = new Color(255, 255, 255, 0);
-            // Perform the action associated with the button
-            buttons[verticalIndex, horizontalIndex].onClick.Invoke();
+        /// <summary>
+        ///     Update <see cref="lastIndex"/> when <see cref="buttons"/> is changed.
+        /// </summary>
+        private void OnValidate()
+        {
+            lastIndex = buttons.Length - 1;
         }
     }
 }
+

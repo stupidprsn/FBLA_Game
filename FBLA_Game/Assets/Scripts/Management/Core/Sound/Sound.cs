@@ -67,15 +67,6 @@ namespace JonathansAdventure.Sound
                 source.volume = this.volume;
             }
         }
-
-        /// <summary>
-        ///     Multiply the volume by a factor.
-        /// </summary>
-        /// <param name="multiplier"> The factor that the volume will be multiplied against. </param>
-        internal void MultiplyVolume(float multiplier)
-        {
-            this.Source.volume *= multiplier;
-        }
     }
 
 }

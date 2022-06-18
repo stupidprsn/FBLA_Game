@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.Game.Boss
 {
@@ -62,11 +63,11 @@ namespace JonathansAdventure.Game.Boss
                 if (collision.transform.position.y - transform.position.y > 0.1f)
                 {
                     Instantiate(artifact, transform.position, Quaternion.identity, transform.parent);
-                    FindObjectOfType<SoundManager>().PlaySound("playerKillSnake");
+                    FindObjectOfType<SoundManager>().PlaySound(SoundNames.KillSnake);
                     Destroy(this.gameObject);
                 } else
                 {
-                    StartCoroutine(FindObjectOfType<GamePlayManager>().onDeath());
+                    StartCoroutine(FindObjectOfType<GameManager>().onDeath());
                 }
             }
         }

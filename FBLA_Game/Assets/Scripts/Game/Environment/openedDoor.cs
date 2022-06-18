@@ -1,30 +1,40 @@
-/*
- * Hanlin Zhang
- * Purpose: Script for when the user has collected all the artifacts
- */
 using UnityEngine;
 
 namespace JonathansAdventure.Game.Normal
 {
-    public class openedDoor : MonoBehaviour
+    /// <summary>
+    ///     Allows the user to "enter" the door
+    ///     after it has been opened.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     Last Modified: 6/15/2022
+    /// </remarks>
+    public class OpenedDoor : MonoBehaviour
     {
-        // Referances to the player and door's colliders
-        private CapsuleCollider2D playerCollider;
+
+        #region References
+
+        [Header("Object References")]
         [SerializeField] private BoxCollider2D doorCollider;
+        private CapsuleCollider2D playerCollider;
+        private GameManager gameManager;
+
+        #endregion
 
         private void Start()
         {
-            // Set a referance to the player's collider
-            playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
+            gameManager = GameManager.Instance;
+            playerCollider = gameManager.PlayerCollider;
         }
 
         private void Update()
         {
-            // Check if the player is touching the door and has pressed w
-            if (playerCollider.IsTouching(doorCollider) && (Input.GetKeyDown("w") || Input.GetKeyDown("up")))
+            bool recievedInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+            
+            if (recievedInput && playerCollider.IsTouching(doorCollider))
             {
-                // Call the game play manager's method for winning a stage
-                FindObjectOfType<GameManager>().winStage();
+                gameManager.winStage();
             }
         }
     }

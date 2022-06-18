@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using System.Collections;
+using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.Game.Normal
 {
@@ -22,7 +23,7 @@ namespace JonathansAdventure.Game.Normal
         private IEnumerator onCollect()
         {
             // Play the sound effect for collecting an artifact
-            FindObjectOfType<SoundManager>().PlaySound("gameLevelWin");
+            FindObjectOfType<SoundManager>().PlaySound(SoundNames.ArtifactCollect);
 
             // Variables for setting up the animation
             Vector3 startPos = transform.localPosition;

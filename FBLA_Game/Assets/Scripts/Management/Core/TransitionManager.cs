@@ -9,45 +9,53 @@ namespace JonathansAdventure
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/12/2022
+    ///     Last Modified: 6/13/2022
     /// </remarks>
-    public class TransitionManager : MonoBehaviour
+    public class TransitionManager : Singleton<TransitionManager>
     {
-
         /// <summary>
-        ///     Overload that plays a transition and loads the next sceen.
+        ///     Plays a crossfade and loads the scene.
         /// </summary>
         /// <remarks>
-        ///     Wrapper method for <see cref="TransitionCoroutine(Animator, string, bool)"/>.
+        ///     Wrapper method for <see cref="CrossFadeCoroutine(Animator, int)"/>.
         /// </remarks>
         /// <param name="animator"> Reference to the <see cref="Animator"/> that has the animation. </param>
-        /// <param name="trigger"> Name of the trigger used to start the animation. </param>
-        /// <param name="nextScene"> If the next scene should be loaded </param>
-        /// <returns> null </returns>
-        public void Transition(Animator animator, string trigger, bool nextScene)
+        /// <param name="buildIndex"> The <see cref="Scene.buildIndex"/> of the scene to load. </param>
+        public void CrossFade(Animator animator, int buildIndex)
         {
-            StartCoroutine(TransitionCoroutine(animator, trigger, nextScene));
+            StartCoroutine(CrossFadeCoroutine(animator, buildIndex));
         }
 
         /// <summary>
-        /// 
+        ///     Overload of <see cref="CrossFade(Animator, int)"/> in which
+        ///     the next scene is loaded.
         /// </summary>
-        /// <param name="animator"></param>
-        /// <param name="trigger"></param>
-        /// <param name="nextScene"></param>
-        /// <returns></returns>
-        private IEnumerator TransitionCoroutine(Animator animator, string trigger, bool nextScene)
+        /// <remarks>
+        ///     Wrapper method for <see cref="CrossFadeCoroutine(Animator, int)"/>.
+        /// </remarks>
+        /// <param name="animator"> Reference to the <see cref="Animator"/> that has the animation. </param>
+        public void CrossFade(Animator animator)
         {
-            animator.SetTrigger(trigger);
-            if (nextScene)
-            {
-                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
+            StartCoroutine(CrossFadeCoroutine(animator, SceneManager.GetActiveScene().buildIndex + 1));
         }
 
+        /// <summary>
+        ///     <see cref="CrossFade(Animator, string, int)"/>.
+        /// </summary>
+        private IEnumerator CrossFadeCoroutine(Animator animator, int buildIndex)
+        {
+            // Play animation.
+            animator.SetTrigger("Exit");
+        
+            // Wait until the animation is done.
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            SceneManager.LoadScene(buildIndex);
+        }
 
+        private void Awake()
+        {
+            SingletonCheck(this);
+        }
     }
 
 }

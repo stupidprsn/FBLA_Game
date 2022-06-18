@@ -9,7 +9,7 @@ namespace JonathansAdventure.Sound
     /// <remarks>
     ///     <para>
     ///         Hanlin Zhang
-    ///         Last Modified: 6/10/2022
+    ///         Last Modified: 6/13/2022
     ///     </para>
     ///     <para>
     ///         This class was inspired by "Introduction to AUDIO in Unity"
@@ -22,15 +22,10 @@ namespace JonathansAdventure.Sound
     ///         <seealso href="https://www.youtube.com/watch?v=6OT43pvUyfY"/>
     ///     </para>
     /// </remarks>
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : Singleton<SoundManager>
     {
         [SerializeField, Tooltip("Set all of the audios")]
         private Sound[] sounds;
-
-        /// <summary>
-        ///     Implements singleton pattern.
-        /// </summary>
-        public static SoundManager Instance { get; private set; }
 
         /// <summary>
         ///     Plays a sound.
@@ -102,21 +97,6 @@ namespace JonathansAdventure.Sound
         }
 
         /// <summary>
-        ///     Sets the master volume of the game.
-        /// </summary>
-        /// <remarks>
-        ///     Multiplies all sound volumes by a factor.
-        /// </remarks>
-        /// <param name="volume"> The factor that all sounds are multiplied by. </param>
-        public void SetVolume(float volume)
-        {
-            foreach (Sound sound in sounds)
-            {
-                sound.MultiplyVolume(volume);
-            }
-        }
-
-        /// <summary>
         ///     Used privately to find the reference to a specific <see cref="Sound"/>.
         /// </summary>
         /// <param name="name"> The name being searched for </param>
@@ -134,14 +114,7 @@ namespace JonathansAdventure.Sound
         /// </summary>
         private void Awake()
         {
-            // Singleton pattern Check
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-            } else
-            {
-                Instance = this;
-            }
+            SingletonCheck(this);
 
             foreach (Sound sound in sounds)
             {

@@ -40,7 +40,7 @@ namespace JonathansAdventure.UI.Cutscene
         internal void Transition()
         {
             soundManager.StopAllSound();
-            StartCoroutine(FindObjectOfType<TransitionManager>().transition(animator, "Exit", true));
+            FindObjectOfType<TransitionManager>().CrossFade(animator);
         }
     }
 

@@ -14,91 +14,65 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace JonathansAdventure.Data
 {
+    /// <summary>
+    ///     Manages serializing and deserializing data 
+    ///     to and from a non volatile state.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         This class was inspired by "SAVE & LOAD SYSTEM in Unity" 
+    ///         by "Asbjørn Thirslund (Brackeys)" 2018.
+    ///         
+    ///         The members: <see cref="SaveData{T}(string, T)"/> and part of 
+    ///         <see cref="LoadData{T}(string)"/> are creddited to Brackeys.
+    ///         
+    ///         <seealso href="https://www.youtube.com/watch?v=XOjd_qU2Ido"/>
+    ///     </para>
+    ///     <para>
+    ///         Hanlin Zhang
+    ///         Last Modified: 6/13/2022
+    ///     </para>
+    /// </remarks>
     public class FileManager : MonoBehaviour
     {
+        /// <summary>
+        ///     Leaderboard data for singleplayer.
+        /// </summary>
+        public LeaderboardDataFile SingleLeaderboard { get; private set; }
 
-        public LeaderboardDataFile LeaderboardData { get; private set; }
-        public DataFile<UserSettings> UserSettingsData { get; private set; }
+        /// <summary>
+        ///     Leaderboard data for multiplayer.
+        /// </summary>
+        public LeaderboardDataFile MultiLeaderboard { get; private set; }
+
+        /// <summary>
+        ///     Data regarding what level the user has reached.
+        /// </summary>
         public DataFile<UserProgress> UserProgressData { get; private set; }
 
         private void Awake()
         {
-            LeaderboardData = new LeaderboardDataFile("leaderboard.fbla");
-            UserSettingsData = new DataFile<UserSettings>("userSettings.fbla");
+            SingleLeaderboard = new LeaderboardDataFile("singleLeaderboard.fbla");
+            MultiLeaderboard = new LeaderboardDataFile("multiLeaderboard");
             UserProgressData = new DataFile<UserProgress>("userProgress.fbla");
         }
 
-        // Method for loading the default settings if no settings have been set yet
+        /// <summary>
+        ///     Load the default settings if no settings have been set yet.
+        /// </summary>
         public void LoadDefaults()
         {
-            LeaderboardData.saveDefault();
-            UserSettingsData.saveDefault();
-            UserProgressData.saveDefault();
-
-            //if(!File.Exists(paths.leaderboard)) {
-            //    SaveData<Leaderboard>(paths.leaderboard, new Leaderboard());
-            //}
-
-            //if (!File.Exists(paths.userSettings)) {
-            //    SaveData<UserSettings>(paths.userSettings, new UserSettings());
-            //}
-
-            //if (!File.Exists(paths.userProgress)) {
-            //    SaveData<UserProgress>(paths.userProgress, new UserProgress());
-            //}
+            SingleLeaderboard.SaveDefault();
+            MultiLeaderboard.SaveDefault();
+            UserProgressData.SaveDefault();
         }
 
-        //// Method for adding a new placement to the leaderboard
-        //// Params: name (user name), score (user score)
-        //// Returns true if the name doesn't already exist in the leaderboard
-        //public bool SaveLeaderboard(string name, int score) {
-        //    Leaderboard leaderboard;
-
-        //    bool isNewEntry;
-
-        //    // Checks if the leaderboard already exists, 
-        //    if (File.Exists(DataFile.leaderboard)) {
-        //        leaderboard = LoadLeaderboard();
-        //    } else {
-        //        leaderboard = new Leaderboard();
-        //    }
-
-        //    isNewEntry = leaderboard.NewEntry(name, score);
-
-        //    SaveData<Leaderboard>(DataFile.leaderboard, leaderboard);
-
-        //    // Return true if a new entry was added
-        //    // Return false if a preexisting entry was updated
-        //    return isNewEntry;
-        //}
-
-        //// Method for loading the leaderboard
-        //public Leaderboard LoadLeaderboard() {
-        //    return LoadData<Leaderboard>(DataFile.leaderboard);
-        //}
-
-        //// Method for saving user settings
-        //public void SaveUserSettings(UserSettings userSettings) {
-        //    SaveData<UserSettings>(DataFile.userSettings, userSettings);
-        //}
-
-        //// Method for loading user settings
-        //public UserSettings LoadUserSettings() {
-        //    return LoadData<UserSettings>(DataFile.userSettings);
-        //}
-
-        //// Method for saving user progress
-        //public void SaveUserProgress(UserProgress userProgress) {
-        //    SaveData<UserProgress>(DataFile.userProgress, userProgress);
-        //}
-
-        //// Method for loading user progress
-        //public UserProgress LoadUserProgress() {
-        //    return LoadData<UserProgress>(DataFile.userProgress);
-        //}
-
-        // Method for saving data
-        // Params: T (data class type), path (file path and name), data (data to save)
+        /// <summary>
+        ///     Serializes and saves data.
+        /// </summary>
+        /// <typeparam name="T"> Type of data </typeparam>
+        /// <param name="path"> Path to save it to </param>
+        /// <param name="data"> The data to save </param>
         public static void SaveData<T>(string path, T data)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -108,10 +82,12 @@ namespace JonathansAdventure.Data
             stream.Close();
         }
 
-        // Method for loading data
-        // Params: T (data type to load), path (file path and name)
-        // Return: data from path
-        // The data type, T, has to be a class and has to have a new() constructor
+        /// <summary>
+        ///     Deserializes and loads data.
+        /// </summary>
+        /// <typeparam name="T"> Type of data </typeparam>
+        /// <param name="path"> Path where data is saved at </param>
+        /// <returns> The data </returns>
         public static T LoadData<T>(string path) where T : class, new()
         {
             if (File.Exists(path))
@@ -125,7 +101,8 @@ namespace JonathansAdventure.Data
                 if (stream.Length != 0)
                 {
                     data = formatter.Deserialize(stream) as T;
-                } else
+                }
+                else
                 {
                     data = new T();
                     Debug.LogError($"Save file: \"{path}\" is empty");
@@ -133,18 +110,12 @@ namespace JonathansAdventure.Data
 
                 stream.Close();
                 return data;
-            } else
+            }
+            else
             {
                 Debug.LogError($"Save file: \"{path}\" not found");
                 return new T();
             }
         }
     }
-
-    // static class of strings for the different file paths
-    //public static class Paths {
-    //    public static readonly string leaderboard = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "leaderboard.fbla";
-    //    public static readonly string userSettings = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "userSettings.fbla";
-    //    public static readonly string userProgress = Application.persistentDataPath + Path.AltDirectorySeparatorChar + "userProgress.fbla";
-    //}
 }

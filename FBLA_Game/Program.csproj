@@ -662,6 +662,10 @@
       <Project>{2B0A851C-AC92-FF24-91C1-D5C34661962C}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="Data.csproj">
+      <Project>{D5910436-4E1D-59E4-DD01-779484F98BF3}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

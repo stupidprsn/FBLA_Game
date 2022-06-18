@@ -14,10 +14,10 @@ namespace JonathansAdventure.Data
     /// </remarks>
     public enum MenuPanels
     {
-        TitleScreen = 0,
-        HomeScreen = 1,
-        InstructionsScreen = 2,
-        CreditsScreen = 3,
-        LeaderboardScreen = 4
+        HomeScreen = 0,
+        GameSelectScreen = 1,
+        LevelSelectScreen = 2,
+        LeaderbaordScreen = 3,
+        InstructionsScreen = 4
     }
 }

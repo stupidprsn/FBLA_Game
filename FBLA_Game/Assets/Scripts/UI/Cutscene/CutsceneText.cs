@@ -48,6 +48,7 @@ namespace JonathansAdventure.UI.Cutscene
         [SerializeField] private TMP_Text text;
         [SerializeField] private CutsceneManager cutsceneManager;
         [SerializeField] private ContinueCue continueCue;
+        [SerializeField] private SkipMessage skipMessage;
 
         #endregion
 
@@ -94,7 +95,10 @@ namespace JonathansAdventure.UI.Cutscene
                 index++;
                 // Show the cue to tell the user to press space to continue.
                 continueCue.FadeInText();
-                
+
+                // Tell the skip message not to pop up.
+                skipMessage.SetVoidSpace(true);
+
                 /*
                  * Wait for the user to press space.
                  * ** canContinue needs to be checked again so that just pressing space
@@ -102,8 +106,13 @@ namespace JonathansAdventure.UI.Cutscene
                  */
                 yield return new WaitUntil(() => canContinue && Input.GetKeyDown(KeyCode.Space));
                 soundManager.PlaySound(SoundNames.SpaceContinue);
+                
+                // Allow the skip message to pop up again.
+                skipMessage.SetVoidSpace(false);
+
                 // Reset the signal.
                 canContinue = false;
+
                 // Hide the cue
                 continueCue.FadeOutText();
             }
