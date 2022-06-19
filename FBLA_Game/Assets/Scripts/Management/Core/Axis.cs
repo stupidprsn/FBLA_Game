@@ -3,6 +3,8 @@
     public enum Axis
     {
         Vertical,
-        Horizontal
+        Horizontal,
+        ArrowHorizontal,
+        ADHorizontal
     }
 }

@@ -50,7 +50,7 @@ namespace JonathansAdventure.Game
         // Referances to various objects in the game 
         private SoundManager soundManager;
         private GameObject player;
-        private PlayerMovement playerMovement;
+        private Player playerMovement;
         //private PlayerAnimation playerAnimation;
         private Rigidbody2D playerRB;
         
@@ -87,7 +87,7 @@ namespace JonathansAdventure.Game
         {
             // Create referances to the various game objects on the stage
             player = GameObject.Find("Jonathan");
-            playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement = player.GetComponent<Player>();
             //playerAnimation = player.GetComponent<PlayerAnimation>();
             playerRB = player.GetComponent<Rigidbody2D>();
             Canvas canvas = FindObjectOfType<Canvas>();

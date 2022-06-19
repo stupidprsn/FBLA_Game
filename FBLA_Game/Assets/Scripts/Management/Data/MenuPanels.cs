@@ -16,8 +16,9 @@ namespace JonathansAdventure.Data
     {
         HomeScreen = 0,
         GameSelectScreen = 1,
-        LevelSelectScreen = 2,
-        LeaderbaordScreen = 3,
-        InstructionsScreen = 4
+        SingleLevelScreen = 2,
+        MultiLevelScreen = 3,
+        LeaderbaordScreen = 4,
+        InstructionsScreen = 5
     }
 }

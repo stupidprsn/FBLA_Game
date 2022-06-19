@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using JonathansAdventure.Sound;
+using JonathansAdventure.Data;
 
 namespace JonathansAdventure.UI.Main
 {
@@ -12,7 +13,7 @@ namespace JonathansAdventure.UI.Main
 
         [SerializeField,
             Tooltip("Set the panel to return to when the user presses space.")]
-        private GameObject returnTo;
+        private MenuPanels panel;
         
         [SerializeField] private MainMenuTransitions transitions;
         
@@ -23,7 +24,7 @@ namespace JonathansAdventure.UI.Main
             // Wait until the user presses space.
             if (!Input.GetKeyDown(KeyCode.Space)) return;
             SoundManager.Instance.PlaySound(SoundNames.SpaceContinue);
-            transitions.Transition(gameObject, returnTo, false);
+            transitions.Transition(panel, false);
             
         }
     }

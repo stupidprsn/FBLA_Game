@@ -58,9 +58,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Main\LeaderboardScreen.cs" />
     <Compile Include="Assets\Scripts\UI\Main\HomeScreen.cs" />
-    <Compile Include="Assets\Scripts\UI\Main\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\UI\Main\SpaceReturn.cs" />
     <Compile Include="Assets\Scripts\UI\Main\MainMenuTransitions.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\Panel.cs" />
+    <Compile Include="Assets\Scripts\UI\Main\MenuButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\UI\Main\MainMenu.asmdef" />

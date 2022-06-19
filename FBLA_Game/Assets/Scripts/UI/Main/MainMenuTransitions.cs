@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using JonathansAdventure.Sound;
+using JonathansAdventure.Data;
 
 namespace JonathansAdventure.UI.Main
 {
@@ -16,6 +18,15 @@ namespace JonathansAdventure.UI.Main
 
         #endregion
 
+        #region Panels
+        
+        [SerializeField,
+            Tooltip("An array of panels in the main menu.")] private Panel[] panels;
+
+        #endregion
+
+        #region Transition
+
         /// <summary>
         ///     Keeps track of how many coroutines have finished.
         /// </summary>
@@ -26,49 +37,41 @@ namespace JonathansAdventure.UI.Main
         private int coroutinesFinished = 0;
 
         /// <summary>
+        ///     Keeps track of which panel is currently being displayed.
+        /// </summary>
+        private Panel currentPanel;
+
+        /// <summary>
         ///     Transitions from one panel to another.
         /// </summary>
         /// <remarks>
         ///     Creates a horizontal text sliding effect.
         /// </remarks>
-        /// <typeparam name="TFrom"> The class controlling the panel being transitioned from. </typeparam>
-        /// <typeparam name="TTo"> The class controlling the panel being transitioned to. </typeparam>
-        /// <param name="fromPanel"> The panel being transitioned from. </param>
-        /// <param name="toPanel"> The panel being transitioned to. </param>
+        /// <param name="panel"> The panel to transition to. </param>
         /// <param name="toLeft"> If the panels are moving left. </param>
-        internal void Transition(GameObject fromPanel, GameObject toPanel, bool toLeft)
+        internal void Transition(MenuPanels panel, bool toLeft)
         {
-            StartCoroutine(TransitionCoroutine(fromPanel, toPanel, toLeft));
+            StartCoroutine(TransitionCoroutine(panels[(int) panel], toLeft));
         }
 
         /// <summary>
-        ///     <see cref="Transition{TFrom, TTo}(GameObject, GameObject, bool)"/>
+        ///     <see cref="Transition(MenuPanels, bool)"/>
         /// </summary>
         /// <returns> null </returns>
-        private IEnumerator TransitionCoroutine(GameObject fromPanel, GameObject toPanel, bool toLeft)
+        private IEnumerator TransitionCoroutine(Panel toPanel, bool toLeft)
         {
-            // Get the components of the panel being transitioned from.
-            RectTransform fromT = fromPanel.GetComponent<RectTransform>();
-            CanvasGroup fromC = fromPanel.GetComponent<CanvasGroup>();
-            MonoBehaviour[] fromM = fromPanel.GetComponents<MonoBehaviour>();
-
-            // Get the components of the panel being transitioned to.
-            RectTransform toT = toPanel.GetComponent<RectTransform>();
-            CanvasGroup toC = toPanel.GetComponent<CanvasGroup>();
-            MonoBehaviour[] toM = toPanel.GetComponents<MonoBehaviour>();
-
             // Activate the panel but disable its interactivity.
-            fromPanel.SetActive(true);
-            fromC.interactable = false;
-            foreach (MonoBehaviour m in fromM)
+            currentPanel.GameObject.SetActive(true);
+            currentPanel.Canvas.interactable = false;
+            foreach (MonoBehaviour m in currentPanel.MonoBehaviours)
             {
                 m.enabled = false;
             }
 
             // Activate the panel but disable its interactivity.
-            toPanel.SetActive(true);
-            toC.interactable = false;
-            foreach (MonoBehaviour m in fromM)
+            toPanel.GameObject.SetActive(true);
+            toPanel.Canvas.interactable = false;
+            foreach (MonoBehaviour m in toPanel.MonoBehaviours)
             {
                 m.enabled = false;
             }
@@ -78,17 +81,17 @@ namespace JonathansAdventure.UI.Main
             // 1920 is the pixel width of the screen.
             if (toLeft)
             {
-                toT.anchoredPosition = new Vector2(1920, 0);
+                toPanel.Transform.anchoredPosition = new Vector2(1920, 0);
 
-                StartCoroutine(Shift(fromT, new Vector2(-1920, 0)));
-                StartCoroutine(Shift(toT, new Vector2(0, 0)));
+                StartCoroutine(Shift(currentPanel.Transform, new Vector2(-1920, 0)));
+                StartCoroutine(Shift(toPanel.Transform, new Vector2(0, 0)));
             }
             else
             {
-                toT.anchoredPosition = new Vector2(-1920, 0);
+                toPanel.Transform.anchoredPosition = new Vector2(-1920, 0);
 
-                StartCoroutine(Shift(fromT, new Vector2(1920, 0)));
-                StartCoroutine(Shift(toT, new Vector2(0, 0)));
+                StartCoroutine(Shift(currentPanel.Transform, new Vector2(1920, 0)));
+                StartCoroutine(Shift(toPanel.Transform, new Vector2(0, 0)));
             }
 
             // Wait until both shifts are finished.
@@ -97,14 +100,17 @@ namespace JonathansAdventure.UI.Main
             coroutinesFinished = 0;
 
             // Enable interactivity on toPanel
-            toC.interactable = true;
-            foreach (MonoBehaviour m in fromM)
+            toPanel.Canvas.interactable = true;
+            foreach (MonoBehaviour m in toPanel.MonoBehaviours)
             {
                 m.enabled = true;
             }
 
             // Disable fromPanel
-            fromPanel.SetActive(false);
+            currentPanel.GameObject.SetActive(false);
+
+            // Record the new current panel.
+            currentPanel = toPanel;
         }
 
         /// <summary>
@@ -137,6 +143,21 @@ namespace JonathansAdventure.UI.Main
 
             // Signify that the coroutine finished.
             coroutinesFinished++;
+        }
+
+        #endregion
+
+        private void Awake()
+        {
+            // Get the panel that the main menu should open on.
+            currentPanel = panels[(int)GameData.MenuPanel];
+            currentPanel.GameObject.SetActive(true);
+
+        }
+
+        private void Start()
+        {
+            SoundManager.Instance.PlaySound(SoundNames.MusicMainMenu);
         }
     }
 }

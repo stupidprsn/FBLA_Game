@@ -31,33 +31,10 @@ namespace JonathansAdventure.UI.Main
         /// </summary>
         private int lastIndex;
 
-        private int buttonIndex;
-
         /// <summary>
-        ///     The index of the current button selected.
+        ///     The index of the button currently selected.
         /// </summary>
-        /// <remarks>
-        ///     Wraps the value of <see cref="buttonIndex"/>
-        ///     from 0 to <see cref="lastIndex"/>.
-        /// </remarks>
-        private int ButtonIndex
-        {
-            get => buttonIndex;
-            set
-            {
-                if (value < 0)
-                {
-                    buttonIndex = lastIndex;
-                    return;
-                }
-                if(value > lastIndex)
-                {
-                    buttonIndex = 0;
-                    return;
-                }
-                buttonIndex = value;
-            }
-        }
+        private int buttonIndex;
 
         /// <summary>
         ///     Closes the application.
@@ -72,7 +49,7 @@ namespace JonathansAdventure.UI.Main
 
         private void Awake()
         {
-            soundManager = SoundManager.Instance;
+            lastIndex = buttons.Length - 1;
         }
 
         /// <summary>
@@ -80,19 +57,34 @@ namespace JonathansAdventure.UI.Main
         /// </summary>
         private void Start()
         {
+            soundManager = SoundManager.Instance;
             buttons[buttonIndex].Select();
         }
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                buttons[++buttonIndex].Select();
+                // Inversed as a higher button has a lower index.
+                buttonIndex--;
+                if (buttonIndex < 0)
+                {
+                    buttonIndex = lastIndex;
+                }
+                buttons[buttonIndex].Select();
+                soundManager.PlaySound(SoundNames.ButtonSelect);
             }
 
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                buttons[--buttonIndex].Select();
+                // Inversed as a lower button has a higher index.
+                buttonIndex++;
+                if(buttonIndex > lastIndex)
+                {
+                    buttonIndex = 0;
+                }
+                buttons[buttonIndex].Select();
+                soundManager.PlaySound(SoundNames.ButtonSelect);
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -105,14 +97,6 @@ namespace JonathansAdventure.UI.Main
                 // Perform the action associated with the button
                 buttons[buttonIndex].onClick.Invoke();
             }
-        }
-
-        /// <summary>
-        ///     Update <see cref="lastIndex"/> when <see cref="buttons"/> is changed.
-        /// </summary>
-        private void OnValidate()
-        {
-            lastIndex = buttons.Length - 1;
         }
     }
 }
