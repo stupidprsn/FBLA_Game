@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{B0A9F07E-31C1-6087-00CC-F947304EF05F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -57,29 +56,29 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game\Boss\Boss.cs" />
-    <Compile Include="Assets\Scripts\Game\Boss\BossArtifact.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\ArtifactHolder.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\Player.cs" />
-    <Compile Include="Assets\Scripts\Game\Boss\BossSnake.cs" />
-    <Compile Include="Assets\Scripts\Game\Artifact.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\normalArtifact.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\finalArtifact.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\OpenedDoor.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\NormalSnake.cs" />
-    <Compile Include="Assets\Scripts\Game\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Environment\OnEnterLevel.cs" />
-    <Compile Include="Assets\Scripts\Game\GameUI.cs" />
-    <Compile Include="Assets\Scripts\Game\Singleplayer\SingleplayerPlayer.cs" />
-    <Compile Include="Assets\Scripts\Game\Multiplayer\Player1.cs" />
-    <Compile Include="Assets\Scripts\Game\Multiplayer\Player2.cs" />
-    <Compile Include="Assets\Scripts\Game\Snake.cs" />
-    <Compile Include="Assets\Scripts\Game\Boss\ObjectPooler.cs" />
-    <Compile Include="Assets\Scripts\Game\Boss\PoolTags.cs" />
-    <Compile Include="Assets\Scripts\Game\Boss\Pool.cs" />
+    <Compile Include="Assets\Scripts\game\boss\Boss.cs" />
+    <Compile Include="Assets\Scripts\game\Multiplayer\Player2.cs" />
+    <Compile Include="Assets\Scripts\game\boss\bossArtifact.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\ArtifactHolder.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\Player.cs" />
+    <Compile Include="Assets\Scripts\game\boss\BossSnake.cs" />
+    <Compile Include="Assets\Scripts\game\Singleplayer\SingleplayerPlayer.cs" />
+    <Compile Include="Assets\Scripts\game\Artifact.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\normalArtifact.cs" />
+    <Compile Include="Assets\Scripts\game\boss\ObjectPooler.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\finalArtifact.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\openedDoor.cs" />
+    <Compile Include="Assets\Scripts\game\Snake.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\NormalSnake.cs" />
+    <Compile Include="Assets\Scripts\game\Multiplayer\Player1.cs" />
+    <Compile Include="Assets\Scripts\game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\game\Environment\onEnterLevel.cs" />
+    <Compile Include="Assets\Scripts\game\boss\PoolTags.cs" />
+    <Compile Include="Assets\Scripts\game\boss\Pool.cs" />
+    <Compile Include="Assets\Scripts\game\GameUI.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\Game\Game.asmdef" />
+    <None Include="Assets\Scripts\game\Game.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
