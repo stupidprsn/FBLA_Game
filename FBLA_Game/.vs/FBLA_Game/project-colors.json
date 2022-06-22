@@ -35,7 +35,12 @@
       "ProjectGuid": "02261220-f6f8-db37-9e8a-fa1d00f53e82",
       "DisplayName": "Program",
       "ColorIndex": 5
+    },
+    "d022022f-ba17-a6eb-0f79-faabc98fcd91": {
+      "ProjectGuid": "d022022f-ba17-a6eb-0f79-faabc98fcd91",
+      "DisplayName": "MainMenu",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 6
+  "NextColorIndex": 7
 }
