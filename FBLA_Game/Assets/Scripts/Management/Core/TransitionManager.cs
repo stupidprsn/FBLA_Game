@@ -2,17 +2,25 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace JonathansAdventure
+namespace JonathansAdventure.Transitions
 {
     /// <summary>
     ///     Manages transitions between scenes.
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/13/2022
+    ///     Last Modified: 6/23/2022
     /// </remarks>
     public class TransitionManager : Singleton<TransitionManager>
     {
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.M))
+            {
+                SceneManager.LoadScene(5);
+            }
+        }
+
         /// <summary>
         ///     Plays a crossfade and loads the scene.
         /// </summary>

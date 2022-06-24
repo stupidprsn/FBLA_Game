@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Video;
 using JonathansAdventure.Sound;
+using JonathansAdventure.Transitions;
 
 namespace JonathansAdventure.UI.Cutscene
 {

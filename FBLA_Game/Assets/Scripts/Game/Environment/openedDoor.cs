@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JonathansAdventure.Game.Normal
+namespace JonathansAdventure.Game
 {
     /// <summary>
     ///     Allows the user to "enter" the door
@@ -10,32 +10,25 @@ namespace JonathansAdventure.Game.Normal
     ///     Hanlin Zhang
     ///     Last Modified: 6/15/2022
     /// </remarks>
-    public class OpenedDoor : MonoBehaviour
+    public class OpenedDoor : Interactable
     {
+        [SerializeField] private GameObject doorLock;
 
-        #region References
-
-        [Header("Object References")]
-        [SerializeField] private BoxCollider2D doorCollider;
-        private CapsuleCollider2D playerCollider;
-        private GameManager gameManager;
-
-        #endregion
-
-        private void Start()
+        /// <summary>
+        ///     Let the user exit the stage when they interact
+        ///     with the opened door.
+        /// </summary>
+        protected override void OnInteract(PlayerMovement player)
         {
-            gameManager = GameManager.Instance;
-            playerCollider = gameManager.PlayerCollider;
+            GameManager.Instance.StageCleared();
         }
 
-        private void Update()
+        /// <summary>
+        ///     Disable the door lock sprite to "open" the door.
+        /// </summary>
+        private void OnEnable()
         {
-            bool recievedInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
-            
-            if (recievedInput && playerCollider.IsTouching(doorCollider))
-            {
-                gameManager.winStage();
-            }
+            doorLock.SetActive(false);
         }
     }
 

@@ -1,14 +1,17 @@
-﻿namespace JonathansAdventure.Game
+﻿namespace JonathansAdventure.Game.Boss
 {
     /// <summary>
     ///     Reference tags to the different pools.
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/18/2022
+    ///     Last Modified: 6/22/2022
     /// </remarks>
     internal enum PoolTags
     {
-        Snake = 0
+        Snake,
+        Laser,
+        Warning,
+        Box
     }
 }

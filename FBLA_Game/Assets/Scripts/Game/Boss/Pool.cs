@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace JonathansAdventure.Game
+namespace JonathansAdventure.Game.Boss
 {
     /// <summary>
     ///     Pool for a specific object.

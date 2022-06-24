@@ -1,4 +1,5 @@
 using UnityEngine;
+using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.Game.Normal
 {
@@ -7,18 +8,21 @@ namespace JonathansAdventure.Game.Normal
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     6/15/2022
+    ///     6/22/2022
     /// </remarks>
     public class OnEnterLevel : MonoBehaviour
     {
         [SerializeField,
             Tooltip("The music to be played for this stage.")] 
-        private string music;
+        private SoundNames music;
 
-        private void Awake()
+        /// <summary>
+        ///     Inform the game manager that a new stage has been loaded.
+        /// </summary>
+        private void Start()
         {
-            // Call the method in the game play manager for when a new stage is loaded
-            FindObjectOfType<GameManager>().OnStageEnter(music, GameObject.Find("Jonathan").transform.position);
+            GameManager gameManager = GameManager.Instance;
+            gameManager.OnStageEnter(music);
         }
     }
 

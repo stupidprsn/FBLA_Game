@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace JonathansAdventure.Game
+namespace JonathansAdventure.Game.Boss
 {
     /// <summary>
     ///     Manages object pooling.
@@ -25,7 +25,7 @@ namespace JonathansAdventure.Game
     {
 
         [SerializeField,
-            Tooltip("Set up the object pools.")] 
+            Tooltip("Set up the object pools. If the tag cannot be found, add it to PoolTags.cs")] 
         private Pool[] pools;
         
         /// <summary>
@@ -66,14 +66,19 @@ namespace JonathansAdventure.Game
         /// </summary>
         /// <param name="tag"> The tag that references the object's pool. </param>
         /// <param name="position"> The position to spawn the object at. </param>
+        /// <param name="parent"> The parent object to place the spawned object under. </param>
         /// <returns> A reference to the spawned object. </returns>
-        internal GameObject Spawn(PoolTags tag, Vector3 position)
+        internal GameObject Spawn(PoolTags tag, Vector3 position, Transform parent)
         {
             // Take the object from the queue.
             GameObject objToSpawn = poolDict[tag].Dequeue();
 
             objToSpawn.SetActive(true);
-            objToSpawn.transform.SetPositionAndRotation(position, Quaternion.identity);
+
+            // Cache transform.
+            Transform objTransform = objToSpawn.transform;
+            objTransform.parent = parent;
+            objTransform.SetPositionAndRotation(position, Quaternion.identity);
 
             // Return object to the pool
             poolDict[tag].Enqueue(objToSpawn);

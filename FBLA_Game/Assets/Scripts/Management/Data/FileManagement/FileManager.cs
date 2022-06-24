@@ -1,13 +1,3 @@
-/*
- * Hanlin Zhang
- * Purpose: Manages encrypting and decrypting data
- * 
- * Part of this script was inspired by "SAVE & LOAD SYSTEM in Unity" 
- * by "Asbjørn Thirslund (Brackeys)" 2018.
- * Credits for SaveData and LoadData to "Brackeys"
- * https://www.youtube.com/watch?v=XOjd_qU2Ido
- */
-
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -33,7 +23,7 @@ namespace JonathansAdventure.Data
     ///         Last Modified: 6/13/2022
     ///     </para>
     /// </remarks>
-    public class FileManager : MonoBehaviour
+    public class FileManager : Singleton<FileManager>
     {
         /// <summary>
         ///     Leaderboard data for singleplayer.
@@ -52,6 +42,7 @@ namespace JonathansAdventure.Data
 
         private void Awake()
         {
+            SingletonCheck(this);
             SingleLeaderboard = new LeaderboardDataFile("singleLeaderboard.fbla");
             MultiLeaderboard = new LeaderboardDataFile("multiLeaderboard");
             UserProgressData = new DataFile<UserProgress>("userProgress.fbla");
