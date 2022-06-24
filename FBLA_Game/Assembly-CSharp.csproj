@@ -56,7 +56,29 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Management\MenuPanels.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\Boss.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\Player.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\PooledArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\ArtifactHolder.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\PooledSnake.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\Artifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\NormalArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\IDestroyable.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\ObjectPooler.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\FinalArtifact.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\OpenedDoor.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\Snake.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\PlayerAnimation.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\NormalSnake.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\Box.cs" />
+    <Compile Include="Assets\Scripts\Game\Environment\OnEnterLevel.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\PoolTags.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\Laser.cs" />
+    <Compile Include="Assets\Scripts\Game\Boss\Pool.cs" />
+    <Compile Include="Assets\Scripts\Game\Foundation\GameUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Unity_Editor\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -779,10 +801,6 @@
     <ProjectReference Include="Program.csproj">
       <Project>{02261220-F6F8-DB37-9E8A-FA1D00F53E82}</Project>
       <Name>Program</Name>
-    </ProjectReference>
-    <ProjectReference Include="Game.csproj">
-      <Project>{B0A9F07E-31C1-6087-00CC-F947304EF05F}</Project>
-      <Name>Game</Name>
     </ProjectReference>
     <ProjectReference Include="Core.csproj">
       <Project>{2B0A851C-AC92-FF24-91C1-D5C34661962C}</Project>

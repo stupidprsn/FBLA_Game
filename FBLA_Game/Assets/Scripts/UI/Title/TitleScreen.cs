@@ -1,4 +1,5 @@
- using UnityEngine;
+using UnityEngine;
+using JonathansAdventure.Transitions;
 using JonathansAdventure.Data;
 
 namespace JonathansAdventure.UI.Title

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Box
   - Platform
+  - Door
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Destroyable
   - Jumpable
   - Boundary
   - 
@@ -55,7 +57,7 @@ TagManager:
   - name: Door
     uniqueID: 4168681029
     locked: 0
-  - name: PlacedAmulets
+  - name: PlacedArtifacts
     uniqueID: 988674361
     locked: 0
   - name: Jonathan

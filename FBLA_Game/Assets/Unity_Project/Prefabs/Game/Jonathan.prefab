@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 6844556448386597939}
   - component: {fileID: 6844556448386597938}
   - component: {fileID: 6844556448386597937}
-  - component: {fileID: 1604256245688274264}
+  - component: {fileID: 3333344425274445307}
   - component: {fileID: 812763256}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Jonathan
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -164,18 +164,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6844556448386597942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb327e49d4d94454d992c9d94ebcc4d9, type: 3}
+  m_Script: {fileID: 11500000, guid: b9b8ec002873d3b408821c96bf7c5c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontal: 1
+  jumpKeys: 7700000011010000
+  <InteractKey>k__BackingField: 20000000
+  speed: 3
+  jumpHeight: 10
+  facingRight: 1
+  playerAnimation: {fileID: 3333344425274445307}
   rb: {fileID: 6844556448386597939}
+  trans: {fileID: 6844556448386597936}
   groundCheckerObj: {fileID: 999879364}
   jumpableLayer:
     serializedVersion: 2
     m_Bits: 256
-  playerAnimation: {fileID: 1604256245688274264}
-  speed: 3
-  jumpHeight: 10
---- !u!114 &1604256245688274264
+  animator: {fileID: 812763256}
+--- !u!114 &3333344425274445307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,10 +190,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6844556448386597942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510f84dff5d1f6a4681bc4a1147ccbb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fb4cbcc78a238b469e9230491f47275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trans: {fileID: 6844556448386597936}
   animator: {fileID: 812763256}
+  jumpableLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!95 &812763256
 Animator:
   serializedVersion: 3

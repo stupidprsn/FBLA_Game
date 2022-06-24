@@ -499,6 +499,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2028465017388534984, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2028465017388534987, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -2051,6 +2055,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bdc0b4cdd5a42e46925862d1cc1eb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preSortingLayer: Foreground
+  postSortingLayer: Foreground
+  duration: 1
+  trans: {fileID: 2218907932637414763}
+  spriteRenderer: {fileID: 2218907932637414772}
+  sprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   artifactCollider: {fileID: 2218907932637414774}
 --- !u!212 &2218907932637414772
 SpriteRenderer:

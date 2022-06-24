@@ -43,4 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10567b64db379934c85361f25d988c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: musicNormalLevel
+  music: 2
+  gameUI: {fileID: 0}
+  player:
+    <PlayerObject>k__BackingField: {fileID: 0}
+    <Transform>k__BackingField: {fileID: 0}
+    <PlayerRB>k__BackingField: {fileID: 0}
+    <PlayerCollider>k__BackingField: {fileID: 0}
+    <PlayerMovement>k__BackingField: {fileID: 0}

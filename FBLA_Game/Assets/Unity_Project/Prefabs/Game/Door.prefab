@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2429659826168387030}
   - component: {fileID: 2429659826168387029}
-  - component: {fileID: 1715149428717412452}
   - component: {fileID: 96510524616433655}
   - component: {fileID: 2626277758541139211}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -126286267
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a5de7832023de0b45bee6da1b58828e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -86,21 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1715149428717412452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2429659826168387031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1c07cf5c942024b92dd509c37be4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numOfAmulets: 3
-  doorPieceRenderer: {fileID: 7119336315356798965}
-  openedDoorScript: {fileID: 2626277758541139211}
 --- !u!61 &96510524616433655
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7febdab5e03dc27429d13213381df39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorCollider: {fileID: 96510524616433655}
+  doorLock: {fileID: 8585475941124551503}
 --- !u!1 &8585475941124551503
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6480827452700788711}
   - component: {fileID: 7119336315356798965}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +193,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -126286267
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a5d4d1db4c7658b49b77957867c16740, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

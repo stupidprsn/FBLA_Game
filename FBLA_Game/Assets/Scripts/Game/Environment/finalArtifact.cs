@@ -1,68 +1,39 @@
-/*
- * Hanlin Zhang
- * Purpose: Functionality for the final artifact that wins the game
- *          It is very similar to the regular artifact script
- */
-
 using UnityEngine;
-using System.Collections;
-using JonathansAdventure.Sound;
 
 namespace JonathansAdventure.Game.Normal
 {
-    public class finalArtifact : MonoBehaviour
+    /// <summary>
+    ///     Functionality for the final artifact taht wins the game.
+    /// </summary>
+    /// <remarks>
+    ///     Hanlin Zhang
+    ///     Last Modified: 6/23/2022
+    /// </remarks>
+    public class FinalArtifact : Artifact
     {
+        /// <summary>
+        ///     The final parent doesn't matter, so keep the same parent.
+        /// </summary>
+        protected override Transform FinalParent => trans.parent;
 
-        // Referances to the artifact and player's collider
-        [SerializeField] private BoxCollider2D artifactCollider;
+        /// <summary>
+        ///     The end position is slightly above the center of the screen.
+        /// </summary>
+        protected override Vector3 EndPos => new Vector3(0, 3, 0);
 
-        private CapsuleCollider2D playerCollider;
-
-        // Proceedure for animating the artifact going to it's place in the artifact placer
-        // An IEnumerator is used because it allows the use of time
-        private IEnumerator onCollect()
+        /// <summary>
+        ///     Signal to the <see cref="GameManager"/> that the player has won.
+        /// </summary>
+        protected override void AfterCollect()
         {
-            // Play the sound effect for collecting an artifact
-            FindObjectOfType<SoundManager>().PlaySound(SoundNames.ArtifactCollect);
-
-            // Variables for setting up the animation
-            Vector3 startPos = transform.localPosition;
-            Vector3 finishPos = new Vector3(0, 3, 0);
-            float t = 0;
-
-            // Change the rendering layer so that the artifacts appear on top of everything while the animation plays
-            gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Foreground";
-
-            // Move the artifact over t time
-            while (t < 1)
-            {
-                // Add the time that has passed
-                t += Time.deltaTime / 0.3f;
-                // Lerp is a unity method that linearly moves an object's position from the startPos to the finishPos
-                transform.localPosition = Vector3.Lerp(startPos, finishPos, t);
-                // Repeat this code segment
-                yield return null;
-            }
-
-            // Call function for winning the game
-            FindObjectOfType<GameManager>().winGame();
+            GameManager.Instance.WinGame();
         }
 
-        void Start()
-        {
-            // Set a referance to the player collider
-            playerCollider = GameObject.Find("Jonathan").GetComponent<CapsuleCollider2D>();
-        }
-
-        void Update()
-        {
-            // Check if the user is touching the artifact and has pressed w
-            if (artifactCollider.IsTouching(playerCollider) && Input.GetKeyDown("w"))
-            {
-                // Start the IEnumerator
-                StartCoroutine(onCollect());
-            }
-        }
+        /// <summary>
+        ///     Claer awake as the final artifact's texture does not need
+        ///     to be randomized.
+        /// </summary>
+        protected override void Awake() {}
     }
 
 }
