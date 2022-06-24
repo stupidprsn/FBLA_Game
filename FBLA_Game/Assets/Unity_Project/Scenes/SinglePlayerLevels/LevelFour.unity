@@ -591,9 +591,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3644167809568719071, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 383.1994
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644167809568719071, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 48.276
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644167809568719071, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.9023
+      objectReference: {fileID: 0}
+    - target: {fileID: 3644167809568719071, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 152.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730665602858321158, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_text
+      value: you played jonathan's adventure!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3730665602858321158, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747710550286197974, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3891087957299450437, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107480932475104084, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_text
+      value: DISPLAY NAME
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107480932475104084, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215208543036739616, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_text
+      value: 'Congratulations!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215208543036739616, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6047902990698192330, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
       propertyPath: m_IsActive
@@ -603,11 +649,35 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6566405671820950195, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -6.8962
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566405671820950195, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566405671820950195, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000009536743
+      objectReference: {fileID: 0}
     - target: {fileID: 9138954026747900625, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
       propertyPath: m_text
       value: 'Press enter to
 
         Submit Score'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138954026747900625, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138954026747900625, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138954026747900625, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f017536da843d409b0d8af3b2484ec, type: 3}
