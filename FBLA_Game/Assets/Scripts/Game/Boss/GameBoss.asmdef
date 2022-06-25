@@ -1,0 +1,17 @@
+{
+    "name": "GameBoss",
+    "rootNamespace": "",
+    "references": [
+        "Core",
+        "GameFoundation"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
