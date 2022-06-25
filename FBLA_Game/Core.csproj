@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Management\Core\Singleton.cs" />
     <Compile Include="Assets\Scripts\Management\Core\TransitionManager.cs" />
+    <Compile Include="Assets\Scripts\Management\Core\Scenes.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\SoundNames.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Sound\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Management\Core\Axis.cs" />
