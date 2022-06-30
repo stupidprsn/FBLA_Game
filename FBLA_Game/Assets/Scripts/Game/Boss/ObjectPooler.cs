@@ -68,7 +68,7 @@ namespace JonathansAdventure.Game.Boss
         /// <param name="position"> The position to spawn the object at. </param>
         /// <param name="parent"> The parent object to place the spawned object under. </param>
         /// <returns> A reference to the spawned object. </returns>
-        internal GameObject Spawn(PoolTags tag, Vector3 position, Transform parent)
+        public GameObject Spawn(PoolTags tag, Vector3 position, Transform parent)
         {
             // Take the object from the queue.
             GameObject objToSpawn = poolDict[tag].Dequeue();

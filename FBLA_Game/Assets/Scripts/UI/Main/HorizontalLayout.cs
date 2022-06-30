@@ -7,7 +7,7 @@ namespace JonathansAdventure.UI.Main
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/24/2022
+    ///     Last Modified: 6/25/2022
     /// </remarks>
     public class HorizontalLayout : ButtonLayout
     {
@@ -16,12 +16,12 @@ namespace JonathansAdventure.UI.Main
         /// </summary>
         private protected virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
                 Increment(); 
             }
 
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Decrement();
             }

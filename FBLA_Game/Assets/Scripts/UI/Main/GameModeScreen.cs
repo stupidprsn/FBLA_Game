@@ -10,7 +10,7 @@ namespace JonathansAdventure.UI.Main
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/24/2022
+    ///     Last Modified: 6/25/2022
     /// </remarks>
     public class GameModeScreen : HorizontalLayout
     {
@@ -75,7 +75,18 @@ namespace JonathansAdventure.UI.Main
             }
 
             // Select button with space.
-            if (Input.GetKeyDown(KeyCode.Space)) Select();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (quitSelected)
+                {
+                    soundManager.PlaySound(SoundNames.SpaceContinue);
+                    quitButton.onClick.Invoke();
+                }
+                else
+                {
+                    Select();
+                }
+            }
         }
     }
 

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preSortingLayer: Foreground
   postSortingLayer: PlacedArtifacts
-  duration: 1
+  duration: 0.5
   trans: {fileID: 521100191378693546}
   spriteRenderer: {fileID: 521100191378693557}
   sprites:

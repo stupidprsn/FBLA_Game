@@ -5,7 +5,7 @@
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/22/2022
+    ///     Last Modified: 6/30/2022
     /// </remarks>
     public static class GameData
     {
@@ -17,6 +17,8 @@
         /// <summary>
         ///     If the game is in singleplayer mode.
         /// </summary>
-        public static bool IsSingleplayer { get; set; }
+        public static bool IsSingleplayer { get; set; } = false;
+
+
     }
 }

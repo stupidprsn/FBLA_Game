@@ -9,7 +9,7 @@ namespace JonathansAdventure.UI.Main
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/24/2022
+    ///     Last Modified: 6/25/2022
     /// </remarks>
     public abstract class ButtonLayout : MonoBehaviour
     {
@@ -42,30 +42,28 @@ namespace JonathansAdventure.UI.Main
         #region Abstract
 
         /// <summary>
-        ///     Goes to the next button (up or right).
+        ///     Goes to the next button.
         /// </summary>
         private protected void Increment()
         {
-            // Inversed as a higher button has a lower index.
-            buttonIndex--;
-            if (buttonIndex < 0)
+            buttonIndex++;
+            if (buttonIndex > lastIndex)
             {
-                buttonIndex = lastIndex;
+                buttonIndex = 0;
             }
             buttons[buttonIndex].Select();
             soundManager.PlaySound(SoundNames.ButtonSelect);
         }
 
         /// <summary>
-        ///     Goes to the previous button (down or left).
+        ///     Goes to the previous button.
         /// </summary>
         private protected void Decrement()
         {
-            // Inversed as a lower button has a higher index.
-            buttonIndex++;
-            if (buttonIndex > lastIndex)
+            buttonIndex--;
+            if (buttonIndex < 0)
             {
-                buttonIndex = 0;
+                buttonIndex = lastIndex;
             }
             buttons[buttonIndex].Select();
             soundManager.PlaySound(SoundNames.ButtonSelect);
@@ -91,11 +89,10 @@ namespace JonathansAdventure.UI.Main
         {
             lastIndex = buttons.Length - 1;
         }
-
         /// <summary>
-        ///     Select the default (play) button.
+        ///     Select the default (1st) button.
         /// </summary>
-        private void Start()
+        private void OnEnable()
         {
             soundManager = SoundManager.Instance;
             buttons[buttonIndex].Select();

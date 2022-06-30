@@ -10,16 +10,10 @@ namespace JonathansAdventure.Game.Boss
     /// <remarks>
     ///     <para>
     ///         Hanlin Zhang
-    ///         Last Modified: 6/24/2022
-    ///     </para>
-    ///     <para>
-    ///         <see cref="Flip"/> was inspired by
-    ///         "Unity Tutorial Quick Tip: The BEST way to flip your character sprite in Unity"
-    ///         by "Nick Hwang" 2020.
-    ///         <seealso cref="https://www.youtube.com/watch?v=ccxXxvlS4mI"/>
+    ///         Last Modified: 6/27/2022
     ///     </para>
     /// </remarks>
-    public class Boss : MonoBehaviour, IDestroyable
+    public class Boss : MonoBehaviour
     {
         /// <summary>
         ///     Singleton Pattern.
@@ -59,28 +53,29 @@ namespace JonathansAdventure.Game.Boss
             internal int LaserCount { get; set; }
         }
 
+        /// <summary>
+        ///     Set the number of rounds and the number of enemies that spawn each round.
+        /// </summary>
         [Header("Settings")]
         [SerializeField,
-            Tooltip("Set the number of rounds and the number of snakes that spawn each round.")]
-        private Round[] spawnCount;
+            Tooltip("Set the number of rounds and the number of enemies that spawn each round.")]
+        private Round[] Rounds;
 
+        /// <summary>
+        ///     Set the amount of time between the warning symbol and the enemy spawning.
+        /// </summary>
         [SerializeField,
             Range(0f, 5f),
             Tooltip("Set the amount of time between the warning symbol and the enemy spawning.")]
-        private float warningTime;        
-        
+        private float warningTime;
+
+        /// <summary>
+        ///     Set the amount of time between the last snake dying and the lasers spawning.
+        /// </summary>
         [SerializeField,
             Range(0f, 5f),
             Tooltip("Set the amount of time between the last snake dying and the lasers spawning.")]
         private float laserWait;
-
-        [SerializeField,
-            Tooltip("How much the boss should be nudged once it is killed.")]
-        private Vector2 deathNudge;
-
-        [SerializeField,
-            Tooltip("Is the player sprite currently facing right?")]
-        private bool facingRight;
 
         #endregion
 
@@ -90,14 +85,11 @@ namespace JonathansAdventure.Game.Boss
         [SerializeField] private ObjectPooler objectPooler;
         [SerializeField] private Transform snakeParent;
         [SerializeField] private Transform laserParent;
+        [SerializeField] private Transform warningParent;
         [SerializeField] private Transform platformTrans;
 
         [SerializeField] private GameObject door;
-
-        [SerializeField] private Rigidbody2D bossRB;
-        [SerializeField] private Animator bossAnimator;
-
-        private Transform playerTrans;
+        [SerializeField] private BossAnimation bossAnimation;
 
         #endregion
 
@@ -109,6 +101,11 @@ namespace JonathansAdventure.Game.Boss
         private int snakesLeft;
 
         /// <summary>
+        ///     If the warning is finished.
+        /// </summary>
+        private bool warningFinished;
+
+        /// <summary>
         ///     A list of positions to spawn snake enemies.
         /// </summary>
         private readonly List<Vector3> snakePositions = new List<Vector3>();
@@ -118,24 +115,6 @@ namespace JonathansAdventure.Game.Boss
         /// </summary>
         private readonly List<int> positionIndexes = new List<int>();
 
-        /// <summary>
-        ///     List of x coordinates to spawn lasers.
-        /// </summary>
-        /// <remarks>
-        ///     This list is used in order to not have a heap of 
-        ///     lasers spawn near the same position.
-        /// </remarks>
-        private readonly List<int> laserPositions = new List<int>
-        {
-            -11, -10, -9, -8, -7, -6, -5, -4, -3, -2,
-            2, 3, 4, 5, 6, 7, 8, 9, 10, 11
-        };
-
-        /// <summary>
-        ///     The ID for the trigger that plays the boss's damanged animation.
-        /// </summary>
-        private int damageAnimation;
-
         #endregion
 
         /// <summary>
@@ -143,18 +122,8 @@ namespace JonathansAdventure.Game.Boss
         /// </summary>
         internal void ArtifactCollected()
         {
-            print("Collected");
-            bossAnimator.SetTrigger(damageAnimation);
+            bossAnimation.DamageAnimation();
             snakesLeft--;
-        }
-
-        /// <summary>
-        ///     Call when the boss takes damage.
-        /// </summary>
-        public void OnDamage()
-        {
-            print("ondamage");
-            bossAnimator.SetTrigger(damageAnimation);
         }
 
         /// <summary>
@@ -163,147 +132,155 @@ namespace JonathansAdventure.Game.Boss
         /// <returns> null </returns>
         private IEnumerator OnWin()
         {
-            // Allow the boss to move
-            bossRB.constraints = RigidbodyConstraints2D.None;
-
-            // Give the boss a slight nudge
-            bossRB.AddForce(new Vector2(deathNudge.x * Time.deltaTime, deathNudge.y * Time.deltaTime), ForceMode2D.Impulse);
-
+            bossAnimation.DeathAnimation();
             yield return new WaitForSeconds(2);
             door.SetActive(true);
         }
 
         /// <summary>
-        ///     Creates warning symbols and then replaces them with the prefab to spawn.
+        ///     Spawns warning symbols.
         /// </summary>
-        /// <param name="positions"> The positions to spawn in. </param>
-        /// <param name="spawn"> The object to spawn. </param>
-        /// <param name="parent"> The parent to place the spawned objects in. </param>
-        /// <param name="delay"> The delay before starting. </param>
-        /// <returns></returns>
-        private IEnumerator Spawn(Vector3[] positions, PoolTags spawn, Transform parent, float delay)
+        /// <param name="positions"> The positions to spawn them at. </param>
+        /// <returns> null </returns>
+        private IEnumerator SpawnWarnings(Vector3[] positions)
         {
-            yield return new WaitForSeconds(delay);
-
             // List of warning symbols.
-            List<GameObject> warnings = new List<GameObject> ();
+            List<GameObject> warnings = new List<GameObject>();
 
             // Spawn warning symbols the warn the player.
-            foreach(Vector3 pos in positions)
+            foreach (Vector3 pos in positions)
             {
                 warnings.Add(
-                    objectPooler.Spawn(PoolTags.Warning, pos, parent)
+                    objectPooler.Spawn(PoolTags.Warning, pos, warningParent)
                 );
             }
 
+            // Disable the warnings so that they can be reused by the object pooler
+            // after the warning time.
             yield return new WaitForSeconds(warningTime);
-
-            // Disable the warnings so that they can be reused by the object pooler.
             foreach (var item in warnings)
             {
                 item.SetActive(false);
             }
 
-            
-            // Spawn the object.
-            foreach(Vector3 pos in positions)
-            {
-                objectPooler.Spawn(spawn, pos, parent);
-            }
-
+            // Signal that the warning phase is done.
+            warningFinished = true;
         }
 
         /// <summary>
-        ///     Spawns snake enemies.
+        ///     Spawns snake and their corresponding warning symbols.
         /// </summary>
         /// <remarks>
         ///     Randomly picks platforms to spawn snakes on. Only one snake spawns per platform. 
         /// </remarks>
-        /// <param name="secondsToWait"> The amount of time to wait before spawning the snakes. </param>
         /// <param name="numOfSnakes"> The number of snakes to spawn. </param>
-        private void SpawnSnakes(float secondsToWait, int numOfSnakes)
+        private IEnumerator SpawnSnakes(int numOfSnakes)
         {
             // Temporary list used to store the indexes of possible platforms to spawn on.
             // Editing a list of ints uses less memory than a list of Vector3. 
-            List<int> tempIndexes = new List<int>(positionIndexes);
-
+            List<int> indexes = new List<int>(positionIndexes);
             // Eliminate random indexes until the number of indexes equals the number of snakes.
-            while(tempIndexes.Count != numOfSnakes)
+            while(indexes.Count != numOfSnakes)
             {
-                tempIndexes.RemoveAt(Random.Range(0, tempIndexes.Count - 1));
+                indexes.RemoveAt(Random.Range(0, indexes.Count));
             }
 
             // Array of positions to spawn snakes on.
             Vector3[] spawnPositions = new Vector3[numOfSnakes];
 
-            // Fill the array.
+            // Fill the array with the random indexes.
             for(int i = 0; i < numOfSnakes; i++)
             {
-                spawnPositions[i] = snakePositions[tempIndexes[i]];
-                print(spawnPositions[i]);
+                spawnPositions[i] = snakePositions[indexes[i]];
             }
 
-            StartCoroutine(Spawn(spawnPositions, PoolTags.Snake, snakeParent, secondsToWait));
+            // Spawn warnings and wait until the warning phase is finished.
+            warningFinished = false;
+            StartCoroutine(SpawnWarnings(spawnPositions));
+            yield return new WaitUntil(() => warningFinished);
+
+            // Spawn snakes
+            foreach(Vector3 position in spawnPositions)
+            {
+                objectPooler.Spawn(PoolTags.Snake, position, snakeParent);
+            }
         }
 
         /// <summary>
         ///     Spawns laser beams.
         /// </summary>
         /// <remarks>
-        ///     There are two special lasers, one that spawns above the player, and one above the boss.
+        ///     Spawns evenly distributed lasers with one over the boss.
         /// </remarks>
-        /// <param name="secondsToWait"> The amount of time to wait before spawning the lasers. </param>
         /// <param name="numOfLasers"> The number of lasers to spawn. </param>
-        private void SpawnLasers(int numOfLasers)
+        /// <returns> null </returns>
+        private IEnumerator SpawnLasers(int numOfLasers)
         {
-            List<int> temp = new List<int>(laserPositions);
+            List<float> xCoords = new List<float>(numOfLasers);
 
-            Vector3[] spawnPositions = new Vector3[numOfLasers];
+            // One laser above the boss.
+            xCoords.Add(0f);
+            int lasersLeft = numOfLasers - 1;
+            
+            int lasersOnOneSide = lasersLeft / 2; // Divide by two to evenly distribute between both sides.
+            int divisor = lasersOnOneSide + 1; // Add 1 so that the lasers aren't on the edges of the screen.
+            float inc = 12f / divisor; // 12 is the maximum x value of the screen.
 
-
-            // Special case 1: laser above player.
-            spawnPositions[0] = new Vector3(platformTrans.position.x, 0, 0);
-
-            // Special case 2: laser above boss.
-            // The boss' sprite is slightly more to the right.
-            spawnPositions[1] = new Vector3(Random.Range(-0.9f, 1f), 0, 0);
-
-            // Fill up the remaining positions.
-            // Start at 2 in order to not override the special cases.
-            for(int i = 2; i < numOfLasers; i++)
+            // Fill x coordinates.
+            for (int i = 1; i <= lasersOnOneSide; i++)
             {
-                int index = Random.Range(0, temp.Count - 1);
-                spawnPositions[i] = new Vector3(
-                    temp[index] + Random.Range(-0.6f, 0.6f),
-                    0, 0
-                    );
-                temp.RemoveAt(index);
+                xCoords.Add(i * inc);
+                xCoords.Add(-1 * i * inc);
             }
 
-            StartCoroutine(Spawn(spawnPositions, PoolTags.Laser, laserParent, laserWait));
+            // Fill a list of warning symbol positions
+            Vector3[] warningPositions = new Vector3[numOfLasers];
+            for(int i = 0; i < numOfLasers; i++)
+            {
+                // 3.5 is close to the ceiling of the stage.
+                warningPositions[i] = new Vector3(xCoords[i], 4.5f, 0f);
+            }
+
+            // Spawn warnings and wait for them to finish.
+            warningFinished = false;
+            StartCoroutine(SpawnWarnings(warningPositions));
+            yield return new WaitUntil(() => warningFinished);
+
+            // Spawn lasers.
+            foreach(float x in xCoords)
+            {
+                objectPooler.Spawn(PoolTags.Laser, new Vector3(x, 5f, 0f), laserParent);
+            }
         }
 
+        /// <summary>
+        ///     Manages sending out the rounds of enemies.
+        /// </summary>
+        /// <returns> null </returns>
         private IEnumerator RoundSender()
         {
-            foreach(Round round in spawnCount)
+            foreach(Round round in Rounds)
             {
-                SpawnSnakes(round.Wait, round.SnakeCount);
+                // Send out the snakes and wait till all of the artifacts are collected.
+                yield return new WaitForSeconds(round.Wait);
+                StartCoroutine(SpawnSnakes(round.SnakeCount));
                 snakesLeft = round.SnakeCount;
                 yield return new WaitUntil(() => snakesLeft == 0);
-                SpawnLasers(round.LaserCount);
+
+                // Send out the lasers.
+                yield return new WaitForSeconds(laserWait);
+                StartCoroutine(SpawnLasers(round.LaserCount));
+                yield return new WaitForSeconds(warningTime + 2);
             }
 
             StartCoroutine(OnWin());
         }
 
         /// <summary>
-        ///     Set variables.
+        ///     Partial singleton check.
         /// </summary>
         private void Awake()
         {
-            // Find the ID for the damage animation.
-            damageAnimation = Animator.StringToHash("Damage");
-
             Instance = this;
         }
 
@@ -312,8 +289,6 @@ namespace JonathansAdventure.Game.Boss
         /// </summary>
         private void Start()
         {
-            playerTrans = GameObject.FindWithTag("Player").transform;
-
             // Find all platforms where the snake enemies can be spawned
             // Find every game object under the Platforms folder
             List<Transform> tempPositions = new List<Transform>(platformTrans.GetComponentsInChildren<Transform>());
@@ -321,7 +296,7 @@ namespace JonathansAdventure.Game.Boss
             // For each gameobject
             foreach(Transform temp in tempPositions)
             {
-                // Makesure it's the platform
+                // Make sure it's the platform
                 if(temp.CompareTag("Platform"))
                 {
                     // Add it's position to the list of positions.
@@ -342,21 +317,19 @@ namespace JonathansAdventure.Game.Boss
         }
 
         /// <summary>
-        ///     Method for flipping the direction the boss is facing to match the player.
+        ///     Make sure laser count is an odd number.
         /// </summary>
-        private void Update()
+        private void OnValidate()
         {
-            // Cache x coordinate.
-            float x = playerTrans.position.x; 
-
-            // If the user is to the left and the boss is facing right,
-            // or if the user is to the right and the boss is facing left...
-            if ((x < 0 && facingRight) || (x > 0 && !facingRight))
+            foreach(Round round in Rounds)
             {
-                transform.Rotate(new Vector3(0, 180, 0));
-                facingRight = !facingRight;
+                if(round.LaserCount % 2 == 0)
+                {
+                    Debug.LogError("Laser count should be an odd number");
+                }
             }
         }
+
     }
 
 }

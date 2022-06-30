@@ -12,6 +12,14 @@ namespace JonathansAdventure.Game
     /// </remarks>
     public class PlayerAnimation : MonoBehaviour
     {
+
+        /// <summary>
+        ///     Is the player Jonathan.
+        /// </summary>
+        [SerializeField,
+            Tooltip("Select if the player is Jonathan (not Jonathana).")]
+        private bool isJonathan;
+
         #region Reference
 
         [SerializeField] private Transform trans;
@@ -104,6 +112,15 @@ namespace JonathansAdventure.Game
         /// </summary>
         private int currentAnimation;
 
+        /// <summary>
+        ///     Used to differentiate between player 1 and
+        ///     2 walk sounds.
+        /// </summary>
+        private SoundNames walkSound;
+
+        /// <summary>
+        ///     Is the walk sound currently playing.
+        /// </summary>
         private bool walkSoundPlaying = false;
 
         /// <summary>
@@ -165,7 +182,7 @@ namespace JonathansAdventure.Game
             // If the player is walking but the sound effect is not playing.
             if (IsWalking && !walkSoundPlaying)
             {
-                soundManager.PlaySound(SoundNames.Walk);
+                soundManager.PlaySound(walkSound);
                 walkSoundPlaying = true;
                 return;
             }
@@ -173,7 +190,7 @@ namespace JonathansAdventure.Game
             // If the player is not walking bu the sound effect is playing.
             if (!IsWalking && walkSoundPlaying)
             {
-                soundManager.StopSound(SoundNames.Walk);
+                soundManager.StopSound(walkSound);
                 walkSoundPlaying = false;
             }
         }
@@ -231,12 +248,29 @@ namespace JonathansAdventure.Game
         {
             soundManager = SoundManager.Instance;
 
-            JumpID = Animator.StringToHash("JonathanJumping");
-            PushID = Animator.StringToHash("JonathanPushing");
-            StillPushID = Animator.StringToHash("JonathanPushingStill");
-            WalkID = Animator.StringToHash("JonathanWalking");
-            IdleID = Animator.StringToHash("JonathanIdle");
-            DiedID = Animator.StringToHash("JonathanDead");
+            if(isJonathan)
+            {
+                JumpID = Animator.StringToHash("JonathanJumping");
+                PushID = Animator.StringToHash("JonathanPushing");
+                StillPushID = Animator.StringToHash("JonathanPushingStill");
+                WalkID = Animator.StringToHash("JonathanWalking");
+                IdleID = Animator.StringToHash("JonathanIdle");
+                DiedID = Animator.StringToHash("JonathanDead");
+
+                walkSound = SoundNames.Walk;
+            }
+            else
+            {
+                JumpID = Animator.StringToHash("JonathanaJumping");
+                PushID = Animator.StringToHash("JonathanaPushing");
+                StillPushID = Animator.StringToHash("JonathanaPushingStill");
+                WalkID = Animator.StringToHash("JonathanaWalking");
+                IdleID = Animator.StringToHash("JonathanaIdle");
+                DiedID = Animator.StringToHash("JonathanDead");
+
+                walkSound = SoundNames.JonathanaWalking;
+            }
+
         }
 
     }

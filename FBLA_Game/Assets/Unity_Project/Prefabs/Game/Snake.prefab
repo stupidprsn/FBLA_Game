@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6861719531075927878}
   - component: {fileID: 6861719531075927879}
   - component: {fileID: 6861719531075927877}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,12 +120,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 0
   speed: 1.5
-  trans: {fileID: 6861719531075927898}
-  artifactTrans: {fileID: 2899573849608184929}
-  artifact: {fileID: 2899573849608184928}
+  isNormal: 1
   boundary:
     serializedVersion: 2
     m_Bits: 512
+  trans: {fileID: 6861719531075927898}
+  artifactTrans: {fileID: 2899573849608184929}
+  artifact: {fileID: 2899573849608184928}
 --- !u!50 &6861719531075927879
 Rigidbody2D:
   serializedVersion: 4

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using JonathansAdventure.Data;
 
@@ -11,26 +10,25 @@ namespace JonathansAdventure.UI.Main
     ///     Displays the leaderboard.
     /// </summary>
     /// <remarks>
-    ///     Hanlin Zhang
-    ///     Last Modified: 6/24/2022
+    ///     <para>
+    ///         Don't disable during transitions.
+    ///     </para>
+    ///     <para>
+    ///         Hanlin Zhang
+    ///         Last Modified: 6/25/2022
+    ///     </para>
     /// </remarks>
     public class LeaderboardScreen : MonoBehaviour
     {
 
-        #region Settings
-
-        [SerializeField,
-            Range(0.001f, 0.01f),
-            Tooltip("The speed at which the user can scroll through" +
-            "the leaderboard. This should be a really small number.")]
-        private float speed;
-
-        #endregion
-
         #region References
 
         [Header("Object/Prefab References")]
-        [SerializeField] private Transform content;
+        [SerializeField] private GameObject singleContentObject;
+        [SerializeField] private GameObject multiContentObject;
+        [SerializeField] private Transform singleContent;
+        [SerializeField] private Transform multiContent;
+
         [SerializeField] private GameObject noLeaderboardMsg;
         [SerializeField] private GameObject rankingPrefab;
         [SerializeField] private TMP_Text title;
@@ -39,74 +37,68 @@ namespace JonathansAdventure.UI.Main
 
         #endregion
 
-        private string axis;
+        /// <summary>
+        ///     Is singleplayer currently shown.
+        /// </summary>
+        private bool? singleShown = null;
 
         /// <summary>
-        ///     Updates the leaderboard display.
+        ///     If the singleplayer leaderboard is empty.
         /// </summary>
-        public void UpdateScreen()
+        private bool singleEmpty;
+
+        /// <summary>
+        ///     If the multiplayer leaderboard is empty.
+        /// </summary>
+        private bool multiEmpty;
+
+        /// <summary>
+        ///     Sorts and fills the leaderboard.
+        /// </summary>
+        /// <param name="leaderboard"> The data </param>
+        /// <param name="content"> The parent object to place the rankings under. </param>
+        /// <returns> If the leaderboard is empty. </returns>
+        private bool CreateBoard(List<Rank> leaderboard, Transform content)
         {
-            List<Rank> leaderboard;
+            // Return if the leaderboard is empty.
+            if (leaderboard.Count == 0) return true;
 
-            if(GameData.IsSingleplayer)
-            {
-                leaderboard = fileManager.SingleLeaderboard.Load().Data;
-            }
-            else
-            {
-                leaderboard = fileManager.MultiLeaderboard.Load().Data;
-            }
+            // Sort the leaderboard
+            leaderboard = leaderboard.OrderByDescending(x => x.Score).ToList();
 
-            // Check if there is content in the leaderboard.
-            if (leaderboard.Count > 0)
+            // For each ranking, create a visual display using our rankingPrefab template
+            for (int i = 0; i < leaderboard.Count; i++)
             {
-                // Sort the leaderboard
-                leaderboard.OrderByDescending(x => x.Score).ToList();
+                GameObject newRank = Instantiate(rankingPrefab, content);
+                Ranking texts = newRank.GetComponent<Ranking>();
 
-                // For each ranking, create a visual display using our rankingPrefab template
-                for (int i = 0; i < leaderboard.Count; i++)
+                // Show the placement on the leaderboard
+                // We need this as "1st", "2nd", and "3rd" aren't standard
+                // After that, we can use the conjugation n + "th" where n is the numberic placement
+                if (i == 0)
                 {
-                    GameObject newRank = Instantiate(rankingPrefab, content);
-                    TMP_Text text = newRank.transform.Find("place").GetComponent<TMP_Text>();
-
-                    // Show the placement on the leaderboard
-                    // We need this as "1st", "2nd", and "3rd" aren't standard
-                    // After that, we can use the conjugation n + "th" where n is the numberic placement
-                    if (i == 0)
-                    {
-                        text.text = "1st";
-                    }
-                    else if (i == 1)
-                    {
-                        text.text = "2nd";
-                    }
-                    else if (i == 2)
-                    {
-                        text.text = "3rd";
-                    }
-                    else
-                    {
-                        text.text = (i + 1).ToString() + "th";
-                    }
-
-                    // Update the name and points on the screen
-                    newRank.transform.Find("name").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Name;
-                    newRank.transform.Find("points").gameObject.GetComponent<TMP_Text>().text = leaderboard[i].Score.ToString();
+                    texts.Place.SetText("1st");
                 }
-            }
-            else
-            {
-                // Show the message that says the leaderboard is empty
-                noLeaderboardMsg.SetActive(true);
-            }
-        }
+                else if (i == 1)
+                {
+                    texts.Place.SetText("2st");
+                }
+                else if (i == 2)
+                {
+                    texts.Place.SetText("3st");
+                }
+                else
+                {
+                    texts.Place.SetText((i + 1).ToString() + "th");
+                }
 
-        /// <summary>
-        ///     Allows the user to scroll up and down.
-        /// </summary>
-        private void Update()
-        {
-            FindObjectOfType<ScrollRect>().verticalNormalizedPosition += Input.GetAxis(axis) * speed;
+                // Update the name and points on the screen
+                texts.Name.SetText(leaderboard[i].Name);
+                texts.Score.SetText(leaderboard[i].Score.ToString());
+
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -116,21 +108,59 @@ namespace JonathansAdventure.UI.Main
         {
             fileManager = FileManager.Instance;
 
-            if (GameData.IsSingleplayer)
+            // If no leaderboard is shown OR if the shown one is not equal (XOR to) the one selected.
+            if (singleShown == null || (singleShown.Value ^ GameData.IsSingleplayer))
             {
-                title.SetText("SINGLEPLAYER LEADERBOARD");
-            } 
-            else
-            {
-                title.SetText("MULTIPLAYER LEADERBOARD");
+                // Set the title, show the selected leaderboard, and the no content message.
+                if (GameData.IsSingleplayer)
+                {
+                    title.SetText("SINGLEPLAYER LEADERBOARD");
+
+                    multiContentObject.SetActive(false);
+                    singleContentObject.SetActive(true);
+
+                    if (singleEmpty)
+                    {
+                        noLeaderboardMsg.SetActive(true);
+                    }
+                    else
+                    {
+                        noLeaderboardMsg.SetActive(false);
+                    }
+
+                    singleShown = true;
+                }
+                else
+                {
+                    title.SetText("MULTIPLAYER LEADERBOARD");
+
+                    singleContentObject.SetActive(false);
+                    multiContentObject.SetActive(true);
+
+                    if (multiEmpty)
+                    {
+                        noLeaderboardMsg.SetActive(true);
+                    }
+                    else
+                    {
+                        noLeaderboardMsg.SetActive(false);
+                    }
+
+                    singleShown = false;
+                }
             }
-            UpdateScreen();
         }
 
-        // Get string from axis.
-        private void Awake()
+        /// <summary>
+        ///     Fill the leaderboards.
+        /// </summary>
+        private void Start()
         {
-            axis = Axis.Vertical.ToString();
+            List<Rank> single = fileManager.SingleLeaderboard.Load().Data;
+            List<Rank> multi = fileManager.MultiLeaderboard.Load().Data;
+
+            singleEmpty = CreateBoard(single, singleContent);
+            multiEmpty = CreateBoard(multi, multiContent);
         }
     }
 

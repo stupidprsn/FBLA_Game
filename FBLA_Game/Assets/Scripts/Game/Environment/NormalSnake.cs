@@ -19,20 +19,6 @@ namespace JonathansAdventure.Game.Normal
         {
             Destroy(gameObject);
         }
-
-        /// <summary>
-        ///     Set values for the snake's size.
-        /// </summary>
-        private void Awake()
-        {
-            right = new Vector2(1.05f, -0.45f);
-            downRight = new Vector2(0.9f, -0.7f);
-            left = new Vector2(-0.7f, -0.45f);
-            downLeft = new Vector2(-0.9f, -0.7f);
-            raycast = new Vector2(0.3f, 0.75f);
-        }
-
-        
     }
 
 }

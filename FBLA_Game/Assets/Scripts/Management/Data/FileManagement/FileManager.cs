@@ -35,17 +35,11 @@ namespace JonathansAdventure.Data
         /// </summary>
         public LeaderboardDataFile MultiLeaderboard { get; private set; }
 
-        /// <summary>
-        ///     Data regarding what level the user has reached.
-        /// </summary>
-        public DataFile<UserProgress> UserProgressData { get; private set; }
-
         private void Awake()
         {
             SingletonCheck(this);
             SingleLeaderboard = new LeaderboardDataFile("singleLeaderboard.fbla");
-            MultiLeaderboard = new LeaderboardDataFile("multiLeaderboard");
-            UserProgressData = new DataFile<UserProgress>("userProgress.fbla");
+            MultiLeaderboard = new LeaderboardDataFile("multiLeaderboard.fbla");
         }
 
         /// <summary>
@@ -55,7 +49,6 @@ namespace JonathansAdventure.Data
         {
             SingleLeaderboard.SaveDefault();
             MultiLeaderboard.SaveDefault();
-            UserProgressData.SaveDefault();
         }
 
         /// <summary>

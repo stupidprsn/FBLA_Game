@@ -15,7 +15,7 @@ namespace JonathansAdventure
         /// <summary>
         ///     Reference to the <see cref="T"/>.
         /// </summary>
-        [HideInInspector] public static T Instance { get; private set; }
+        [HideInInspector] public static T Instance { get; set; }
 
         /// <summary>
         ///     Singleton pattern check to make sure only

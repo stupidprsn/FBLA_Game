@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 2028465017388534984}
   - component: {fileID: 2028465017388534985}
   - component: {fileID: 2028465017388534986}
-  - component: {fileID: 1975188973042603651}
+  - component: {fileID: 4121477603313170044}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: UI
@@ -432,6 +432,7 @@ RectTransform:
   - {fileID: 2028465017045614848}
   - {fileID: 4218938105108824165}
   - {fileID: 5343652888304962143}
+  - {fileID: 5254620797955299538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -457,7 +458,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1975188973042603651
+--- !u!114 &4121477603313170044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -510,19 +511,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2028465017388534987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbadece9a91eb04ba22acde137d34c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 92da1c68d3d25de4b969338a6ec5e12f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winTitle: Congradulations!
-  winSubtitle: You beat Jonathan's adventure
-  loseTitle: You Died
-  loseSubtitle: Try again next time
   congratulatoryMsgs:
-  - GOOD JOB, LEVEL CLEARED!
   - CONGRATULATIONS, LEVEL CLEARED!
-  - NICELY DONE, LEVEL CLEARED!
   - PHENOMENAL, LEVEL CLEARED!
-  - WELL DONE, LEVEL CLEARED!
+  - GREAT JOB, LEVEL CLEARED!
+  - NICE WORK, LEVEL CLEARED!
+  - AMAZING, LEVEL CLEARED!
   canvas: {fileID: 2028465017388534987}
   timeText: {fileID: 2028465017103162156}
   heartsImage: {fileID: 2028465017045614848}
@@ -532,8 +529,12 @@ MonoBehaviour:
   scoreText: {fileID: 152587840518424671}
   scoreNumbers: {fileID: 6643663873630280924}
   inputName: {fileID: 222624672728998286}
-  CongratulatoryText: {fileID: 9188791377441305103}
+  congratulatoryText: {fileID: 9188791377441305103}
   congratulatoryAnimator: {fileID: 4168087513811722399}
+  winTitle: Congratulations!
+  winSubtitle: You beat Jonathan's Adventure
+  loseTitle: You Died
+  loseSubtitle: Try again next time
 --- !u!1 &2489636577904269677
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +670,7 @@ MonoBehaviour:
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 36
-  m_CharacterLimit: 0
+  m_CharacterLimit: 20
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1986,3 +1987,105 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &7265440485174847665
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2028465017388534991}
+    m_Modifications:
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186347752457498724, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+      propertyPath: m_Name
+      value: CrossFade
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+--- !u!224 &5254620797955299538 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3186347752457498723, guid: 535a73187ede5f641893ece50d052eab, type: 3}
+  m_PrefabInstance: {fileID: 7265440485174847665}
+  m_PrefabAsset: {fileID: 0}

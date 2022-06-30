@@ -18,7 +18,7 @@ namespace JonathansAdventure.Game
     ///         <seealso cref="https://www.youtube.com/watch?v=ccxXxvlS4mI"/>
     ///     </para>
     /// </remarks>
-    public class PlayerMovement : MonoBehaviour, IDestroyable
+    public class PlayerMovement : MonoBehaviour
     {
         #region Controls
 
@@ -177,12 +177,6 @@ namespace JonathansAdventure.Game
 
             // Check for space to jump.
             if (JumpKey && GroundChecker()) jump = true;
-
-            // Checks if the user has fallen out out of the game.
-            if (trans.position.y < -5.5)
-            {
-                gameManager.OnDeath();
-            }
         }
 
         /// <summary>
@@ -214,14 +208,6 @@ namespace JonathansAdventure.Game
             }
         }
         #endregion
-
-        /// <summary>
-        ///     Player death is handled by <see cref="GameManager"/>.
-        /// </summary>
-        public void OnDamage()
-        {
-            gameManager.OnDeath();
-        }
 
         /// <summary>
         ///     Turn the horizontal axis to a usuable string.

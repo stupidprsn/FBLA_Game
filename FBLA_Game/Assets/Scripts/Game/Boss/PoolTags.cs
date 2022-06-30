@@ -7,7 +7,7 @@
     ///     Hanlin Zhang
     ///     Last Modified: 6/22/2022
     /// </remarks>
-    internal enum PoolTags
+    public enum PoolTags
     {
         Snake,
         Laser,

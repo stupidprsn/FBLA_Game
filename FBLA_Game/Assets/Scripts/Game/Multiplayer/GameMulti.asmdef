@@ -1,0 +1,19 @@
+{
+    "name": "GameMulti",
+    "rootNamespace": "",
+    "references": [
+        "GUID:87c7c645251168049ac3ca87cc3151ae",
+        "GUID:effff8a173cac014b916453a57d4ad6f",
+        "GUID:ea25b43dd18172e4aa08818b6ed8ebdc",
+        "GUID:8558ec4eb2dcbb24d8863af942bb8f93"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

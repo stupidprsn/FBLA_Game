@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using JonathansAdventure.Sound;
@@ -10,32 +9,17 @@ namespace JonathansAdventure.Game
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/24/2022
+    ///     Last Modified: 6/30/2022
     /// </remarks>
     public class GameManager : Singleton<GameManager>
     {
-        #region Settings
-
-        [Header("Set Game Settings")]
 
         [SerializeField,
             Range(1, 10),
             Tooltip("Set the number of lives that the user has.")]
         private int playerHealth;
 
-        [SerializeField,
-            Range(1f, 10f),
-            Tooltip("Set the amount of time (in seconds) it takes for the user to respawn.")]
-        private int respawnTime;
-
-        #endregion
-
-        #region Constant Between Stages
-
-        /// <summary>
-        ///     The lives the player has left.
-        /// </summary>
-        private int health;
+        #region Variables
 
         /// <summary>
         ///     The number of snakes the player has killed.
@@ -60,52 +44,54 @@ namespace JonathansAdventure.Game
         /// </summary>
         public void StageCleared()
         {
-            gameUI.DoUpdateTime = false;
-            soundManager.PlaySound(SoundNames.LevelWin);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            GameUI.OnStageExit();
             stagesCleared++;
             congradulate = true;
+        }
+
+        /// <summary>
+        ///     The time (in seconds) of the player's run.
+        /// </summary>
+        public float Time { get; set; } = 0f;
+
+        private int health;
+
+        /// <summary>
+        ///     The lives the player has left.
+        /// </summary>
+        public int Health
+        {
+            get => health;
+            set
+            {
+                health = value;
+                GameUI.UpdateHealthDisplay(health);
+            }
+
         }
 
         /// <summary>
         ///     If the player beat a stage before and thus should be congratulated.
         /// </summary>
         private bool congradulate = false;
-
-        /// <summary>
-        ///     If the player's death animation is currently playing.
-        /// </summary>
-        /// <remarks>
-        ///     Used to make sure the player can't lose multiple hearts
-        ///     from one interaction.
-        /// </remarks>
-        private bool isDying = false;
+        public SingleUI GameUI { get; private set; }
 
         private SoundManager soundManager;
-        private GameUI gameUI;
-
-        #endregion
-
-        #region Stage References
-
-        internal Player CurrentPlayer { get; private set; }
-
+        private PlayerDeath playerDeath;
         #endregion
 
         /// <summary>
-        ///     Called by <see cref="Normal.OnEnterLevel"/> to reset references.
+        ///      Called by <see cref="Normal.OnEnterLevel"/> to reset references.
         /// </summary>
         /// <param name="music"> The music to play for this stage. </param>
         public void OnStageEnter(SoundNames music)
         {
-            CurrentPlayer = new Player();
-            CurrentPlayer.SetReferences();
 
-            gameUI = GameObject.FindWithTag("UI").GetComponent<GameUI>();
-            gameUI.gameObject.SetActive(false);
-
+            GameUI = GameObject.FindWithTag("UI").GetComponent<SingleUI>();
             // Update the UI and start the clock.
-            gameUI.OnStageEnter(congradulate, health);
+            GameUI.OnStageEnter(this, congradulate, Time);
+
+            playerDeath = GameObject.FindWithTag("Player").GetComponent<PlayerDeath>();
 
             // Stops all sound except for:
             //  1) the music for that stage and play it if it's not already playing
@@ -117,83 +103,51 @@ namespace JonathansAdventure.Game
         }
 
         /// <summary>
-        ///     Death for player. 
-        /// </summary>
-        /// <remarks>
-        ///     Wrapper method for <see cref="OnDeathCoroutine">.
-        /// </remarks>
-        public void OnDeath()
-        {
-            // Check to make sure OnDeath isn't called multiple times at once.
-            if (isDying) return;
-            isDying = true;
-            StartCoroutine(OnDeathCoroutine());
-        }
-
-        /// <summary>
-        ///     <see cref="OnDeath"/>.
-        /// </summary>
-        /// <returns> null </returns>
-        private IEnumerator OnDeathCoroutine()
-        {
-            // Update life count.
-            health--;
-            gameUI.UpdateHealthDisplay(health);
-
-            // Show the death animation and lock the player.
-            CurrentPlayer.PlayerAnimation.PlayAnimation(CurrentPlayer.PlayerAnimation.DiedID);
-            CurrentPlayer.PlayerMovement.enabled = false;
-            CurrentPlayer.PlayerRB.constraints = RigidbodyConstraints2D.FreezeAll;
-
-            soundManager.PlaySound(SoundNames.Died);
-
-            yield return new WaitForSeconds(respawnTime);
-
-            // Checks if the player still has health
-            if (health > 0)
-            {
-                // Reset the player position and unlock the player.
-                CurrentPlayer.Transform.position = CurrentPlayer.SpawnPosition;
-                CurrentPlayer.PlayerAnimation.PlayAnimation(CurrentPlayer.PlayerAnimation.IdleID);
-                CurrentPlayer.PlayerMovement.enabled = true;
-                CurrentPlayer.PlayerRB.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-                soundManager.PlaySound(SoundNames.Revive);
-
-                isDying = false;
-            }
-            else
-            {
-                gameUI.DisplayScore(false, stagesCleared, snakesKilled, health);
-
-                soundManager.StopAllSound();
-                soundManager.PlaySound(SoundNames.GameOver);
-
-            }
-        }
-
-        /// <summary>
         ///     Call when the player wins the entire game (not just the stage).
         /// </summary>
         public void WinGame()
         {
             // Lock player movement
-            CurrentPlayer.PlayerMovement.enabled = false;
-            CurrentPlayer.PlayerRB.constraints = RigidbodyConstraints2D.FreezeAll;
+            playerDeath.DisableMovement();
 
-            soundManager.StopAllSound();
-            soundManager.PlaySound(SoundNames.LevelWin);
-
-            gameUI.DisplayScore(true, stagesCleared, snakesKilled, health);
+            DisplayScore(SoundNames.LevelWin, true);
         }
+
         /// <summary>
-        ///     Perform singleton check and initate variables.
+        ///     Displays the leaderboard
+        /// </summary>
+        /// <param name="soundName"> The sound effect to play. </param>
+        /// <param name="win"> If the user won. </param>
+        public void DisplayScore(SoundNames soundName, bool win)
+        {
+            soundManager.StopAllSound();
+            soundManager.PlaySound(soundName);
+
+            GameUI.DisplayScore(win, stagesCleared, snakesKilled, Health);
+        }
+
+        /// <summary>
+        ///     Perform singleton check and initate player health;
         /// </summary>
         private void Awake()
         {
             SingletonCheck(this);
-            health = playerHealth;
+        }
+
+        /// <summary>
+        ///     Set Reference.
+        /// </summary>
+        private void OnEnable()
+        {
             soundManager = SoundManager.Instance;
+        }
+
+        /// <summary>
+        ///     Update health count.
+        /// </summary>
+        private void Start()
+        {
+            Health = playerHealth;
         }
 
         /// <summary>
@@ -205,7 +159,7 @@ namespace JonathansAdventure.Game
             if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
             // Allows the user to return to the main menu my pressing tab.
-            if (Input.GetKeyDown(KeyCode.Tab)) gameUI.ToMainMenu();
+            if (Input.GetKeyDown(KeyCode.Tab)) GameUI.ToMainMenu();
         }
     }
 }

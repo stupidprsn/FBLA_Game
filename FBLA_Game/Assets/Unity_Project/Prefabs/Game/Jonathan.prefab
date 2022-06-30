@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6844556448386597937}
   - component: {fileID: 3333344425274445307}
   - component: {fileID: 812763256}
+  - component: {fileID: 6355866037153121908}
   m_Layer: 7
   m_Name: Jonathan
   m_TagString: Player
@@ -168,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontal: 1
-  jumpKeys: 7700000011010000
-  <InteractKey>k__BackingField: 20000000
+  jumpKeys: 20000000
+  <InteractKey>k__BackingField: 7700000011010000
   speed: 3
   jumpHeight: 10
   facingRight: 1
@@ -193,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb4cbcc78a238b469e9230491f47275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isJonathan: 1
   trans: {fileID: 6844556448386597936}
   animator: {fileID: 812763256}
   jumpableLayer:
@@ -217,3 +219,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6355866037153121908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844556448386597942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d488c9be74c628849bbd42b39966f162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnTime: 2
+  playerObject: {fileID: 6844556448386597942}
+  trans: {fileID: 6844556448386597936}
+  playerRB: {fileID: 6844556448386597939}
+  playerCollider: {fileID: 6844556448386597938}
+  playerMovement: {fileID: 6844556448386597937}
+  playerAnimation: {fileID: 3333344425274445307}

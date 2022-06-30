@@ -14,13 +14,23 @@ namespace JonathansAdventure.UI.Main
     /// </remarks>
     public class MainMenuTransitions : MonoBehaviour
     {
-
+        /// <summary>
+        ///     Partial singleton pattern.
+        /// </summary>
         public static MainMenuTransitions Instance { get; private set; }
+
+        /// <summary>
+        ///     Cached reference to <see cref="soundManager"/>.
+        /// </summary>
+        private SoundManager soundManager;
 
         #region Settings
 
         [Header("Transition Settings")]
 
+        /// <summary>
+        ///     Set the amount of time in seconds it takes for panel transitions.
+        /// </summary>
         [SerializeField,
             Range(0.1f, 2f),
             Tooltip("Set the amount of time in seconds it takes for panel transitions.")]
@@ -29,9 +39,13 @@ namespace JonathansAdventure.UI.Main
         #endregion
 
         #region Panels
-        
+
+        /// <summary>
+        ///     An array of panels in the main menu.
+        /// </summary>
         [SerializeField,
-            Tooltip("An array of panels in the main menu.")] private Panel[] panels;
+            Tooltip("An array of panels in the main menu.")] 
+        private Panel[] panels;
 
         #endregion
 
@@ -41,7 +55,7 @@ namespace JonathansAdventure.UI.Main
         ///     Keeps track of how many coroutines have finished.
         /// </summary>
         /// <remarks>
-        ///     Used durring <see cref="TransitionCoroutine{TFrom, TTo}(GameObject, GameObject, bool)"/>
+        ///     Used durring <see cref="TransitionCoroutine(Panel, bool)"/>
         ///     to check if both shift coroutines have finished.
         /// </remarks>
         private int coroutinesFinished = 0;
@@ -157,14 +171,22 @@ namespace JonathansAdventure.UI.Main
 
         #endregion
 
+        /// <summary>
+        ///     Singleton check.
+        /// </summary>
         private void Awake()
         {
             Instance = this;
         }
 
+        /// <summary>
+        ///     Play main menu sound and activate the correct panel.
+        /// </summary>
         private void Start()
         {
-            SoundManager.Instance.PlaySound(SoundNames.MusicMainMenu);
+            soundManager = SoundManager.Instance;
+            soundManager.StopAllSound();
+            soundManager.PlaySound(SoundNames.MusicMainMenu);
             
             // Turn off all the panels except the one to open on.
             foreach(Panel panel in panels)

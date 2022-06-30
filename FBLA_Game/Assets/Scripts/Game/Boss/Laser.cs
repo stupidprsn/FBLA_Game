@@ -7,15 +7,15 @@ namespace JonathansAdventure.Game.Boss
     /// </summary>
     /// <remarks>
     ///     Hanlin Zhang
-    ///     Last Modified: 6/21/2022
+    ///     Last Modified: 6/27/2022
     /// </remarks>
     public class Laser : MonoBehaviour
     {
         #region References
 
         [Header("References")]
-        [SerializeField] private LayerMask killable;
-
+        [SerializeField] private LayerMask destroyable;
+        [SerializeField] private LayerMask boundry;
         #endregion
 
         /// <summary>
@@ -26,14 +26,16 @@ namespace JonathansAdventure.Game.Boss
         {
             // Layermask is in binary while layer is in decimal, the bitwise operation converts
             // the decimal to binary and checks them.
-            if ((killable.value & (1 << collision.gameObject.layer)) > 0) {   // Checks that the object is destroyable.
 
+            // Lasers can pass through boundries.
+            if ((boundry.value & (1 << collision.gameObject.layer)) > 0) return;
+
+            // Lasers damange anything destroyable.
+            if ((destroyable.value & (1 << collision.gameObject.layer)) > 0) 
                 collision.gameObject.GetComponent<IDestroyable>().OnDamage();
-            } else
-            {
-                // Turn off laser so that it can be reused by the object pool.
-                gameObject.SetActive(false);
-            }
+
+            // Turn off laser so that it can be reused by the object pool.
+            gameObject.SetActive(false);
         }
     }
 

@@ -18,6 +18,7 @@
         MusicMainMenu,
         MusicNormalLevel,
         MusicBoss,
+        MusicMulti,
 
         TextTyping,
         ButtonSelect,
@@ -32,6 +33,8 @@
         Revive,
 
         LevelWin,
-        GameOver
+        GameOver,
+
+        JonathanaWalking
     }
 }
